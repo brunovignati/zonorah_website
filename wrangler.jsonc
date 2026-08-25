@@ -1,0 +1,12 @@
+{
+  // Nombre del Worker en Cloudflare. Debe coincidir con el
+  // Worker al que conectes este repositorio.
+  "name": "zonorah-web",
+  "compatibility_date": "2026-08-25",
+
+  // Sitio estático: se publica el contenido de ./public tal cual.
+  // No hace falta ningún archivo JavaScript.
+  "assets": {
+    "directory": "./public"
+  }
+}
