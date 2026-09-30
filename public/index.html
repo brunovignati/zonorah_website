@@ -504,7 +504,7 @@ body[data-nav="lime"] .nav-progress{background:var(--bosque)}
   <div class="nav-right">
     <button class="nav-sound" id="soundBtn" type="button" aria-pressed="false" aria-label="Activar sonido ambiente"><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>Sonido <b id="soundState">off</b></button>
     <span class="nav-login nav-cuenta" id="navCuenta" aria-live="polite"></span>
-    <a class="btn btn-lime btn-nav magnetic" href="/datos/planes" data-cursor="Ir">Ver planes</a>
+    <a id="navPlanes" class="btn btn-lime btn-nav magnetic" href="/datos/planes" data-cursor="Ir">Ver planes</a>
     <button class="nav-burger" id="burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu"><i></i><i></i></button>
   </div>
   <span class="nav-progress" id="navProgress" aria-hidden="true"></span>
@@ -1304,10 +1304,13 @@ body[data-nav="lime"] .nav-progress{background:var(--bosque)}
      Aquí no hay claves ni datos: el ID de cliente de Google lo da la API. -->
 <script>
 (function () {
-  const API = "/datos/api/sesion", caja = document.getElementById("navCuenta"), menu = document.getElementById("menuCuenta");
+  const API = "/datos/api/sesion", caja = document.getElementById("navCuenta"), menu = document.getElementById("menuCuenta"),
+        planes = document.getElementById("navPlanes");
   const esc = t => String(t ?? "").replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
   let estado = null, cliente = null;
   function pintar() {
+    // Con la sesión iniciada sobra «Ver planes»: el plan se ve en /datos/planes.
+    planes.style.display = estado?.usuario ? "none" : "";
     if (!estado || !estado.login_activo) { caja.innerHTML = ""; menu.hidden = true; return; }
     const u = estado.usuario;
     if (u) {
