@@ -1354,6 +1354,9 @@ body.menu-open .nav{color:#16230F!important}
   }
   async function cargar() {
     try { estado = await (await fetch(API, {credentials: "same-origin"})).json(); } catch { estado = null; }
+    // Con la sesión iniciada la portada no se muestra: la función de «/» ya
+    // redirige; esto cubre la vuelta atrás del navegador y la caché.
+    if (estado?.usuario) { location.replace("/datos/"); return; }
     pintar();
   }
   function google_() {
@@ -1371,7 +1374,7 @@ body.menu-open .nav{color:#16230F!important}
         if (r.error) return;
         const x = await fetch(API + "/google", {method: "POST", headers: {"Content-Type": "application/json"},
           body: JSON.stringify({access_token: r.access_token})});
-        if (x.ok) cargar();
+        if (x.ok) location.href = "/datos/";   // entrar lleva a la app
       }});
     cliente.requestAccessToken();
   }
@@ -1382,6 +1385,7 @@ body.menu-open .nav{color:#16230F!important}
     if (a.dataset.cuenta === "salir") { await fetch(API + "/salir", {method: "POST"}); cargar(); }
   });
   cargar();
+  window.addEventListener("pageshow", e => { if (e.persisted) cargar(); });
 })();
 </script>
 <script>
