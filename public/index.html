@@ -548,7 +548,7 @@ body.menu-open .nav{color:#16230F!important}
 .inf-book{border-radius:16px;overflow:hidden;background:var(--claro-2);transform:none!important}
 .inf-page{box-shadow:none;border-radius:16px;transition:transform .8s var(--out)}
 .inf:hover .inf-page{transform:scale(1.03)}
-.inf-cover,.inf-book::after{display:none}
+.inf-book::after{display:none}
 .inf h3{font-stretch:100%;font-weight:500;text-transform:none;letter-spacing:-.02em;font-size:clamp(19px,1.5vw,23px);line-height:1.2;margin:18px 6px 0}
 .inf-data{margin:6px 6px 0;text-transform:none;letter-spacing:.02em;color:var(--fg-3)}
 .inf-bajar{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;margin:16px 6px 0;height:40px;padding:0 16px;border-radius:999px;
@@ -596,6 +596,15 @@ body::after{content:"";position:fixed;inset:0;z-index:999;pointer-events:none;ba
 /* Logos de las emisoras: verde oscuro translúcido, no lima */
 .logo{background:#163300;opacity:.2}
 .logo:hover{opacity:.45}
+
+/* Portada de las fichas de informes (1-oct-2026): solo el logo de Zonorah,
+   sobre verde bosque con un brillo lima. Sin texto ni la página del PDF. */
+.inf-page{display:none}
+.inf-cover{display:grid!important;place-items:center;inset:0;border-radius:16px;transform:none!important;box-shadow:none;
+  background:radial-gradient(70% 55% at 50% 42%,rgba(159,232,112,.20),transparent 70%),linear-gradient(160deg,#1c3f06,#102a02 70%)}
+.inf-cover svg{width:30%;color:#9FE870;transition:transform .8s var(--out)}
+.inf-cover-t{display:none}
+.inf:hover .inf-cover svg{transform:scale(1.06)}
 </style>
 </head>
 <body>
