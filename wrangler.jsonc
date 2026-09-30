@@ -4,9 +4,12 @@
   "name": "zonorah-web",
   "compatibility_date": "2026-08-25",
 
-  // Sitio estático: se publica el contenido de ./public tal cual.
-  // No hace falta ningún archivo JavaScript.
+  // El sitio es estático (./public). El Worker de src/worker.js solo atiende
+  // /datos y /datos/…, que reenvía a la app de datos (datos.zonorah.com).
+  "main": "src/worker.js",
   "assets": {
-    "directory": "./public"
+    "directory": "./public",
+    "binding": "ASSETS",
+    "run_worker_first": ["/datos", "/datos/*"]
   }
 }
