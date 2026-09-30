@@ -609,6 +609,17 @@ body::after{content:"";position:fixed;inset:0;z-index:999;pointer-events:none;ba
 .inf-cover svg{width:30%;color:#9FE870;transition:transform .8s var(--out)}
 .inf-cover-t{display:none}
 .inf:hover .inf-cover svg{transform:scale(1.06)}
+
+/* Fichas de informes invertidas (1-oct-2026): tarjeta verde bosque y
+   portada blanca con el logo en verde oscuro. */
+.inf{background:#163300;box-shadow:0 18px 44px -22px rgba(22,51,0,.55)}
+.inf:hover,.inf:focus-visible{box-shadow:0 26px 60px -24px rgba(22,51,0,.7)}
+.inf-cover{background:#fff!important}
+.inf-cover svg{color:#163300}
+.inf h3{color:#fff}
+.inf-data,.inf:hover .inf-data,.inf.is-open .inf-data{color:rgba(255,255,255,.6)}
+.inf-bajar{background:rgba(255,255,255,.1);color:#9FE870}
+.inf:hover .inf-bajar{background:#9FE870;color:#163300}
 </style>
 </head>
 <body>
