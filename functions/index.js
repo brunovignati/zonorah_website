@@ -9,16 +9,23 @@ const APP = "https://datos.zonorah.com/api/sesion";
 
 export async function onRequestGet({ request, next }) {
   const galleta = request.headers.get("Cookie") || "";
+  let paso = "sin-cookie";
   if (/(?:^|;\s*)zonorah_sesion=[^;]+/.test(galleta)) {
+    paso = "cookie";
     try {
       const r = await fetch(APP, { headers: { Cookie: galleta } });
+      paso = "app-" + r.status;
       if (r.ok && (await r.json()).usuario) {
         return new Response(null, {
           status: 302,
           headers: { Location: new URL("/datos/", request.url).toString(), "Cache-Control": "no-store" },
         });
       }
-    } catch { /* la app no responde: portada */ }
+    } catch (e) { paso = "error"; /* la app no responde: portada */ }
   }
-  return next();
+  // Diagnóstico mínimo (sin datos personales): qué decidió la función.
+  const res = await next();
+  const out = new Response(res.body, res);
+  out.headers.set("X-Zonorah-Portada", paso);
+  return out;
 }
