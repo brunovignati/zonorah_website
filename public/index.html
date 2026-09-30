@@ -588,6 +588,14 @@ body.menu-open .nav{color:#16230F!important}
 .plan.pro .btn{background:var(--lima);color:var(--bosque);box-shadow:none}
 .plan.pro .btn::before{background:#fff}
 .q{border-radius:16px;border-left:0!important;box-shadow:var(--sombra)!important;background:#fff}
+
+/* Blanco arenado (1-oct-2026): el fondo sigue blanco, con un grano muy fino
+   encima de todo (no se puede pulsar ni tapa nada). Sin líneas en el hero. */
+:root{--claro:#FDFDFB;--claro-2:#F6F8F3}
+body::after{content:"";position:fixed;inset:0;z-index:999;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .08 0 0 0 0 .13 0 0 0 0 .05 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");background-size:180px;opacity:.11;mix-blend-mode:multiply}
+/* Logos de las emisoras: verde oscuro translúcido, no lima */
+.logo{background:#163300;opacity:.2}
+.logo:hover{opacity:.45}
 </style>
 </head>
 <body>
@@ -658,7 +666,6 @@ body.menu-open .nav{color:#16230F!important}
 <!-- ═══════════ HERO ═══════════ -->
 <section class="hero is-light" data-theme="light" data-sec="01" aria-labelledby="heroTitle">
   <div class="aura" aria-hidden="true"></div>
-  <canvas class="hero-wave" id="wave" aria-hidden="true"></canvas>
   <div class="container hero-inner">
     <!-- ════════════════════════════════════════════════════════════════
          ZONA EDITABLE Nº 2 · TITULAR GRANDE DE LA PORTADA
