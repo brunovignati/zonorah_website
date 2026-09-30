@@ -446,6 +446,147 @@ body[data-nav="lime"] .nav-progress{background:var(--bosque)}
   .foot-word span{clip-path:none}
   .signal{transform:none}
 }
+
+/* ════════════════════════════════════════════════════════════════════
+   CAPA CLARA (1-oct-2026): la portada con la estética del chat de datos.
+   Fondo claro, Archivo fino y en minúscula, botones y tarjetas redondeados
+   con sombras suaves, y el halo lima difuminado. Va al final para mandar
+   sobre lo anterior sin tocarlo.
+   ════════════════════════════════════════════════════════════════════ */
+:root{--claro:#F8FAF5;--claro-2:#F0F5EA;--r:22px;--cut:0px;
+  --g1:#2F6B14;--g2:#58B22E;--g3:#1F8A7A;
+  --sombra:0 0 0 1px rgba(22,51,0,.05),0 2px 6px rgba(22,51,0,.04),0 18px 44px -22px rgba(22,51,0,.28)}
+body{background:var(--claro)}
+.is-light{--bg:var(--claro);--fg:#16230F;--fg-2:#56684B;--fg-3:#8A9A7E;--line:rgba(22,51,0,.10);--surface:#fff;--accent:var(--bosque);--on-accent:var(--lima)}
+.is-pale{--bg:var(--claro-2);--fg:#16230F;--fg-2:#4F6343;--fg-3:#83967A;--line:rgba(22,51,0,.10);--surface:#fff;--accent:var(--bosque);--on-accent:var(--lima)}
+
+/* Tipografía: la de los titulares deja las mayúsculas condensadas */
+.display{font-stretch:100%;font-weight:400;text-transform:none;line-height:1.06;letter-spacing:-.032em}
+.h-xxl{font-size:clamp(44px,6.6vw,104px)}
+.h-xl{font-size:clamp(34px,4.4vw,66px)}
+.h-l{font-size:clamp(28px,3.3vw,48px)}
+.h-m{font-size:clamp(22px,2.1vw,30px);letter-spacing:-.02em}
+.display em{background:linear-gradient(90deg,var(--g1),var(--g2) 55%,var(--g3));-webkit-background-clip:text;background-clip:text;
+  color:transparent;padding:0;font-weight:500}
+.lead{font-size:clamp(17px,1.25vw,20px);line-height:1.6;color:var(--fg-2)}
+.mono{font-size:11.5px;letter-spacing:.08em}
+
+/* Botones: píldoras */
+.btn{height:52px;padding:0 26px;border-radius:999px;font-weight:500;font-size:15px;letter-spacing:0;text-transform:none;clip-path:none}
+.btn-lime{background:var(--bosque);color:var(--lima);clip-path:none}
+.btn-lime::before{background:#23480f}
+.btn-lime:hover{color:#fff}
+.btn-ghost{background:#fff;color:var(--fg);box-shadow:var(--sombra)}
+.btn-ghost::before{background:var(--claro-2)}
+.btn-ghost:hover{color:var(--fg)}
+.btn-sm{height:44px;font-size:14px}
+.btn-nav{height:42px;padding:0 20px;font-size:14px}
+
+/* Cabecera y menú */
+.nav-brand{font-weight:700}
+.nav-links a{font-family:var(--fd);text-transform:none;letter-spacing:0;font-size:14.5px}
+.nav-login{font-family:var(--fd);text-transform:none;letter-spacing:0;font-size:14.5px}
+body[data-nav="light"] .nav::before{background:rgba(248,250,245,.82);border-color:rgba(22,51,0,.07)}
+.menu{background:var(--claro);color:var(--fg,#16230F)}
+body.menu-open .nav{color:#16230F!important}
+.menu-links a{font-stretch:100%;font-weight:400;text-transform:none;letter-spacing:-.03em;border-color:rgba(22,51,0,.08)}
+.menu-links a:hover{color:var(--g1)}
+.menu-foot{text-transform:none;letter-spacing:0;font-family:var(--fd);color:#56684B}
+.menu-foot a{color:var(--g1)}
+.cursor{display:none!important}
+
+/* Arranque */
+.loader{background:var(--claro);color:#16230F}
+.loader-mark{color:var(--g2)!important}
+.loader-freq{font-stretch:100%;font-weight:300;color:#16230F;letter-spacing:-.04em}
+.loader-bar{background:rgba(22,51,0,.1)}
+.loader-row{color:#83967A}
+
+/* Hero: claro, con halo */
+.hero{justify-content:center;background:var(--claro)}
+.hero-title{color:var(--fg);margin-bottom:clamp(22px,3vh,36px)}
+.hero-title .line{padding:.04em 0 .1em;margin:-.04em 0 -.1em}
+.hero-wave{opacity:.5}
+.aura{position:absolute;left:50%;top:62%;width:min(1300px,160vw);height:min(820px,100vh);transform:translate(-50%,-50%);
+  pointer-events:none;z-index:0;filter:blur(60px)}
+.aura::before,.aura::after{content:"";position:absolute;inset:0;border-radius:50%}
+.aura::before{background:radial-gradient(closest-side,rgba(159,232,112,.5),rgba(159,232,112,.2) 45%,transparent 72%);transform:translateY(10%) scale(.9,.66)}
+.aura::after{background:radial-gradient(closest-side at 36% 55%,rgba(47,107,20,.14),transparent 60%),radial-gradient(closest-side at 66% 48%,rgba(31,138,122,.14),transparent 58%)}
+@media (prefers-reduced-motion:no-preference){.aura::before{animation:z-respira 9s ease-in-out infinite alternate}.aura::after{animation:z-deriva 14s ease-in-out infinite alternate}}
+@keyframes z-respira{to{transform:translateY(5%) scale(1,.74);opacity:.85}}
+@keyframes z-deriva{to{transform:translateX(3%) rotate(4deg)}}
+.logos{border-color:rgba(22,51,0,.08)}
+.logos img,.logos svg{filter:grayscale(1) opacity(.55)}
+
+/* Cómo funciona: tarjetas blancas redondeadas */
+.step{background:#fff;border:0;border-radius:var(--r);clip-path:none;box-shadow:var(--sombra)}
+.step-head{color:var(--g1)}
+.step h3{font-stretch:100%;font-weight:400;text-transform:none;letter-spacing:-.03em;color:var(--fg);font-size:clamp(30px,2.8vw,44px);line-height:1.05}
+.step-tags li{border-radius:999px;text-transform:none;letter-spacing:0;font-size:12px;background:var(--claro-2);border-color:transparent}
+.vis-bars i{background:var(--g2);border-radius:3px 3px 0 0}
+.vis-text b{color:var(--fg)}
+.vis-text .caret{background:var(--g2)}
+.vis-tags{text-transform:none;letter-spacing:0}
+.vis-tags span{border-radius:12px;background:var(--claro)}
+.vis-tags span b{color:var(--g1)}
+.vis-tags span.hot{background:var(--bosque);color:#fff}
+.vis-tags span.hot b{color:var(--lima)}
+.vis-mail{border-radius:16px;clip-path:none;box-shadow:var(--sombra)}
+.vis-mail .row span{border-radius:999px;text-transform:none;letter-spacing:0}
+
+/* Casos */
+.caso::before{background:#fff;border-radius:var(--r)}
+.caso:hover>*{color:inherit;transform:translateX(12px)}
+.caso:hover p{color:var(--fg-2)}
+.caso:hover .mono,.caso:hover .ex{color:var(--g1)}
+.caso h3{font-stretch:100%;font-weight:400;text-transform:none;letter-spacing:-.03em;font-size:clamp(28px,2.9vw,44px);line-height:1.08}
+
+/* Informes: fichas como tarjetas del chat */
+.inf{gap:0;background:#fff;border-radius:26px;padding:14px 14px 20px;box-shadow:var(--sombra);transition:transform .45s var(--out),box-shadow .45s var(--out)}
+.inf:hover,.inf:focus-visible{transform:translateY(-6px);box-shadow:0 0 0 1px rgba(22,51,0,.06),0 26px 60px -24px rgba(22,51,0,.38)}
+.inf-book{border-radius:16px;overflow:hidden;background:var(--claro-2);transform:none!important}
+.inf-page{box-shadow:none;border-radius:16px;transition:transform .8s var(--out)}
+.inf:hover .inf-page{transform:scale(1.03)}
+.inf-cover,.inf-book::after{display:none}
+.inf h3{font-stretch:100%;font-weight:500;text-transform:none;letter-spacing:-.02em;font-size:clamp(19px,1.5vw,23px);line-height:1.2;margin:18px 6px 0}
+.inf-data{margin:6px 6px 0;text-transform:none;letter-spacing:.02em;color:var(--fg-3)}
+.inf-bajar{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;margin:16px 6px 0;height:40px;padding:0 16px;border-radius:999px;
+  background:var(--claro-2);color:var(--bosque);font-size:14px;font-weight:500;transition:background .25s,color .25s}
+.inf-bajar svg{width:16px;height:16px}
+.inf:hover .inf-bajar{background:var(--bosque);color:var(--lima)}
+.inf-track{padding-top:34px;padding-bottom:56px}
+.inf-btn{border-radius:50%;background:#fff;box-shadow:var(--sombra)}
+.inf-btn:hover{background:var(--bosque);color:var(--lima)}
+.inf-bar{border-radius:2px}
+.inf-bar i{border-radius:2px}
+
+/* Precios */
+.plan{border:0;border-radius:var(--r);box-shadow:var(--sombra)}
+.plan .price{font-stretch:100%;font-weight:400;text-transform:none;letter-spacing:-.03em}
+.plan .tag{border-radius:999px}
+.plan.pro{clip-path:none;border-radius:var(--r)}
+
+/* Preguntas frecuentes */
+.faq summary{font-weight:500}
+.faq summary .plus{border-radius:50%}
+
+/* Cierre (demo): claro con halo y el formulario como la barra del chat */
+.demo{position:relative;background:var(--claro)}
+.demo-mark{opacity:.05;color:var(--g1)}
+.demo-form{background:#fff;border-radius:999px;padding:6px;box-shadow:var(--sombra);gap:6px}
+.demo-form input{background:transparent;height:52px;border-radius:999px;font-family:var(--fd);font-size:16px}
+.demo-form .btn{height:52px}
+
+/* Pie: sigue oscuro, con la palabra en fino */
+.foot-brand{font-weight:700}
+.foot h4{text-transform:none;letter-spacing:0;font-family:var(--fd);font-size:13px;font-weight:500}
+.foot-word{font-stretch:100%;font-weight:300;text-transform:none;letter-spacing:-.05em}
+@media (max-width:720px){.inf{flex-basis:74vw}}
+.h-xxl{font-size:clamp(42px,5.6vw,88px)}
+.plan .price s{font-size:.52em;color:var(--fg-3);text-decoration-thickness:1px;margin-right:.25em;vertical-align:.25em}
+.plan.pro .btn{background:var(--lima);color:var(--bosque);box-shadow:none}
+.plan.pro .btn::before{background:#fff}
+.q{border-radius:16px;border-left:0!important;box-shadow:var(--sombra)!important;background:#fff}
 </style>
 </head>
 <body>
@@ -515,7 +656,8 @@ body[data-nav="lime"] .nav-progress{background:var(--bosque)}
 <main id="top">
 
 <!-- ═══════════ HERO ═══════════ -->
-<section class="hero is-dark" data-theme="dark" data-sec="01" aria-labelledby="heroTitle">
+<section class="hero is-light" data-theme="light" data-sec="01" aria-labelledby="heroTitle">
+  <div class="aura" aria-hidden="true"></div>
   <canvas class="hero-wave" id="wave" aria-hidden="true"></canvas>
   <div class="container hero-inner">
     <!-- ════════════════════════════════════════════════════════════════
@@ -570,7 +712,7 @@ body[data-nav="lime"] .nav-progress{background:var(--bosque)}
 </section>
 
 <!-- ═══════════ CÓMO FUNCIONA ═══════════ -->
-<section class="como is-dark" id="como" data-theme="dark" data-sec="03" aria-labelledby="comoTitle">
+<section class="como is-pale" id="como" data-theme="light" data-sec="03" aria-labelledby="comoTitle">
   <div class="container como-head">
     <div>
       <h2 class="display h-xl" id="comoTitle" data-split>Cómo funciona</h2>
@@ -662,52 +804,52 @@ body[data-nav="lime"] .nav-progress{background:var(--bosque)}
       <a class="inf" href="/datos/informes/alimentos-agroindustria" target="_blank" rel="noopener" data-cursor="Abrir PDF">
         <span class="inf-book"><img class="inf-page" src="informes/alimentos-agroindustria.webp" width="560" height="792" loading="lazy" decoding="async" alt="Portada del informe Alimentos y agroindustria" draggable="false"><span class="inf-cover" aria-hidden="true"><svg><use href="#i-mark"/></svg><span class="inf-cover-t">Alimentos y agroindustria</span></span></span>
         <h3>Alimentos y agroindustria</h3>
-        <span class="mono inf-data">34 menciones · 7 págs · PDF</span>
+        <span class="mono inf-data">34 menciones · 7 págs · PDF</span><span class="inf-bajar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Descargar PDF</span>
       </a>
       <a class="inf" href="/datos/informes/banca-finanzas" target="_blank" rel="noopener" data-cursor="Abrir PDF">
         <span class="inf-book"><img class="inf-page" src="informes/banca-finanzas.webp" width="560" height="792" loading="lazy" decoding="async" alt="Portada del informe Banca y finanzas" draggable="false"><span class="inf-cover" aria-hidden="true"><svg><use href="#i-mark"/></svg><span class="inf-cover-t">Banca y finanzas</span></span></span>
         <h3>Banca y finanzas</h3>
-        <span class="mono inf-data">67 menciones · 6 págs · PDF</span>
+        <span class="mono inf-data">67 menciones · 6 págs · PDF</span><span class="inf-bajar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Descargar PDF</span>
       </a>
       <a class="inf" href="/datos/informes/construccion-infraestructura" target="_blank" rel="noopener" data-cursor="Abrir PDF">
         <span class="inf-book"><img class="inf-page" src="informes/construccion-infraestructura.webp" width="560" height="792" loading="lazy" decoding="async" alt="Portada del informe Construcción e infraestructura" draggable="false"><span class="inf-cover" aria-hidden="true"><svg><use href="#i-mark"/></svg><span class="inf-cover-t">Construcción e infraestructura</span></span></span>
         <h3>Construcción e infraestructura</h3>
-        <span class="mono inf-data">70 menciones · 7 págs · PDF</span>
+        <span class="mono inf-data">70 menciones · 7 págs · PDF</span><span class="inf-bajar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Descargar PDF</span>
       </a>
       <a class="inf" href="/datos/informes/energia-hidrocarburos" target="_blank" rel="noopener" data-cursor="Abrir PDF">
         <span class="inf-book"><img class="inf-page" src="informes/energia-hidrocarburos.webp" width="560" height="792" loading="lazy" decoding="async" alt="Portada del informe Energía e hidrocarburos" draggable="false"><span class="inf-cover" aria-hidden="true"><svg><use href="#i-mark"/></svg><span class="inf-cover-t">Energía e hidrocarburos</span></span></span>
         <h3>Energía e hidrocarburos</h3>
-        <span class="mono inf-data">81 menciones · 7 págs · PDF</span>
+        <span class="mono inf-data">81 menciones · 7 págs · PDF</span><span class="inf-bajar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Descargar PDF</span>
       </a>
       <a class="inf" href="/datos/informes/medio-ambiente" target="_blank" rel="noopener" data-cursor="Abrir PDF">
         <span class="inf-book"><img class="inf-page" src="informes/medio-ambiente.webp" width="560" height="792" loading="lazy" decoding="async" alt="Portada del informe Medio ambiente" draggable="false"><span class="inf-cover" aria-hidden="true"><svg><use href="#i-mark"/></svg><span class="inf-cover-t">Medio ambiente</span></span></span>
         <h3>Medio ambiente</h3>
-        <span class="mono inf-data">52 menciones · 6 págs · PDF</span>
+        <span class="mono inf-data">52 menciones · 6 págs · PDF</span><span class="inf-bajar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Descargar PDF</span>
       </a>
       <a class="inf" href="/datos/informes/mineria" target="_blank" rel="noopener" data-cursor="Abrir PDF">
         <span class="inf-book"><img class="inf-page" src="informes/mineria.webp" width="560" height="792" loading="lazy" decoding="async" alt="Portada del informe Minería" draggable="false"><span class="inf-cover" aria-hidden="true"><svg><use href="#i-mark"/></svg><span class="inf-cover-t">Minería</span></span></span>
         <h3>Minería</h3>
-        <span class="mono inf-data">132 menciones · 6 págs · PDF</span>
+        <span class="mono inf-data">132 menciones · 6 págs · PDF</span><span class="inf-bajar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Descargar PDF</span>
       </a>
       <a class="inf" href="/datos/informes/salud-medicina" target="_blank" rel="noopener" data-cursor="Abrir PDF">
         <span class="inf-book"><img class="inf-page" src="informes/salud-medicina.webp" width="560" height="792" loading="lazy" decoding="async" alt="Portada del informe Salud y medicina" draggable="false"><span class="inf-cover" aria-hidden="true"><svg><use href="#i-mark"/></svg><span class="inf-cover-t">Salud y medicina</span></span></span>
         <h3>Salud y medicina</h3>
-        <span class="mono inf-data">209 menciones · 7 págs · PDF</span>
+        <span class="mono inf-data">209 menciones · 7 págs · PDF</span><span class="inf-bajar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Descargar PDF</span>
       </a>
       <a class="inf" href="/datos/informes/seguridad-ciudadana-defensa" target="_blank" rel="noopener" data-cursor="Abrir PDF">
         <span class="inf-book"><img class="inf-page" src="informes/seguridad-ciudadana-defensa.webp" width="560" height="792" loading="lazy" decoding="async" alt="Portada del informe Seguridad ciudadana y defensa" draggable="false"><span class="inf-cover" aria-hidden="true"><svg><use href="#i-mark"/></svg><span class="inf-cover-t">Seguridad ciudadana y defensa</span></span></span>
         <h3>Seguridad ciudadana y defensa</h3>
-        <span class="mono inf-data">976 menciones · 7 págs · PDF</span>
+        <span class="mono inf-data">976 menciones · 7 págs · PDF</span><span class="inf-bajar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Descargar PDF</span>
       </a>
       <a class="inf" href="/datos/informes/telecomunicaciones" target="_blank" rel="noopener" data-cursor="Abrir PDF">
         <span class="inf-book"><img class="inf-page" src="informes/telecomunicaciones.webp" width="560" height="792" loading="lazy" decoding="async" alt="Portada del informe Telecomunicaciones" draggable="false"><span class="inf-cover" aria-hidden="true"><svg><use href="#i-mark"/></svg><span class="inf-cover-t">Telecomunicaciones</span></span></span>
         <h3>Telecomunicaciones</h3>
-        <span class="mono inf-data">8 menciones · 5 págs · PDF</span>
+        <span class="mono inf-data">8 menciones · 5 págs · PDF</span><span class="inf-bajar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Descargar PDF</span>
       </a>
       <a class="inf" href="/datos/informes/transporte-movilidad" target="_blank" rel="noopener" data-cursor="Abrir PDF">
         <span class="inf-book"><img class="inf-page" src="informes/transporte-movilidad.webp" width="560" height="792" loading="lazy" decoding="async" alt="Portada del informe Transporte y movilidad" draggable="false"><span class="inf-cover" aria-hidden="true"><svg><use href="#i-mark"/></svg><span class="inf-cover-t">Transporte y movilidad</span></span></span>
         <h3>Transporte y movilidad</h3>
-        <span class="mono inf-data">252 menciones · 6 págs · PDF</span>
+        <span class="mono inf-data">252 menciones · 6 págs · PDF</span><span class="inf-bajar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Descargar PDF</span>
       </a>
     </div>
     <div class="inf-ctrl">
@@ -717,55 +859,8 @@ body[data-nav="lime"] .nav-progress{background:var(--bosque)}
   </div>
 </section>
 
-<!-- ═══════════ COMPARATIVA ═══════════ -->
-<section class="comp is-light" data-theme="light" data-sec="06" aria-labelledby="compTitle">
-  <div class="container">
-    <div class="sec-head">
-      <h2 class="display h-xl" id="compTitle" data-split>Frente a las alternativas</h2>
-    </div>
-    <div class="vs" id="vs" data-reveal>
-      <div class="vs-tabs" role="tablist" aria-label="Elige una alternativa">
-        <button class="vs-tab is-on" type="button" role="tab" aria-selected="true" data-alt="0">Alguien escuchando<i aria-hidden="true"></i></button>
-        <button class="vs-tab" type="button" role="tab" aria-selected="false" data-alt="1">Clipping tradicional<i aria-hidden="true"></i></button>
-        <button class="vs-tab" type="button" role="tab" aria-selected="false" data-alt="2">Social listening<i aria-hidden="true"></i></button>
-      </div>
-      <div class="vs-grid">
-        <div class="vs-col vs-alt" role="tabpanel">
-          <div class="vs-colhead"><span class="clip"><span id="vsAltName">Alguien escuchando</span></span><span class="clip vs-sub mono"><span id="vsAltSub">Una persona con auriculares</span></span></div>
-          <dl>
-            <div class="vs-row"><dt>Cobertura</dt><dd><i class="dot bad" data-k="cobertura"></i><span class="vs-val" data-k="cobertura">1 o 2 emisoras</span></dd></div>
-            <div class="vs-row"><dt>Latencia</dt><dd><i class="dot bad" data-k="latencia"></i><span class="vs-val" data-k="latencia">Horas</span></dd></div>
-            <div class="vs-row"><dt>Audio original</dt><dd><i class="dot mid" data-k="audio"></i><span class="vs-val" data-k="audio">Si grabó</span></dd></div>
-            <div class="vs-row"><dt>Fines de semana</dt><dd><i class="dot bad" data-k="finde"></i><span class="vs-val" data-k="finde">No</span></dd></div>
-            <div class="vs-row"><dt>Coste</dt><dd><i class="dot bad" data-k="coste"></i><span class="vs-val" data-k="coste">Su jornada completa</span></dd></div>
-          </dl>
-        </div>
-        <span class="vs-badge" aria-hidden="true">VS</span>
-        <div class="vs-col vs-z">
-          <div class="vs-colhead"><span class="clip"><span>Zonorah</span></span><span class="clip vs-sub mono"><span>Escucha automática 24 h</span></span></div>
-          <dl>
-            <div class="vs-row"><dt>Cobertura</dt><dd><i class="dot good"></i><span class="vs-val">Todas las que elijas</span></dd></div>
-            <div class="vs-row"><dt>Latencia</dt><dd><i class="dot good"></i><span class="vs-val">Menos de 3 minutos</span></dd></div>
-            <div class="vs-row"><dt>Audio original</dt><dd><i class="dot good"></i><span class="vs-val">Siempre</span></dd></div>
-            <div class="vs-row"><dt>Fines de semana</dt><dd><i class="dot good"></i><span class="vs-val">Sí</span></dd></div>
-            <div class="vs-row"><dt>Coste</dt><dd><i class="dot good"></i><span class="vs-val">Por fuente</span></dd></div>
-          </dl>
-        </div>
-      </div>
-      <div class="vs-lat" aria-label="Tiempo desde la emisión hasta el aviso, comparado">
-        <div class="vs-lat-head mono"><span>De la emisión al aviso</span><span>Escala logarítmica</span></div>
-        <div class="vs-track">
-          <div class="vs-ticks mono" aria-hidden="true"><span style="left:0">1 min</span><span style="left:31.7%">10 min</span><span style="left:56.3%">1 h</span><span style="left:84.9%">8 h</span><span style="left:100%">24 h</span></div>
-          <div class="vs-marker alt" id="latAlt" style="left:84.9%"><b id="latAltName">Alguien escuchando</b><span id="latAltVal">~8 h</span></div>
-          <div class="vs-marker z" id="latZ" style="left:15.1%"><b>Zonorah</b><span>&lt;3 min</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ═══════════ PRECIOS ═══════════ -->
-<section class="precios is-pale" id="precios" data-theme="light" data-sec="07" aria-labelledby="preciosTitle">
+<section class="precios is-pale" id="precios" data-theme="light" data-sec="06" aria-labelledby="preciosTitle">
   <div class="container">
     <div class="sec-head">
       <h2 class="display h-xl" id="preciosTitle" data-split>Precios</h2>
@@ -814,13 +909,13 @@ body[data-nav="lime"] .nav-progress{background:var(--bosque)}
         <a class="btn btn-ghost" href="/datos/planes?plan=redaccion">Activar gratis</a>
       </article>
     </div>
-    <p class="lead" style="margin-top:28px" data-reveal>Precios al mes, en soles. ¿Monitoreo a medida para tu institución, con tus fuentes, alertas e informes? <a href="mailto:hola@zonorah.com?subject=Monitoreo%20a%20medida" style="text-decoration:underline">Escríbenos</a>.</p>
+    <p class="lead" style="margin-top:48px" data-reveal>Precios al mes, en soles. ¿Monitoreo a medida para tu institución, con tus fuentes, alertas e informes? <a href="mailto:hola@zonorah.com?subject=Monitoreo%20a%20medida" style="text-decoration:underline">Escríbenos</a>.</p>
     <!-- ════════════════════ FIN DE LA ZONA EDITABLE Nº 3 ════════════════════ -->
   </div>
 </section>
 
 <!-- ═══════════ FAQ ═══════════ -->
-<section class="faq is-light" id="faq" data-theme="light" data-sec="08" aria-labelledby="faqTitle">
+<section class="faq is-light" id="faq" data-theme="light" data-sec="07" aria-labelledby="faqTitle">
   <div class="container faq-grid">
     <div>
       <h2 class="display h-l" id="faqTitle" data-split>Preguntas</h2>
@@ -837,7 +932,7 @@ body[data-nav="lime"] .nav-progress{background:var(--bosque)}
 </section>
 
 <!-- ═══════════ DEMO / CTA ═══════════ -->
-<section class="demo is-lime" id="demo" data-theme="lime" data-sec="09" aria-labelledby="demoTitle">
+<section class="demo is-light" id="demo" data-theme="light" data-sec="08" aria-labelledby="demoTitle">
   <svg class="demo-mark" viewBox="0 0 780 825" aria-hidden="true"><path d="M138 0 L0 782 L380 162 L228 189 Z M780 36 L382 690 L679 649 L780 825 Z" fill="#163300"/></svg>
   <div class="container demo-grid">
     <h2 class="display h-xl" id="demoTitle" data-split>Deja de enterarte tarde.</h2>
@@ -860,7 +955,7 @@ body[data-nav="lime"] .nav-progress{background:var(--bosque)}
 </main>
 
 <!-- ═══════════ FOOTER ═══════════ -->
-<footer class="foot is-dark" data-theme="dark" data-sec="10">
+<footer class="foot is-dark" data-theme="dark" data-sec="09">
   <div class="container">
     <div class="foot-grid">
       <div>
@@ -1040,7 +1135,7 @@ body[data-nav="lime"] .nav-progress{background:var(--bosque)}
   var heroTitle = $('#heroTitle'), heroLines = $$('.hero-title .line-inner');
   function fitTitle() {
     if (!heroTitle) return;
-    var MAX = 176, MIN = 40;
+    var MAX = 92, MIN = 36;   // capa clara: titular fino y más contenido
     heroTitle.style.fontSize = MAX + 'px';
     var widest = 0;
     heroLines.forEach(function (l) { l.style.whiteSpace = 'nowrap'; var br = l.querySelector('.br-m'), brShown = br && getComputedStyle(br).display !== 'none';
