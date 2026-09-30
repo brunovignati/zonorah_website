@@ -182,9 +182,9 @@ body[data-nav="lime"] .nav-progress{background:var(--bosque)}
 .hero-title .line{display:block;overflow:hidden;padding:.12em 0 .08em;margin:-.12em 0 -.08em}
 .hero-title .line-inner{display:block}
 .hero-title em{margin-left:.02em}
-.hero-bottom{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:40px;align-items:end;padding-bottom:clamp(40px,6vh,72px)}
+.hero-bottom{display:flex;padding-top:clamp(12px,2vh,24px);padding-bottom:clamp(40px,6vh,72px)}
 .hero-lead{max-width:30em}
-.hero-ctas{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-start}
 .hero-meta{display:flex;flex-wrap:wrap;gap:8px 18px;color:var(--fg-3);margin-top:22px}
 .hero-meta span+span::before{content:"/";margin-right:18px;color:rgba(159,232,112,.4)}
 .br-m{display:none}
@@ -529,9 +529,6 @@ body[data-nav="lime"] .nav-progress{background:var(--bosque)}
 <section class="hero is-dark" data-theme="dark" data-sec="01" aria-labelledby="heroTitle">
   <canvas class="hero-wave" id="wave" aria-hidden="true"></canvas>
   <div class="container hero-inner">
-    <div class="hero-top">
-      <span class="live mono"><span class="live-dot" aria-hidden="true"></span>En vivo · <span class="num" id="srcCount">34</span> fuentes en escucha</span>
-    </div>
     <!-- ════════════════════════════════════════════════════════════════
          ZONA EDITABLE Nº 2 · TITULAR GRANDE DE LA PORTADA
          Cada <span class="line"> es una línea. Cambia solo el texto dentro
@@ -545,9 +542,6 @@ body[data-nav="lime"] .nav-progress{background:var(--bosque)}
     </h1>
     <!-- ════════════════════ FIN DE LA ZONA EDITABLE Nº 2 ════════════════════ -->
     <div class="hero-bottom">
-      <div>
-        <p class="lead hero-lead" data-reveal>Escuchamos emisoras de radio, canales de televisión y streams de internet las 24 horas, y en todo el mundo. Encarga tu reporte y recìbelo en minutos.</p>
-      </div>
       <div class="hero-ctas" data-reveal>
         <a class="btn btn-lime magnetic" href="/datos/planes" data-cursor="Ir">Empieza gratis<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
         <a class="btn btn-ghost magnetic" href="#como" data-scroll data-cursor="Bajar">Cómo funciona</a>
@@ -734,20 +728,8 @@ body[data-nav="lime"] .nav-progress{background:var(--bosque)}
   </div>
 </section>
 
-<!-- ═══════════ NÚMEROS ═══════════ -->
-<section class="numeros is-bosque" data-theme="dark" data-sec="06" aria-label="Cifras">
-  <div class="container">
-    <div class="num-grid">
-      <div class="num-tile"><b>24<small>/7</small></b><div><strong>Escucha continua</strong><p>Radio, televisión y streaming procesados en continuo, sin turnos.</p></div></div>
-      <div class="num-tile"><b>&lt;<span data-count="3" data-dec="0">0</span><small>min</small></b><div><strong>De emisión a alerta</strong><p>El tiempo que tarda una mención crítica en llegar a tu móvil.</p></div></div>
-      <div class="num-tile"><b><span data-count="98" data-dec="0">0</span><small>%</small></b><div><strong>Precisión en español</strong><p>Transcripción con Whisper, incluida la locución rápida y el acento local.</p></div></div>
-      <div class="num-tile"><b><span data-count="816" data-dec="0">0</span><small>h</small></b><div><strong>De emisión al día</strong><p>34 fuentes, 24 horas.</p></div></div>
-    </div>
-  </div>
-</section>
-
 <!-- ═══════════ COMPARATIVA ═══════════ -->
-<section class="comp is-light" data-theme="light" data-sec="07" aria-labelledby="compTitle">
+<section class="comp is-light" data-theme="light" data-sec="06" aria-labelledby="compTitle">
   <div class="container">
     <div class="sec-head">
       <h2 class="display h-xl" id="compTitle" data-split>Frente a las alternativas</h2>
@@ -794,7 +776,7 @@ body[data-nav="lime"] .nav-progress{background:var(--bosque)}
 </section>
 
 <!-- ═══════════ PRECIOS ═══════════ -->
-<section class="precios is-pale" id="precios" data-theme="light" data-sec="08" aria-labelledby="preciosTitle">
+<section class="precios is-pale" id="precios" data-theme="light" data-sec="07" aria-labelledby="preciosTitle">
   <div class="container">
     <div class="sec-head">
       <h2 class="display h-xl" id="preciosTitle" data-split>Precios</h2>
@@ -849,7 +831,7 @@ body[data-nav="lime"] .nav-progress{background:var(--bosque)}
 </section>
 
 <!-- ═══════════ FAQ ═══════════ -->
-<section class="faq is-light" id="faq" data-theme="light" data-sec="09" aria-labelledby="faqTitle">
+<section class="faq is-light" id="faq" data-theme="light" data-sec="08" aria-labelledby="faqTitle">
   <div class="container faq-grid">
     <div>
       <h2 class="display h-l" id="faqTitle" data-split>Preguntas</h2>
@@ -866,7 +848,7 @@ body[data-nav="lime"] .nav-progress{background:var(--bosque)}
 </section>
 
 <!-- ═══════════ DEMO / CTA ═══════════ -->
-<section class="demo is-lime" id="demo" data-theme="lime" data-sec="10" aria-labelledby="demoTitle">
+<section class="demo is-lime" id="demo" data-theme="lime" data-sec="09" aria-labelledby="demoTitle">
   <svg class="demo-mark" viewBox="0 0 780 825" aria-hidden="true"><path d="M138 0 L0 782 L380 162 L228 189 Z M780 36 L382 690 L679 649 L780 825 Z" fill="#163300"/></svg>
   <div class="container demo-grid">
     <h2 class="display h-xl" id="demoTitle" data-split>Deja de enterarte tarde.</h2>
@@ -889,7 +871,7 @@ body[data-nav="lime"] .nav-progress{background:var(--bosque)}
 </main>
 
 <!-- ═══════════ FOOTER ═══════════ -->
-<footer class="foot is-dark" data-theme="dark" data-sec="11">
+<footer class="foot is-dark" data-theme="dark" data-sec="10">
   <div class="container">
     <div class="foot-grid">
       <div>
