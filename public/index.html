@@ -990,11 +990,13 @@ body[data-nav="lime"] .nav-progress{background:var(--bosque)}
     var c = $('#wave'); if (!c) return;
     var ctx = c.getContext('2d'), hero = c.parentElement;
     var w = 0, h = 0, t = 0, mx = -1, my = -1, visible = true, raf = 0;
+    // Verdes oscuros y translúcidos sobre la noche (#0b1f00): la onda se ve
+    // como textura detrás del titular blanco sin quitarle contraste.
     var LINES = [
-      { a: .62, f: 1.0, s: .9, alpha: .95, lw: 1.6 },
-      { a: .38, f: 1.7, s: -.55, alpha: .45, lw: 1 },
-      { a: .85, f: .55, s: .4, alpha: .22, lw: 1 },
-      { a: .22, f: 3.2, s: 1.35, alpha: .32, lw: .8 }
+      { a: .62, f: 1.0, s: .9, rgb: '56,118,26', alpha: .55, lw: 1.6 },
+      { a: .38, f: 1.7, s: -.55, rgb: '42,96,20', alpha: .45, lw: 1 },
+      { a: .85, f: .55, s: .4, rgb: '31,78,14', alpha: .5, lw: 1 },
+      { a: .22, f: 3.2, s: 1.35, rgb: '47,107,20', alpha: .35, lw: .8 }
     ];
     function size() {
       var dpr = Math.min(2, window.devicePixelRatio || 1);
@@ -1007,7 +1009,7 @@ body[data-nav="lime"] .nav-progress{background:var(--bosque)}
       t += reduce ? 0 : .016;
       ctx.clearRect(0, 0, w, h);
       var narrow = w < 900, cy = h * (narrow ? .3 : .5), A = Math.min(h * (narrow ? .12 : .2), 170);
-      ctx.strokeStyle = 'rgba(159,232,112,.12)'; ctx.lineWidth = 1;
+      ctx.strokeStyle = 'rgba(47,107,20,.18)'; ctx.lineWidth = 1;
       ctx.beginPath(); ctx.moveTo(0, cy); ctx.lineTo(w, cy); ctx.stroke();
       var alphaK = narrow ? .55 : 1;
       for (var k = 0; k < LINES.length; k++) {
@@ -1021,7 +1023,7 @@ body[data-nav="lime"] .nav-progress{background:var(--bosque)}
                   + Math.sin(u * 42 + t * 3.1) * 5 * env * L.a;
           x ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
         }
-        ctx.strokeStyle = 'rgba(159,232,112,' + (L.alpha * alphaK) + ')'; ctx.lineWidth = L.lw; ctx.stroke();
+        ctx.strokeStyle = 'rgba(' + L.rgb + ',' + (L.alpha * alphaK) + ')'; ctx.lineWidth = L.lw; ctx.stroke();
       }
       raf = reduce ? 0 : requestAnimationFrame(frame);
     }
