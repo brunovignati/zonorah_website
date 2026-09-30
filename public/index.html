@@ -469,7 +469,7 @@ body[data-nav="lime"] .nav-progress{background:var(--bosque)}
   </nav>
   <div class="nav-right">
     <button class="nav-sound" id="soundBtn" type="button" aria-pressed="false" aria-label="Activar sonido ambiente"><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>Sonido <b id="soundState">off</b></button>
-    <a class="nav-login" href="https://dashboard.zonorah.com" target="_blank" rel="noopener">Entrar</a>
+    <span class="nav-login nav-cuenta" id="navCuenta" aria-live="polite"></span>
     <a class="btn btn-lime btn-nav magnetic" href="/datos/planes" data-cursor="Ir">Ver planes</a>
     <button class="nav-burger" id="burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu"><i></i><i></i></button>
   </div>
@@ -483,6 +483,7 @@ body[data-nav="lime"] .nav-progress{background:var(--bosque)}
     <a href="/datos/">Chat</a>
     <a href="/datos/aprende">Aprende</a>
     <a href="/datos/planes">Planes</a>
+    <a href="/datos/" id="menuCuenta" hidden>Iniciar sesión / Registrarse</a>
   </nav>
   <div class="menu-foot"><a href="https://dashboard.zonorah.com" target="_blank" rel="noopener">Entrar al panel</a><span>hola@zonorah.com</span></div>
 </div>
@@ -1193,6 +1194,60 @@ body[data-nav="lime"] .nav-progress{background:var(--bosque)}
   });
 
   window.addEventListener('load', function () { fitTitle(); ScrollTrigger.refresh(); });
+})();
+</script>
+<!-- ═══════════ CUENTA ═══════════
+     «Iniciar sesión / Registrarse» con Google. Es la MISMA sesión que
+     zonorah.com/datos: la cookie la pone la app de datos (/datos/api/sesion)
+     en zonorah.com, así que quien entra aquí sigue dentro en Chat y Planes.
+     Aquí no hay claves ni datos: el ID de cliente de Google lo da la API. -->
+<script>
+(function () {
+  const API = "/datos/api/sesion", caja = document.getElementById("navCuenta"), menu = document.getElementById("menuCuenta");
+  const esc = t => String(t ?? "").replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
+  let estado = null, cliente = null;
+  function pintar() {
+    if (!estado || !estado.login_activo) { caja.innerHTML = ""; menu.hidden = true; return; }
+    const u = estado.usuario;
+    if (u) {
+      caja.innerHTML = `<a href="/datos/" title="${esc(u.correo)}">${esc(u.nombre || u.correo)}</a> · <button type="button" data-cuenta="salir">Salir</button>`;
+      menu.textContent = `${u.nombre || u.correo} · ir al chat`; menu.href = "/datos/"; delete menu.dataset.cuenta;
+    } else {
+      caja.innerHTML = `<button type="button" data-cuenta="entrar">Iniciar sesión / Registrarse</button>`;
+      menu.textContent = "Iniciar sesión / Registrarse"; menu.href = "/datos/"; menu.dataset.cuenta = "entrar";
+    }
+    menu.hidden = false;
+  }
+  async function cargar() {
+    try { estado = await (await fetch(API, {credentials: "same-origin"})).json(); } catch { estado = null; }
+    pintar();
+  }
+  function google_() {
+    return new Promise((ok, mal) => {
+      if (window.google?.accounts?.oauth2) return ok();
+      const sc = document.createElement("script"); sc.src = "https://accounts.google.com/gsi/client"; sc.async = true;
+      sc.onload = ok; sc.onerror = mal; document.head.append(sc);
+    });
+  }
+  async function entrar() {
+    await google_();
+    if (!cliente) cliente = google.accounts.oauth2.initTokenClient({
+      client_id: estado.google_client_id, scope: "openid email profile",
+      callback: async r => {
+        if (r.error) return;
+        const x = await fetch(API + "/google", {method: "POST", headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({access_token: r.access_token})});
+        if (x.ok) cargar();
+      }});
+    cliente.requestAccessToken();
+  }
+  document.addEventListener("click", async e => {
+    const a = e.target.closest("[data-cuenta]"); if (!a) return;
+    e.preventDefault();
+    if (a.dataset.cuenta === "entrar") entrar().catch(() => {});
+    if (a.dataset.cuenta === "salir") { await fetch(API + "/salir", {method: "POST"}); cargar(); }
+  });
+  cargar();
 })();
 </script>
 </body>
