@@ -469,7 +469,7 @@ body[data-nav="lime"] .nav-progress{background:var(--bosque)}
   <div class="nav-right">
     <button class="nav-sound" id="soundBtn" type="button" aria-pressed="false" aria-label="Activar sonido ambiente"><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>Sonido <b id="soundState">off</b></button>
     <a class="nav-login" href="https://dashboard.zonorah.com" target="_blank" rel="noopener">Entrar</a>
-    <a class="btn btn-lime btn-nav magnetic" href="#demo" data-scroll data-cursor="Ir">Ver demo</a>
+    <a class="btn btn-lime btn-nav magnetic" href="/datos/planes" data-cursor="Ir">Ver planes</a>
     <button class="nav-burger" id="burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu"><i></i><i></i></button>
   </div>
   <span class="nav-progress" id="navProgress" aria-hidden="true"></span>
@@ -481,7 +481,7 @@ body[data-nav="lime"] .nav-progress{background:var(--bosque)}
     <a href="#precios" data-scroll>Precios</a>
     <a href="#faq" data-scroll>FAQ</a>
     <a href="/datos/">Datos abiertos</a>
-    <a href="#demo" data-scroll>Ver demo</a>
+    <a href="/datos/planes">Ver planes</a>
   </nav>
   <div class="menu-foot"><a href="https://dashboard.zonorah.com" target="_blank" rel="noopener">Entrar al panel</a><span>hola@zonorah.com</span></div>
 </div>
@@ -513,7 +513,7 @@ body[data-nav="lime"] .nav-progress{background:var(--bosque)}
         <p class="lead hero-lead" data-reveal>Escuchamos emisoras de radio, canales de televisión y streams de internet las 24 horas, y en todo el mundo. Encarga tu reporte y recìbelo en minutos.</p>
       </div>
       <div class="hero-ctas" data-reveal>
-        <a class="btn btn-lime magnetic" href="#demo" data-scroll data-cursor="Ir">Ver una demo<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-lime magnetic" href="/datos/planes" data-cursor="Ir">Empieza gratis<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
         <a class="btn btn-ghost magnetic" href="#como" data-scroll data-cursor="Bajar">Cómo funciona</a>
       </div>
     </div>
@@ -695,7 +695,7 @@ body[data-nav="lime"] .nav-progress{background:var(--bosque)}
   <div class="container">
     <div class="sec-head">
       <h2 class="display h-xl" id="preciosTitle" data-split>Precios</h2>
-      <p class="lead" data-reveal>Por fuente, no por menciones. Sin coste de alta.</p>
+      <p class="lead" data-reveal>Todos los planes, gratis hasta el 31 de diciembre de 2026. Sin datos de pago.</p>
     </div>
     <!-- ════════════════════════════════════════════════════════════════
          ZONA EDITABLE Nº 3 · PLANES Y PRECIOS
@@ -704,42 +704,43 @@ body[data-nav="lime"] .nav-progress{background:var(--bosque)}
        ════════════════════════════════════════════════════════════════ -->
     <div class="plans" data-stagger>
       <article class="plan">
-        <div class="mono"><span>Esencial</span></div>
-        <div class="price">A consultar</div>
-        <p class="body">Una marca o institución con unas pocas fuentes locales.</p>
+        <div class="mono"><span>Profesional</span></div>
+        <div class="price"><s>S/ 89</s> S/ 0</div>
+        <p class="body">Para periodistas, docentes e investigadores.</p>
         <ul>
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Hasta 5 fuentes</li>
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Informe diario</li>
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Histórico de 3 meses</li>
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg>1 usuario</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>100 preguntas a la IA al día</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Comparador y gráficos para insertar</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Descargas CSV sin límite</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Laboratorio de estadística</li>
         </ul>
-        <a class="btn btn-ghost" href="#demo" data-scroll>Empezar</a>
+        <a class="btn btn-ghost" href="/datos/planes?plan=profesional">Activar gratis</a>
       </article>
       <article class="plan pro">
-        <div class="mono"><span>Profesional</span><span class="tag">Más elegido</span></div>
-        <div class="price">A consultar</div>
-        <p class="body">Equipos que necesitan reaccionar el mismo día.</p>
+        <div class="mono"><span>Intensivo</span><span class="tag">Más elegido</span></div>
+        <div class="price"><s>S/ 229</s> S/ 0</div>
+        <p class="body">Para quien trabaja con los datos a diario.</p>
         <ul>
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Hasta 25 fuentes</li>
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Alertas urgentes en &lt;3 min</li>
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Reglas de urgencia propias</li>
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg>12 meses de histórico · 5 usuarios</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>500 preguntas a la IA al día</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Todo lo de Profesional</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>5 veces más consultas</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Gratis hasta el 31/12</li>
         </ul>
-        <a class="btn btn-lime" href="#demo" data-scroll data-cursor="Ir">Ver demo<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-lime" href="/datos/planes?plan=intensivo" data-cursor="Ir">Activar gratis<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </article>
       <article class="plan">
-        <div class="mono"><span>Agencia</span></div>
-        <div class="price">A medida</div>
-        <p class="body">Varios clientes, cada uno con sus fuentes, reglas e informes.</p>
+        <div class="mono"><span>Redacción</span></div>
+        <div class="price"><s>S/ 429</s> S/ 0</div>
+        <p class="body">Para redacciones, equipos de investigación y agencias.</p>
         <ul>
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Fuentes y clientes ilimitados</li>
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Informes con tu marca</li>
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg>API y exportaciones</li>
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Soporte prioritario</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>2.000 preguntas a la IA al día</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Todo lo de Intensivo</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>20 veces más consultas</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Gratis hasta el 31/12</li>
         </ul>
-        <a class="btn btn-ghost" href="#demo" data-scroll>Hablar con ventas</a>
+        <a class="btn btn-ghost" href="/datos/planes?plan=redaccion">Activar gratis</a>
       </article>
     </div>
+    <p class="lead" style="margin-top:28px" data-reveal>Precios al mes, en soles. ¿Monitoreo a medida para tu institución, con tus fuentes, alertas e informes? <a href="mailto:hola@zonorah.com?subject=Monitoreo%20a%20medida" style="text-decoration:underline">Escríbenos</a>.</p>
     <!-- ════════════════════ FIN DE LA ZONA EDITABLE Nº 3 ════════════════════ -->
   </div>
 </section>
@@ -769,7 +770,7 @@ body[data-nav="lime"] .nav-progress{background:var(--bosque)}
     <div>
       <p class="lead" data-reveal>Te enseñamos el panel con tus propias fuentes en 15 minutos. Si encaja, tu primer informe llega mañana.</p>
       <div class="demo-actions" data-reveal>
-        <a class="btn btn-lime magnetic" href="mailto:hola@zonorah.com?subject=Quiero%20ver%20una%20demo%20de%20Zonorah" data-cursor="Escribir">Reservar demo<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-lime magnetic" href="/datos/planes" data-cursor="Ir">Ver planes<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
         <a class="btn btn-ghost magnetic" href="#precios" data-scroll>Ver precios</a>
       </div>
       <!-- ZONA EDITABLE Nº 5 · CORREO DE CONTACTO: cambia hola@zonorah.com aquí y en el pie -->
