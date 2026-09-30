@@ -497,10 +497,11 @@ body.menu-open .nav{color:#16230F!important}
 
 /* Arranque */
 .loader{background:var(--claro);color:#16230F}
-.loader-mark{color:var(--g2)!important}
+.loader-mark{width:clamp(76px,9vw,104px);height:auto;aspect-ratio:780/825;margin-bottom:10px}
 .loader-freq{font-stretch:100%;font-weight:300;color:#16230F;letter-spacing:-.04em}
 .loader-bar{background:rgba(22,51,0,.1)}
 .loader-row{color:#83967A}
+.loader-row b{color:var(--g1);font-weight:500}
 
 /* Hero: claro, con halo */
 .hero{justify-content:center;background:var(--claro)}
@@ -611,8 +612,7 @@ body.menu-open .nav{color:#16230F!important}
 <!-- Preloader: sintonizando -->
 <div class="loader" id="loader" aria-hidden="true">
   <div class="loader-inner">
-    <svg class="loader-mark" style="color:#9fe870"><use href="#i-mark"/></svg>
-    <div class="loader-freq"><span id="loaderFreq">0</span><small>fuentes</small></div>
+    <svg class="loader-mark" viewBox="0 0 780 825" aria-hidden="true"><defs><linearGradient id="loaderG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2F6B14"/><stop offset=".55" stop-color="#58B22E"/><stop offset="1" stop-color="#1F8A7A"/></linearGradient></defs><path d="M138 0 L0 782 L380 162 L228 189 Z M780 36 L382 690 L679 649 L780 825 Z" fill="url(#loaderG)"/></svg>
     <div class="loader-bar"><i id="loaderBar"></i></div>
     <div class="loader-row mono"><span>Sintonizando</span><b id="loaderSrc">América TV</b></div>
   </div>
@@ -1163,10 +1163,12 @@ body.menu-open .nav{color:#16230F!important}
     fitTitle();
     if (!loader) { intro(); return; }
     if (reduce) { loader.remove(); ScrollTrigger.refresh(); return; }
-    var freq = $('#loaderFreq'), bar = $('#loaderBar'), src = $('#loaderSrc');
-    var o = { f: 0 }, dur = seen ? .7 : 1.6, idx = -1;
+    var bar = $('#loaderBar'), src = $('#loaderSrc');
+    var dur = seen ? .7 : 1.6, idx = -1;
     var tl = gsap.timeline({ onComplete: function () { loader.remove(); try { sessionStorage.setItem('z-seen', '1'); } catch (e) {} } });
-    tl.to(o, { f: 34, duration: dur, ease: 'power2.inOut', onUpdate: function () { freq.textContent = Math.round(o.f); } }, 0)
+    // El logo ocupa el lugar del antiguo contador de fuentes: aparece y respira mientras carga.
+    tl.fromTo('.loader-mark', { opacity: 0, scale: .86 }, { opacity: 1, scale: 1, duration: .5, ease: 'power3.out' }, 0)
+      .to('.loader-mark', { scale: 1.04, duration: dur / 2, ease: 'sine.inOut', yoyo: true, repeat: 1 }, .3)
       .to(bar, { scaleX: 1, duration: dur, ease: 'power2.inOut' }, 0)
       .to({}, { duration: dur, onUpdate: function () { var k = Math.min(SOURCES.length - 1, Math.floor(this.progress() * SOURCES.length)); if (k !== idx) { idx = k; src.textContent = SOURCES[k]; } } }, 0)
       .to('.loader-inner', { opacity: 0, y: -18, duration: .35, ease: 'power2.in' }, dur + .05)
