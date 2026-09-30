@@ -255,6 +255,35 @@ body[data-nav="lime"] .nav-progress{background:var(--bosque)}
 .caso .ex{display:block;font-family:var(--fm);font-size:12px;letter-spacing:.03em;line-height:1.6;margin-top:16px;color:var(--fg-3);opacity:.9}
 .caso:hover .ex{color:var(--lima)}
 
+/* ── Informes ── */
+.informes{padding:clamp(96px,14vh,160px) 0;overflow:hidden}
+.inf-meta{justify-self:end;text-align:right;color:var(--fg-3);max-width:34em}
+.inf-track{display:flex;gap:clamp(14px,1.6vw,24px);overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scrollbar-width:none;--edge:max(var(--gx),(100vw - var(--w)) / 2);margin:-24px calc(-1 * var(--edge)) -40px;padding:24px var(--edge) 40px;scroll-padding-inline:var(--edge)}
+.inf-track::-webkit-scrollbar{display:none}
+.inf-track.drag{scroll-snap-type:none;cursor:grabbing}
+.inf-track.drag .inf{pointer-events:none}
+.inf{flex:0 0 clamp(260px,25vw,380px);scroll-snap-align:start;display:flex;flex-direction:column;gap:16px;color:var(--fg);-webkit-user-drag:none;user-select:none}
+.inf-book{position:relative;display:block;aspect-ratio:560/792;perspective:1600px;transition:transform .6s var(--ease)}
+.inf-page{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;box-shadow:0 0 0 1px var(--line),0 24px 50px -30px rgba(22,51,0,.55);-webkit-user-drag:none}
+.inf-book::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,31,0,.55),rgba(11,31,0,0) 60%);opacity:1;transition:opacity .9s var(--ease);pointer-events:none}
+.inf-cover{position:absolute;inset:0;z-index:1;display:grid;place-items:center;background:var(--lima);color:var(--bosque);transform-origin:left center;backface-visibility:hidden;transition:transform 1s var(--ease);box-shadow:0 0 0 1px rgba(22,51,0,.12),0 24px 50px -30px rgba(22,51,0,.6),inset 10px 0 0 -6px rgba(22,51,0,.14),inset 14px 0 20px -12px rgba(22,51,0,.28)}
+.inf-cover svg{width:24%;height:auto;aspect-ratio:780/825}
+.inf-cover-t{position:absolute;left:11%;right:9%;bottom:7%;font-family:var(--fd);font-stretch:70%;font-weight:800;font-size:clamp(20px,1.9vw,30px);line-height:.92;letter-spacing:-.01em;text-transform:uppercase;text-wrap:balance;color:rgba(22,51,0,.2)}
+.inf:hover .inf-book,.inf.is-open .inf-book{transform:translateY(-8px)}
+.inf:hover .inf-cover,.inf.is-open .inf-cover,.inf:focus-visible .inf-cover{transform:rotateY(-105deg)}
+.inf:hover .inf-book::after,.inf.is-open .inf-book::after,.inf:focus-visible .inf-book::after{opacity:0}
+.inf h3{font-family:var(--fd);font-stretch:70%;font-weight:800;font-size:clamp(22px,1.9vw,32px);line-height:.95;letter-spacing:-.01em;text-transform:uppercase;text-wrap:balance}
+.inf-data{color:var(--fg-3);margin-top:-6px}
+.inf:hover .inf-data,.inf.is-open .inf-data{color:var(--fg)}
+.inf-ctrl{display:flex;align-items:center;gap:8px;margin-top:clamp(28px,4vh,44px)}
+.inf-bar{position:relative;flex:1;height:1px;background:var(--line);margin-right:16px;overflow:visible}
+.inf-bar i{position:absolute;left:0;top:-1px;height:3px;width:30%;background:var(--bosque);transition:transform .2s linear}
+.inf-btn{width:52px;height:52px;display:grid;place-items:center;color:var(--bosque);box-shadow:inset 0 0 0 1px var(--line);transition:background .3s,color .3s,opacity .3s}
+.inf-btn svg{width:18px;height:18px}
+.inf-btn.prev svg{transform:scaleX(-1)}
+.inf-btn:hover{background:var(--bosque);color:var(--lima)}
+.inf-btn:disabled{opacity:.3;pointer-events:none}
+
 /* ── Números ── */
 .numeros{padding:clamp(80px,10vh,120px) 0}
 .num-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line)}
@@ -389,6 +418,8 @@ body[data-nav="lime"] .nav-progress{background:var(--bosque)}
   .br-m{display:inline}
   .como-head,.sec-head,.demo-grid{grid-template-columns:1fr;gap:20px}
   .como-head .lead,.sec-head .lead{justify-self:start}
+  .inf-meta{justify-self:start;text-align:left}
+  .inf{flex-basis:44vw}
   .como-pin{min-height:0;display:block;padding:20px 0 90px}
   .signal{display:none}
   .como-track{flex-direction:column;align-items:stretch;gap:12px}
@@ -409,6 +440,9 @@ body[data-nav="lime"] .nav-progress{background:var(--bosque)}
   .plans{grid-template-columns:1fr}
 }
 @media (max-width:720px){
+  .inf{flex-basis:66vw}
+  .inf-btn{display:none}
+  .inf-bar{margin-right:0}
   .logo{height:26px;--h:26}
   .logos-track{gap:34px;padding:18px 0}
   .btn-nav{display:none}
@@ -633,8 +667,75 @@ body[data-nav="lime"] .nav-progress{background:var(--bosque)}
   </div>
 </section>
 
+<!-- ═══════════ INFORMES ═══════════ -->
+<section class="informes is-pale" id="informes" data-theme="light" data-sec="05" aria-labelledby="infTitle">
+  <div class="container">
+    <div class="sec-head">
+      <h2 class="display h-xl" id="infTitle" data-split>Informes</h2>
+      <p class="mono inf-meta" data-reveal>Perú · 2 al 8 de septiembre de 2026 · 29 emisoras de radio y TV · 296 horas de audio</p>
+    </div>
+    <!-- ZONA EDITABLE Nº 6 · INFORMES: cada <a class="inf"> es un informe. El PDF y su portada (.webp, 560×792) van en /public/informes/ -->
+    <div class="inf-track" id="infTrack" data-stagger>
+      <a class="inf" href="informes/alimentos-agroindustria.pdf" target="_blank" rel="noopener" data-cursor="Abrir PDF">
+        <span class="inf-book"><img class="inf-page" src="informes/alimentos-agroindustria.webp" width="560" height="792" loading="lazy" decoding="async" alt="Portada del informe Alimentos y agroindustria" draggable="false"><span class="inf-cover" aria-hidden="true"><svg><use href="#i-mark"/></svg><span class="inf-cover-t">Alimentos y agroindustria</span></span></span>
+        <h3>Alimentos y agroindustria</h3>
+        <span class="mono inf-data">34 menciones · 7 págs · PDF</span>
+      </a>
+      <a class="inf" href="informes/banca-finanzas.pdf" target="_blank" rel="noopener" data-cursor="Abrir PDF">
+        <span class="inf-book"><img class="inf-page" src="informes/banca-finanzas.webp" width="560" height="792" loading="lazy" decoding="async" alt="Portada del informe Banca y finanzas" draggable="false"><span class="inf-cover" aria-hidden="true"><svg><use href="#i-mark"/></svg><span class="inf-cover-t">Banca y finanzas</span></span></span>
+        <h3>Banca y finanzas</h3>
+        <span class="mono inf-data">67 menciones · 6 págs · PDF</span>
+      </a>
+      <a class="inf" href="informes/construccion-infraestructura.pdf" target="_blank" rel="noopener" data-cursor="Abrir PDF">
+        <span class="inf-book"><img class="inf-page" src="informes/construccion-infraestructura.webp" width="560" height="792" loading="lazy" decoding="async" alt="Portada del informe Construcción e infraestructura" draggable="false"><span class="inf-cover" aria-hidden="true"><svg><use href="#i-mark"/></svg><span class="inf-cover-t">Construcción e infraestructura</span></span></span>
+        <h3>Construcción e infraestructura</h3>
+        <span class="mono inf-data">70 menciones · 7 págs · PDF</span>
+      </a>
+      <a class="inf" href="informes/energia-hidrocarburos.pdf" target="_blank" rel="noopener" data-cursor="Abrir PDF">
+        <span class="inf-book"><img class="inf-page" src="informes/energia-hidrocarburos.webp" width="560" height="792" loading="lazy" decoding="async" alt="Portada del informe Energía e hidrocarburos" draggable="false"><span class="inf-cover" aria-hidden="true"><svg><use href="#i-mark"/></svg><span class="inf-cover-t">Energía e hidrocarburos</span></span></span>
+        <h3>Energía e hidrocarburos</h3>
+        <span class="mono inf-data">81 menciones · 7 págs · PDF</span>
+      </a>
+      <a class="inf" href="informes/medio-ambiente.pdf" target="_blank" rel="noopener" data-cursor="Abrir PDF">
+        <span class="inf-book"><img class="inf-page" src="informes/medio-ambiente.webp" width="560" height="792" loading="lazy" decoding="async" alt="Portada del informe Medio ambiente" draggable="false"><span class="inf-cover" aria-hidden="true"><svg><use href="#i-mark"/></svg><span class="inf-cover-t">Medio ambiente</span></span></span>
+        <h3>Medio ambiente</h3>
+        <span class="mono inf-data">52 menciones · 6 págs · PDF</span>
+      </a>
+      <a class="inf" href="informes/mineria.pdf" target="_blank" rel="noopener" data-cursor="Abrir PDF">
+        <span class="inf-book"><img class="inf-page" src="informes/mineria.webp" width="560" height="792" loading="lazy" decoding="async" alt="Portada del informe Minería" draggable="false"><span class="inf-cover" aria-hidden="true"><svg><use href="#i-mark"/></svg><span class="inf-cover-t">Minería</span></span></span>
+        <h3>Minería</h3>
+        <span class="mono inf-data">132 menciones · 6 págs · PDF</span>
+      </a>
+      <a class="inf" href="informes/salud-medicina.pdf" target="_blank" rel="noopener" data-cursor="Abrir PDF">
+        <span class="inf-book"><img class="inf-page" src="informes/salud-medicina.webp" width="560" height="792" loading="lazy" decoding="async" alt="Portada del informe Salud y medicina" draggable="false"><span class="inf-cover" aria-hidden="true"><svg><use href="#i-mark"/></svg><span class="inf-cover-t">Salud y medicina</span></span></span>
+        <h3>Salud y medicina</h3>
+        <span class="mono inf-data">209 menciones · 7 págs · PDF</span>
+      </a>
+      <a class="inf" href="informes/seguridad-ciudadana-defensa.pdf" target="_blank" rel="noopener" data-cursor="Abrir PDF">
+        <span class="inf-book"><img class="inf-page" src="informes/seguridad-ciudadana-defensa.webp" width="560" height="792" loading="lazy" decoding="async" alt="Portada del informe Seguridad ciudadana y defensa" draggable="false"><span class="inf-cover" aria-hidden="true"><svg><use href="#i-mark"/></svg><span class="inf-cover-t">Seguridad ciudadana y defensa</span></span></span>
+        <h3>Seguridad ciudadana y defensa</h3>
+        <span class="mono inf-data">976 menciones · 7 págs · PDF</span>
+      </a>
+      <a class="inf" href="informes/telecomunicaciones.pdf" target="_blank" rel="noopener" data-cursor="Abrir PDF">
+        <span class="inf-book"><img class="inf-page" src="informes/telecomunicaciones.webp" width="560" height="792" loading="lazy" decoding="async" alt="Portada del informe Telecomunicaciones" draggable="false"><span class="inf-cover" aria-hidden="true"><svg><use href="#i-mark"/></svg><span class="inf-cover-t">Telecomunicaciones</span></span></span>
+        <h3>Telecomunicaciones</h3>
+        <span class="mono inf-data">8 menciones · 5 págs · PDF</span>
+      </a>
+      <a class="inf" href="informes/transporte-movilidad.pdf" target="_blank" rel="noopener" data-cursor="Abrir PDF">
+        <span class="inf-book"><img class="inf-page" src="informes/transporte-movilidad.webp" width="560" height="792" loading="lazy" decoding="async" alt="Portada del informe Transporte y movilidad" draggable="false"><span class="inf-cover" aria-hidden="true"><svg><use href="#i-mark"/></svg><span class="inf-cover-t">Transporte y movilidad</span></span></span>
+        <h3>Transporte y movilidad</h3>
+        <span class="mono inf-data">252 menciones · 6 págs · PDF</span>
+      </a>
+    </div>
+    <div class="inf-ctrl">
+      <span class="inf-bar" aria-hidden="true"><i id="infBar"></i></span>
+      <button class="inf-btn prev" id="infPrev" type="button" aria-label="Informes anteriores"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+      <button class="inf-btn next" id="infNext" type="button" aria-label="Más informes"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+  </div>
+</section>
+
 <!-- ═══════════ NÚMEROS ═══════════ -->
-<section class="numeros is-bosque" data-theme="dark" data-sec="05" aria-label="Cifras">
+<section class="numeros is-bosque" data-theme="dark" data-sec="06" aria-label="Cifras">
   <div class="container">
     <div class="num-grid">
       <div class="num-tile"><b>24<small>/7</small></b><div><strong>Escucha continua</strong><p>Radio, televisión y streaming procesados en continuo, sin turnos.</p></div></div>
@@ -646,7 +747,7 @@ body[data-nav="lime"] .nav-progress{background:var(--bosque)}
 </section>
 
 <!-- ═══════════ COMPARATIVA ═══════════ -->
-<section class="comp is-light" data-theme="light" data-sec="06" aria-labelledby="compTitle">
+<section class="comp is-light" data-theme="light" data-sec="07" aria-labelledby="compTitle">
   <div class="container">
     <div class="sec-head">
       <h2 class="display h-xl" id="compTitle" data-split>Frente a las alternativas</h2>
@@ -693,7 +794,7 @@ body[data-nav="lime"] .nav-progress{background:var(--bosque)}
 </section>
 
 <!-- ═══════════ PRECIOS ═══════════ -->
-<section class="precios is-pale" id="precios" data-theme="light" data-sec="07" aria-labelledby="preciosTitle">
+<section class="precios is-pale" id="precios" data-theme="light" data-sec="08" aria-labelledby="preciosTitle">
   <div class="container">
     <div class="sec-head">
       <h2 class="display h-xl" id="preciosTitle" data-split>Precios</h2>
@@ -748,7 +849,7 @@ body[data-nav="lime"] .nav-progress{background:var(--bosque)}
 </section>
 
 <!-- ═══════════ FAQ ═══════════ -->
-<section class="faq is-light" id="faq" data-theme="light" data-sec="08" aria-labelledby="faqTitle">
+<section class="faq is-light" id="faq" data-theme="light" data-sec="09" aria-labelledby="faqTitle">
   <div class="container faq-grid">
     <div>
       <h2 class="display h-l" id="faqTitle" data-split>Preguntas</h2>
@@ -765,7 +866,7 @@ body[data-nav="lime"] .nav-progress{background:var(--bosque)}
 </section>
 
 <!-- ═══════════ DEMO / CTA ═══════════ -->
-<section class="demo is-lime" id="demo" data-theme="lime" data-sec="09" aria-labelledby="demoTitle">
+<section class="demo is-lime" id="demo" data-theme="lime" data-sec="10" aria-labelledby="demoTitle">
   <svg class="demo-mark" viewBox="0 0 780 825" aria-hidden="true"><path d="M138 0 L0 782 L380 162 L228 189 Z M780 36 L382 690 L679 649 L780 825 Z" fill="#163300"/></svg>
   <div class="container demo-grid">
     <h2 class="display h-xl" id="demoTitle" data-split>Deja de enterarte tarde.</h2>
@@ -788,14 +889,14 @@ body[data-nav="lime"] .nav-progress{background:var(--bosque)}
 </main>
 
 <!-- ═══════════ FOOTER ═══════════ -->
-<footer class="foot is-dark" data-theme="dark" data-sec="10">
+<footer class="foot is-dark" data-theme="dark" data-sec="11">
   <div class="container">
     <div class="foot-grid">
       <div>
         <a class="foot-brand" href="#top" data-scroll><svg style="color:#9fe870"><use href="#i-mark"/></svg>Zonorah</a>
         <p>Radio, televisión y streaming escuchados con IA, las 24 horas.</p>
       </div>
-      <div class="foot-col"><h4>Producto</h4><a href="#como" data-scroll>Cómo funciona</a><a href="#casos" data-scroll>Casos</a><a href="#precios" data-scroll>Precios</a></div>
+      <div class="foot-col"><h4>Producto</h4><a href="#como" data-scroll>Cómo funciona</a><a href="#casos" data-scroll>Casos</a><a href="#informes" data-scroll>Informes</a><a href="#precios" data-scroll>Precios</a></div>
       <div class="foot-col"><h4>Contacto</h4><a href="#faq" data-scroll>Preguntas</a><a href="https://dashboard.zonorah.com" target="_blank" rel="noopener">Panel</a><a href="mailto:hola@zonorah.com">hola@zonorah.com</a></div>
       <div class="foot-col"><h4>Legal</h4><a href="#">Privacidad</a><a href="#">Cookies</a><a href="#">Términos</a></div>
     </div>
@@ -1248,6 +1349,37 @@ body[data-nav="lime"] .nav-progress{background:var(--bosque)}
     if (a.dataset.cuenta === "salir") { await fetch(API + "/salir", {method: "POST"}); cargar(); }
   });
   cargar();
+})();
+</script>
+<script>
+/* ── Carrusel de informes: flechas, barra, arrastre y apertura en táctil ── */
+(function () {
+  var track = document.getElementById('infTrack'); if (!track) return;
+  var prev = document.getElementById('infPrev'), next = document.getElementById('infNext'), bar = document.getElementById('infBar');
+  var cards = [].slice.call(track.querySelectorAll('.inf'));
+  function step() { return cards.length > 1 ? cards[1].offsetLeft - cards[0].offsetLeft : 300; }
+  function update() {
+    var max = track.scrollWidth - track.clientWidth, x = track.scrollLeft, vis = track.clientWidth / track.scrollWidth;
+    prev.disabled = x <= 2; next.disabled = x >= max - 2;
+    bar.style.width = Math.min(100, vis * 100) + '%';
+    bar.style.transform = 'translateX(' + (max > 0 ? (x / max) * (1 - vis) / vis * 100 : 0) + '%)';
+  }
+  prev.addEventListener('click', function () { track.scrollBy({ left: -step() * 2, behavior: 'smooth' }); });
+  next.addEventListener('click', function () { track.scrollBy({ left: step() * 2, behavior: 'smooth' }); });
+  track.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+  // Ratón: arrastrar para desplazar sin abrir el PDF
+  var down = false, moved = false, sx = 0, sl = 0;
+  track.addEventListener('pointerdown', function (e) { if (e.pointerType !== 'mouse' || e.button !== 0) return; down = true; moved = false; sx = e.clientX; sl = track.scrollLeft; });
+  window.addEventListener('pointermove', function (e) { if (!down) return; var dx = e.clientX - sx; if (!moved && Math.abs(dx) > 6) { moved = true; track.classList.add('drag'); } if (moved) track.scrollLeft = sl - dx; });
+  window.addEventListener('pointerup', function () { if (!down) return; down = false; if (moved) { track.classList.remove('drag'); var k = Math.round(track.scrollLeft / step()); track.scrollTo({ left: k * step(), behavior: 'smooth' }); setTimeout(function () { moved = false; }, 0); } });
+  track.addEventListener('click', function (e) { if (moved) { e.preventDefault(); e.stopPropagation(); } }, true);
+  // Táctil: el informe que queda entero a la vista se abre solo
+  if (matchMedia('(hover: none)').matches && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) { es.forEach(function (en) { en.target.classList.toggle('is-open', en.intersectionRatio > .85); }); }, { root: track, threshold: [0, .85, 1] });
+    cards.forEach(function (c) { io.observe(c); });
+  }
 })();
 </script>
 </body>
