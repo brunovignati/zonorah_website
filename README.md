@@ -11,7 +11,8 @@ este repositorio: cada `push` a `main` despliega la web.
 | `public/_headers` | Cabeceras de seguridad y caché |
 | `public/robots.txt` | Indexación abierta + referencia al sitemap |
 | `wrangler.jsonc` | Configuración de Cloudflare: qué carpeta publicar y qué rutas pasan por el Worker |
-| `src/worker.js` | Reenvía `/datos/…` a la app de datos (datos.zonorah.com). Nada más |
+| `functions/datos/[[ruta]].js` | Cloudflare Pages: reenvía `/datos/…` a la app de datos (datos.zonorah.com). Nada más |
+| `src/worker.js` | Lo mismo, por si el sitio pasa de Pages a Workers |
 
 Solo se publica el contenido de `public/`. Todo lo que esté fuera de esa
 carpeta (este README, la configuración) no acaba en la web.
