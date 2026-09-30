@@ -494,6 +494,10 @@ body.menu-open .nav{color:#16230F!important}
 .menu-foot{text-transform:none;letter-spacing:0;font-family:var(--fd);color:#56684B}
 .menu-foot a{color:var(--g1)}
 .cursor{display:none!important}
+/* Sin cursor personalizado, vuelve el del sistema */
+html.js.fine body{cursor:auto}
+html.js.fine a,html.js.fine button,html.js.fine summary,html.js.fine label,html.js.fine [role=button]{cursor:pointer}
+html.js.fine input,html.js.fine textarea{cursor:text}
 
 /* Arranque */
 .loader{background:var(--claro);color:#16230F}
