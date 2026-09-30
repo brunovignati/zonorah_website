@@ -142,15 +142,6 @@ body[data-nav="lime"] .nav::before{background:rgba(159,232,112,.8);border-color:
 .nav-links a:hover,.nav-links a.active{opacity:1}
 .nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1);transform-origin:left}
 .nav-right{display:flex;align-items:center;gap:6px}
-.nav-sound{display:inline-flex;align-items:center;gap:9px;padding:10px 14px;font-family:var(--fm);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;opacity:.75;transition:opacity .2s}
-.nav-sound:hover{opacity:1}
-.nav-sound b{font-weight:500;color:var(--lima)}
-body[data-nav="light"] .nav-sound b,body[data-nav="lime"] .nav-sound b{color:inherit}
-.eq{display:inline-flex;align-items:flex-end;gap:2px;height:11px}
-.eq i{width:2px;height:4px;background:currentColor;transform-origin:bottom}
-.nav-sound[aria-pressed="true"] .eq i{animation:eq 1s ease-in-out infinite}
-.nav-sound[aria-pressed="true"] .eq i:nth-child(2){animation-delay:.18s}
-.nav-sound[aria-pressed="true"] .eq i:nth-child(3){animation-delay:.36s}
 .nav-login{padding:10px 16px;font-family:var(--fm);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;opacity:.75;transition:opacity .2s}
 .nav-login:hover{opacity:1}
 .btn-nav{height:44px;padding:0 22px;font-size:12px;margin-left:8px}
@@ -399,13 +390,12 @@ body[data-nav="lime"] .nav-progress{background:var(--bosque)}
 /* ── Animaciones ── */
 @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @keyframes ping{0%{box-shadow:0 0 0 0 rgba(159,232,112,.55)}100%{box-shadow:0 0 0 12px rgba(159,232,112,0)}}
-@keyframes eq{0%,100%{transform:scaleY(.4)}50%{transform:scaleY(1)}}
 @keyframes barsy{from{transform:scaleY(.25)}to{transform:scaleY(1)}}
 @keyframes blink{50%{opacity:0}}
 
 /* ── Responsive ── */
 @media (max-width:1100px){
-  .nav-links,.nav-login,.nav-sound{display:none}
+  .nav-links,.nav-login{display:none}
   .nav-burger{display:grid}
   .num-grid{grid-template-columns:repeat(2,1fr)}
   .faq-grid{grid-template-columns:1fr;gap:28px}
@@ -502,7 +492,6 @@ body[data-nav="lime"] .nav-progress{background:var(--bosque)}
     <a href="/datos/planes">Planes</a>
   </nav>
   <div class="nav-right">
-    <button class="nav-sound" id="soundBtn" type="button" aria-pressed="false" aria-label="Activar sonido ambiente"><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>Sonido <b id="soundState">off</b></button>
     <span class="nav-login nav-cuenta" id="navCuenta" aria-live="polite"></span>
     <a id="navPlanes" class="btn btn-lime btn-nav magnetic" href="/datos/planes" data-cursor="Ir">Ver planes</a>
     <button class="nav-burger" id="burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu"><i></i><i></i></button>
@@ -1177,43 +1166,6 @@ body[data-nav="lime"] .nav-progress{background:var(--bosque)}
       el.addEventListener('pointermove', function (e) { var r = el.getBoundingClientRect(); xTo((e.clientX - (r.left + r.width / 2)) * .22); yTo((e.clientY - (r.top + r.height / 2)) * .22); }, { passive: true });
       el.addEventListener('pointerleave', function () { xTo(0); yTo(0); });
     });
-  }
-
-  /* ── Sonido ambiente (Web Audio, se crea al pulsar) ───────────── */
-  var soundBtn = $('#soundBtn'), soundState = $('#soundState'), audio = null, master = null, soundOn = false;
-  function buildAudio() {
-    var AC = window.AudioContext || window.webkitAudioContext; if (!AC) return null;
-    var ac = new AC();
-    master = ac.createGain(); master.gain.value = 0; master.connect(ac.destination);
-    var len = ac.sampleRate * 2, buf = ac.createBuffer(1, len, ac.sampleRate), d = buf.getChannelData(0), b0 = 0, b1 = 0, b2 = 0;
-    for (var i = 0; i < len; i++) { var wn = Math.random() * 2 - 1; b0 = .99765 * b0 + wn * .0990460; b1 = .96300 * b1 + wn * .2965164; b2 = .57000 * b2 + wn * 1.0526913; d[i] = (b0 + b1 + b2 + wn * .1848) * .09; }
-    var src = ac.createBufferSource(); src.buffer = buf; src.loop = true;
-    var bp = ac.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = 900; bp.Q.value = .6;
-    var lfo = ac.createOscillator(), lfoG = ac.createGain(); lfo.frequency.value = .07; lfoG.gain.value = 480;
-    lfo.connect(lfoG); lfoG.connect(bp.frequency); lfo.start();
-    src.connect(bp); bp.connect(master); src.start();
-    return ac;
-  }
-  function blip(f) {
-    if (!audio || !soundOn) return;
-    var o = audio.createOscillator(), g = audio.createGain(), n = audio.currentTime;
-    o.type = 'sine'; o.frequency.setValueAtTime(f, n); o.frequency.exponentialRampToValueAtTime(f * 1.5, n + .06);
-    g.gain.setValueAtTime(.0001, n); g.gain.exponentialRampToValueAtTime(.05, n + .01); g.gain.exponentialRampToValueAtTime(.0001, n + .12);
-    o.connect(g); g.connect(audio.destination); o.start(n); o.stop(n + .14);
-  }
-  if (soundBtn) {
-    soundBtn.addEventListener('click', function () {
-      if (!audio) { audio = buildAudio(); if (!audio) return; }
-      if (audio.state === 'suspended') audio.resume();
-      soundOn = !soundOn;
-      master.gain.cancelScheduledValues(audio.currentTime);
-      master.gain.linearRampToValueAtTime(soundOn ? .35 : 0, audio.currentTime + .8);
-      soundBtn.setAttribute('aria-pressed', String(soundOn));
-      soundBtn.setAttribute('aria-label', soundOn ? 'Desactivar sonido ambiente' : 'Activar sonido ambiente');
-      soundState.textContent = soundOn ? 'on' : 'off';
-      if (soundOn) blip(660);
-    });
-    $$('.btn').forEach(function (b) { b.addEventListener('pointerenter', function () { blip(880); }); });
   }
 
   /* ── Comparativa interactiva ──────────────────────────────────── */
