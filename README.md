@@ -34,6 +34,18 @@ cd ~/zonorah-web/public && python3 -m http.server 8080
 # abrir http://localhost:8080
 ```
 
+## Idioma (español / indonesio)
+
+La portada se escribe en español. El botón **ES · ID** de la cabecera cambia
+al indonesio: guarda la elección y recarga, y la traducción se aplica antes de
+que arranquen las animaciones. También funciona con `zonorah.com/?lang=id` y
+para quien tenga el navegador en indonesio.
+
+Las traducciones están en el diccionario del bloque «IDIOMA» del `<head>` de
+`public/index.html`: frase española exacta → frase indonesia. **Si cambias un
+texto en español, cambia también su clave en el diccionario**; si no, ese texto
+saldrá en español en la versión indonesia.
+
 ## zonorah.com/datos
 
 La memoria de los medios en cifras. No vive en este repositorio: es la app
@@ -58,6 +70,7 @@ Aquí no hay datos ni claves: el Worker no guarda nada.
 
 ## Historial
 
+- **13-oct-2026** — Versión en indonesio con botón ES · ID en la cabecera.
 - **30-sep-2026** — Enlace «Datos» y caso de periodismo de datos; `/datos`
   pasa por un Worker que reenvía a la app de datos.
 - **25-ago-2026** — Repositorio reconstruido: la portada pasa de estar
