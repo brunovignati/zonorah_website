@@ -1,67 +1,175 @@
 # Zonorah, Media Neuroscience Lab
 
-> Zonorah is a Media Neuroscience Lab. Our instrument transcribes Peruvian radio, TV and YouTube and measures what is said: open data and applied studies.
+> Zonorah is a Media Neuroscience Lab. It writes down what radio, TV and YouTube broadcast and counts it. Open data and studies on commission.
 
 Last updated: 2026-11-24
 
-Research on media and the brain. Our computational instrument transcribes Peruvian radio, television and YouTube into a corpus and measures what is said: how much, where, when, by whom and how it is framed.
+Zonorah records radio, TV and YouTube, transcribes the audio, and counts how many minutes each topic is on air, on which station and at what time. The audio is deleted after transcription.
 
-Before asking what media do to the brain, measure what the media say.
+Questions the data can answer
+
+## Home
+
+https://zonorah.com/
+
+Zonorah is a Media Neuroscience Lab. It records and counts what media broadcast. Research on the brain is done separately and uses these counts.
+
+### Method: Recording, transcribing and counting
+
+The procedure, the limits of the counts and how to cite them.
+
+Method →
+
+### Research: Open data and studies on commission
+
+Open data for researchers, teachers and journalists, and studies carried out for organisations.
+
+Research →
+
+### Zonorah Data: Comparator, downloads and assistant
+
+Compare words by station and day, download tables and charts, and ask the AI assistant.
+
+Zonorah Data →
+
+### Sample studies: Ten reports, one per sector
+
+PDF reports covering one week in September 2026. They are in Spanish.
+
+Sample studies →
+
+## How the numbers are made
+
+1. Record. Each station's live signal comes in over the internet. We record it during the hours of its schedule.
+2. Transcribe. A speech-recognition program on our own computer turns the audio into text, with a time for every sentence. Then the audio is deleted.
+3. Code. The text is searched for the words each study uses, including their variants. Every passage that matches is entered on a fixed form: who speaks, the role of the person or cause, topic, tone, framing, and whether the claim has evidence or is rumour.
+4. Report. The public numbers are minutes on air per 100 hours recorded. Work done on commission arrives as a PDF by email, on the schedule you choose.
 
 ## Method
 
-1. Acquisition. We receive each station's live signal over the internet and record it in the time windows of its schedule.
-2. Transcription. A speech-recognition model runs locally and turns audio into timestamped text. Audio is deleted as soon as it is transcribed, so the corpus is text only.
-3. Coding. Terms are searched with their variants. Each relevant passage is coded in closed fields: speaker, role of the subject, topic, tone, framing, and evidence or rumour.
-4. Output. Figures go to Zonorah Data as minutes on air per 100 hours recorded. Commissioned studies arrive as a PDF by email on the schedule you choose.
+https://zonorah.com/method/
 
-## Two fronts, one instrument
+These limits apply to every published figure.
 
-Zonorah is a Media Neuroscience Lab. Its computational instrument measures the media side of the question; our research on the brain side is separate and builds on that data.
+### Limit 1: Transcription errors
 
-### Scientific research: Open data on the media side
+The speech-recognition program mishears names, acronyms and brands. A misheard word is not counted, so figures tend to be low.
 
-Published, literal rules, such as the El Niño index, and aggregate open data for journalists, teachers and researchers: a comparator, embeddable charts, CSV downloads and an AI assistant that quotes short fragments with their station and time.
+Try several spellings of the same name
+
+### Limit 2: Recorded hours only
+
+A station that was not recorded at some hour tells nothing about what it broadcast then. Absence from the recording does not mean it was not said.
+
+The coverage table shows what is recorded
+
+### Limit 3: Music and advertising
+
+Recorded minutes include songs and adverts. A word inside an advert is counted.
+
+### Limit 4: Comparing stations
+
+A music station and a news station cannot be compared directly. Compare stations of the same type, or the same word over time.
+
+### Limit 5: Rounding and hidden figures
+
+Public figures are rounded to multiples of 5 and hidden below 3 minutes. With exact low figures, someone could tell whether a named person was mentioned at a given moment. Totals may not add up exactly.
+
+### Citing: Citing a figure
+
+Cite the permanent link of the comparison and the date it was consulted. Figures change when recordings are added.
+
+Zonorah (2026). Minutes on air per 100 hours recorded. Consulted [date], terms: [terms]. [link to the comparison]
+
+## Research
+
+https://zonorah.com/research/
+
+Two lines of work share the same recordings: open data, and studies carried out on commission.
+
+### Scientific research: Open data
+
+For researchers, teachers and journalists. The comparator, the charts, the CSV files and the El Niño index follow rules that are published and fixed, so anyone can check them. An AI assistant answers from the transcripts and quotes short fragments with their station and time.
 
 Every figure: minutes on air per 100 hours recorded
 
-### Commercial research: Applied media studies
+### Commercial research: Studies on commission
 
-Organisations define the sources, keywords and rules. Each mention is coded for speaker, topic, tone, framing, evidence or rumour, risk and urgency, and delivered as a PDF study by email.
+An organisation chooses the sources, keywords and rules. Each mention is entered on a fixed form, including risk and urgency, and a PDF is sent by email on the schedule the organisation chooses. The public data does not show who commissioned what.
 
-A commission is private: public data never reveals who asked for what
+Not tied to a country: the client picks the stations and their language. Reports in English, Spanish or Indonesian
 
-### Zonorah Data: The lab's open instrument
+### Foundations: Origin of the approach
 
-The comparator contrasts any term across stations, days and regions. A figure is cited with the permanent link of its comparison and the date of consultation.
+The Media Neuroscience Lab at UC Santa Barbara works, among other topics, on moral narratives in news and entertainment, text mining and large media datasets. Zonorah uses that computational approach. It does no brain imaging and runs no experiments with participants. Research on the brain is done separately and uses these figures.
 
-Cite as: Zonorah (2026). Memoria de los medios del Perú: minutos al aire por cada 100 horas grabadas.
+medianeuroscience.org ↗
 
-### Method limits: What the figures do not say
+## Zonorah Data
 
-Transcription is automatic and errs on names, acronyms and brands, so figures tend to fall short. Only what was recorded is measured, music and adverts count, and figures are rounded.
+https://zonorah.com/data/
 
-“Not recorded” is not the same as “not said”
+How many minutes a word was on air, by station and by day.
 
-### Data protection: No recordings kept
+### Compare: Comparator
 
-Audio is deleted as soon as it is transcribed. Questions to the AI assistant go to an AI service (Groq, United States) without email or name. Accounts and their data can be deleted at any time.
+Up to four words at once, grouped by station, day, hour, region or type of station. The search ignores capital letters and accents and includes variants.
 
-Access, correction or deletion: hola@zonorah.com
+The coverage table shows which stations and hours are recorded
 
-### Scientific foundations: Computational media neuroscience
+### Download: Downloads and charts
 
-Zonorah takes the computational side of media neuroscience, such as the work of the Media Neuroscience Lab at UC Santa Barbara on moral narratives, text mining and large media datasets. The instrument does not do brain imaging or experiments with participants.
+Each comparison downloads as a CSV file with the same columns as the table. The same comparison can be embedded in an article as a chart that shows its source.
 
-https://www.medianeuroscience.org/
+### Ask: AI assistant
 
-## Access
+It summarises the transcripts and quotes short fragments with station and time. It does not give names or data of private individuals. Transcripts are automatic, so a summary can contain mistakes.
 
-All access plans are free until 31 December 2026. No payment details.
+### Access
+
+All plans are free until 31 December 2026. No payment details.
 
 - Professional: S/ 89 per month at list price, 100 AI questions a day.
 - Intensive: S/ 229 per month at list price, 500 AI questions a day.
 - Newsroom: S/ 429 per month at list price, 2,000 AI questions a day.
+
+## Sample studies
+
+https://zonorah.com/studies/
+
+One report per sector, from the week of 2 to 8 September 2026. They are in Spanish.
+
+## Privacy
+
+https://zonorah.com/privacy/
+
+No recordings are kept. This page says what is kept about people who sign in. It is a draft pending legal review.
+
+### Recordings: None are kept
+
+The audio is deleted as soon as it has been turned into text. Only the text stays.
+
+### Your account: What is stored if you sign in with Google
+
+Your email and name as Google gives them, the date you joined and the date of your last visit, how many questions you ask each day, and which sector reports you download.
+
+The password is handled by Google. It is not stored here.
+
+### Your questions: They go to an AI service
+
+A question is sent to an AI service (Groq, in the United States) without your email or name. The text of your questions is not kept with your account. Please do not write personal data in a question.
+
+### How long: Until you delete the account
+
+A session lasts 30 days. Your data stays while the account exists. You can delete the account whenever you want, and everything goes: email, name, sessions and question count.
+
+### Your rights: Access, correction, deletion
+
+You can ask for access to your data, for it to be corrected or for it to be deleted by writing to hola@zonorah.com.
+
+### Status: Draft pending legal review
+
+The wording may change after the review. Companies that order studies are covered by their own agreement, not by this page.
 
 Contact: hola@zonorah.com
 
