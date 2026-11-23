@@ -3,301 +3,346 @@
 
     python3 build/build.py
 
+La portada ES la original: `build/plantilla.html` (su CSS, sus animaciones GSAP, su
+estructura y sus clases, intactos). Este script solo cambia el TEXTO y lo que hace
+falta para el SEO: cada reemplazo comprueba que el fragmento original existe, así que
+si la plantilla cambia, falla en voz alta en vez de dejar español colado.
+
 Escribe:
     public/index.html        inglés   (zonorah.com/)
     public/es/index.html     español  (zonorah.com/es/)
     public/id/index.html     indonesio (zonorah.com/id/)
-    public/sitemap.xml  public/robots.txt  public/llms.txt
+    public/404.html  sitemap.xml  robots.txt  llms.txt  llms-full.txt
 
-La fuente única es `build/content.py`. Cada página es HTML completo y legible
-sin JavaScript: lo que ve un buscador o una IA es lo que ve una persona. No hay
-traducción en el navegador. Solo biblioteca estándar.
+No hay traducción en el navegador: cada página trae su idioma ya puesto. Solo biblioteca
+estándar.
 """
 import html
 import json
+import re
 import sys
-from datetime import date
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
-from content import (CITA, EMAIL, IDIOMAS, LAB_URL, PLANES, RUTAS, SITE)  # noqa: E402
+from content import (CITA, EMAIL, LAB_URL, LANGS, LOCALES, NOMBRES, RUTAS, SECTORES, SITE, T,  # noqa: E402
+                     UPDATED, comprobar, textos)
 
 RAIZ = Path(__file__).resolve().parent.parent
 PUBLIC = RAIZ / "public"
-HOY = date.today().isoformat()
+PLANTILLA = (Path(__file__).parent / "plantilla.html").read_text(encoding="utf-8")
 e = html.escape
-
-CSS = """
-:root{--noche:#0b1f00;--bosque:#163300;--lima:#9fe870;--rocio:#eaf7dc;--hueso:#f4f5ef;
---tinta:#0e1a08;--gris:#4f5849;--linea:#d9dccf;--w:1120px;--g:clamp(20px,4vw,48px);
---f:'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;--m:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace}
-*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:76px}
-body{margin:0;font:400 17px/1.6 var(--f);color:var(--tinta);background:var(--hueso);-webkit-font-smoothing:antialiased}
-a{color:inherit}img,svg{max-width:100%}
-.skip{position:absolute;left:-999px;top:8px;background:var(--lima);color:var(--noche);padding:8px 14px;border-radius:6px;z-index:99}
-.skip:focus{left:8px}
-:focus-visible{outline:3px solid var(--lima);outline-offset:3px}
-.wrap{max-width:var(--w);margin:0 auto;padding:0 var(--g)}
-header.top{position:sticky;top:0;z-index:20;background:rgba(244,245,239,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--linea)}
-.bar{display:flex;align-items:center;gap:20px;min-height:64px}
-.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:800;letter-spacing:.02em;font-size:19px}
-.brand svg{width:22px;height:auto;flex:none}.brand span{white-space:nowrap}
-nav.main{margin-left:auto;display:flex;gap:22px;align-items:center;font-size:15px}
-nav.main a{text-decoration:none;color:var(--gris)}nav.main a:hover{color:var(--tinta)}
-.langs{display:flex;gap:4px;font:500 13px var(--m)}
-.langs a{padding:4px 8px;border-radius:5px;text-decoration:none;color:var(--gris);border:1px solid transparent}
-.langs a[aria-current=true]{background:var(--bosque);color:var(--lima)}
-.btn{display:inline-block;padding:12px 20px;border-radius:8px;font-weight:700;text-decoration:none;font-size:16px;border:2px solid var(--bosque)}
-.btn.p{background:var(--lima);color:var(--noche);border-color:var(--lima)}.btn.p:hover{background:#b6f08e}
-.btn.s{color:var(--rocio);border-color:#3f5a2a}.btn.s:hover{border-color:var(--lima)}
-.btn.d{background:var(--bosque);color:var(--lima)}.btn.d:hover{background:var(--noche)}
-.btn.o{background:transparent;color:var(--bosque)}.btn.o:hover{background:var(--rocio)}
-.hero{background:var(--noche);color:var(--rocio);padding:clamp(56px,10vw,120px) 0 clamp(48px,8vw,88px)}
-.eyebrow{font:500 13px var(--m);letter-spacing:.14em;text-transform:uppercase;color:var(--lima);margin:0 0 18px}
-h1{font-weight:800;font-stretch:90%;line-height:1.02;letter-spacing:-.02em;margin:0 0 24px;font-size:clamp(42px,8vw,92px)}
-h1 span{display:block;color:var(--lima)}
-.lead{font-size:clamp(18px,2.2vw,23px);max-width:760px;margin:0 0 32px;color:#cfe3bd}
-.cta{display:flex;flex-wrap:wrap;gap:12px}
-.facts{background:var(--bosque);color:var(--rocio)}
-.facts ul{list-style:none;margin:0;padding:28px 0;display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
-.facts strong{display:block;color:var(--lima);font-size:18px;margin-bottom:4px}
-.facts span{font-size:15px;color:#cfe3bd}
-section{padding:clamp(56px,8vw,96px) 0;border-bottom:1px solid var(--linea)}
-section.alt{background:#fff}
-h2{font-size:clamp(28px,4vw,44px);line-height:1.1;letter-spacing:-.015em;margin:0 0 20px;font-stretch:92%}
-h3{font-size:22px;line-height:1.2;margin:0 0 10px}
-p{margin:0 0 16px;max-width:72ch}
-.note{font-size:15px;color:var(--gris);border-left:3px solid var(--lima);padding-left:14px;max-width:72ch}
-.grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
-.card{background:#fff;border:1px solid var(--linea);border-radius:12px;padding:26px}
-section.alt .card{background:var(--hueso)}
-.step b{font:500 12px var(--m);letter-spacing:.12em;text-transform:uppercase;color:var(--gris);display:block;margin-bottom:8px}
-.two{display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
-.two .card{display:flex;flex-direction:column}
-.two ul,.card ul,.list{margin:0 0 20px;padding-left:20px}.two li,.list li{margin-bottom:10px}
-.two .card .btn{margin-top:auto;align-self:flex-start}
-.tag{font-size:15px;color:var(--gris);margin-bottom:14px}
-.plan.pop{border:2px solid var(--bosque)}
-.plan .badge{font:500 12px var(--m);background:var(--lima);color:var(--noche);padding:3px 9px;border-radius:99px;display:inline-block;margin-bottom:10px}
-.price{font-size:40px;font-weight:800;line-height:1;margin:6px 0}
-.price small{display:block;font-size:13px;font-weight:400;color:var(--gris);margin-top:6px}
-.plan ul{padding-left:18px;font-size:15px}
-.limits dt{font-weight:700;margin-top:14px}.limits dd{margin:2px 0 0;color:var(--gris);max-width:72ch}
-pre.cite{white-space:pre-wrap;background:var(--noche);color:var(--rocio);border-radius:10px;padding:18px;font:400 14px/1.6 var(--m);max-width:72ch}
-details{border-bottom:1px solid var(--linea);padding:16px 0;max-width:820px}
-summary{cursor:pointer;font-weight:700;font-size:18px;list-style:none}
-summary::-webkit-details-marker{display:none}
-summary::after{content:"+";float:right;font-weight:400}details[open] summary::after{content:"–"}
-details p{margin:12px 0 0;color:var(--gris)}
-.contact{background:var(--bosque);color:var(--rocio);border:0}
-.contact h2{color:#fff}.contact p{color:#cfe3bd}
-.mail{font-size:clamp(22px,4vw,34px);font-weight:800;color:var(--lima);word-break:break-all}
-footer{background:var(--noche);color:#9fb28c;padding:36px 0;font-size:14px}
-footer .wrap{display:flex;flex-wrap:wrap;gap:16px 28px;align-items:center}
-footer a{color:#cfe3bd}footer .sp{margin-left:auto}
-@media(max-width:860px){nav.main>a:not(.btn){display:none}nav.main{gap:12px}}
-@media(max-width:560px){nav.main>a.btn{display:none}nav.main{margin-left:auto}.bar{gap:10px}.brand span{font-size:16px}.btn{padding:10px 14px;font-size:15px}nav.main{gap:8px}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-"""
-
-LOGO = ('<svg viewBox="0 0 780 825" aria-hidden="true" focusable="false"><path fill="#163300" '
-        'd="M138 0 L0 782 L380 162 L228 189 Z M780 36 L382 690 L679 649 L780 825 Z"/></svg>')
-FAVICON = ("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 780 825'%3E"
-           "%3Crect width='780' height='825' fill='%23163300'/%3E%3Cpath d='M138 0 L0 782 L380 162 "
-           "L228 189 Z M780 36 L382 690 L679 649 L780 825 Z' fill='%239fe870'/%3E%3C/svg%3E")
+MESES = {
+    "en": "January February March April May June July August September October November December".split(),
+    "es": "enero febrero marzo abril mayo junio julio agosto septiembre octubre noviembre diciembre".split(),
+    "id": "Januari Februari Maret April Mei Juni Juli Agustus September Oktober November Desember".split(),
+}
 
 
-def app(ruta: str, lang: str) -> str:
-    """Enlace a la app de datos en el mismo idioma que la página que se está leyendo.
-
-    La app lee `?lang=` (y lo guarda en su cookie), así que quien cambia de idioma
-    en la portada sigue en ese idioma al entrar: no hay un salto a otro idioma.
-    """
-    return ruta + ("&" if "?" in ruta else "?") + f"lang={lang}"
+def fecha_larga(lang: str) -> str:
+    a, m, d = UPDATED.split("-")
+    mes = MESES[lang][int(m) - 1]
+    return f"{int(d)} de {mes} de {a}" if lang == "es" else f"{int(d)} {mes} {a}"
 
 
 def url(lang: str) -> str:
     return SITE + RUTAS[lang]
 
 
-def alternates(actual: str) -> str:
-    t = "".join(f'<link rel="alternate" hreflang="{l}" href="{url(l)}">\n' for l in IDIOMAS)
-    return t + f'<link rel="alternate" hreflang="x-default" href="{url("en")}">'
+class Plantilla:
+    """La plantilla original con reemplazos que comprueban que el original existe."""
+
+    def __init__(self, s: str):
+        self.s = s
+
+    def rp(self, old: str, new: str, n: int | None = None):
+        c = self.s.count(old)
+        if c == 0 or (n is not None and c != n):
+            raise SystemExit(f"[plantilla] se esperaba {n or '≥1'} vez «{old[:80]}» y hay {c}")
+        self.s = self.s.replace(old, new)
+
+    def re_sub(self, patron: str, nuevo, n: int | None = None, flags=re.S):
+        res, c = re.subn(patron, nuevo, self.s, flags=flags)
+        if c == 0 or (n is not None and c != n):
+            raise SystemExit(f"[plantilla] patrón {patron[:70]!r}: se esperaba {n or '≥1'} y hay {c}")
+        self.s = res
 
 
-def json_ld(c: dict) -> str:
-    lang = c["lang"]
-    org = {"@type": ["Organization", "ResearchOrganization"], "@id": SITE + "/#org",
-           "name": "Zonorah", "alternateName": "Zonorah Media Neuroscience Lab", "url": SITE + "/",
-           "email": EMAIL, "description": c["description"],
+def head_nuevo(lang: str, x: dict) -> str:
+    alt = "\n".join(f'<meta property="og:locale:alternate" content="{LOCALES[o]}">' for o in LANGS if o != lang)
+    hreflang = "".join(f'<link rel="alternate" hreflang="{o}" href="{url(o)}">\n' for o in LANGS)
+    org = {"@type": ["Organization", "ResearchOrganization"], "@id": SITE + "/#org", "name": "Zonorah",
+           "alternateName": "Zonorah Media Neuroscience Lab", "url": SITE + "/", "email": EMAIL,
+           "description": x["description"],
+           "logo": {"@type": "ImageObject", "url": SITE + "/logo.png", "width": 512, "height": 512},
+           "image": SITE + "/og.png",
            "knowsAbout": ["media monitoring", "content analysis", "speech transcription",
                           "media framing", "open media data"]}
     web = {"@type": "WebSite", "@id": SITE + "/#web", "url": SITE + "/", "name": "Zonorah",
-           "inLanguage": list(IDIOMAS), "publisher": {"@id": SITE + "/#org"}}
-    page = {"@type": "WebPage", "@id": url(lang) + "#page", "url": url(lang), "name": c["title"],
-            "description": c["description"], "inLanguage": lang, "isPartOf": {"@id": SITE + "/#web"},
-            "about": {"@id": SITE + "/#org"}, "dateModified": HOY}
-    faq = {"@type": "FAQPage", "@id": url(lang) + "#faq", "inLanguage": lang,
-           "mainEntity": [{"@type": "Question", "name": q,
-                           "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in c["faq"]]}
-    return json.dumps({"@context": "https://schema.org", "@graph": [org, web, page, faq]},
-                      ensure_ascii=False, indent=1)
-
-
-def pagina(c: dict) -> str:
-    lang = c["lang"]
-    ruta = RUTAS[lang]
-    mail = f"mailto:{EMAIL}"
-    asunto = c["com_subject"].replace(" ", "%20")
-    nav = "".join(f'<a href="#{i}"{" class=hide" if i in ("method", "faq") else ""}>{e(t)}</a>'
-                  for i, t in c["nav"])
-    langs = "".join(
-        f'<a href="{RUTAS[l]}" hreflang="{l}" lang="{l}"{" aria-current=true" if l == lang else ""}>{l.upper()}</a>'
-        for l in IDIOMAS)
-    facts = "".join(f"<li><strong>{e(a)}</strong><span>{e(b)}</span></li>" for a, b in c["facts"])
-    steps = "".join(f'<article class="card step"><b>{e(c["step_word"])} 0{i}</b><h3>{e(t)}</h3>'
-                    f"<p>{e(d)}</p></article>" for i, (t, d) in enumerate(c["steps"], 1))
-    li = lambda xs: "".join(f"<li>{e(x)}</li>" for x in xs)  # noqa: E731
-    planes = ""
-    for pid, precio, _ in PLANES:
-        nombre, incl = c["plans"][pid]
-        pop = pid == "intensivo"
-        planes += (f'<article class="card plan{" pop" if pop else ""}">'
-                   + (f'<span class="badge">{e(c["pop"])}</span>' if pop else "")
-                   + f'<h3>{e(nombre)}</h3><div class="price">S/ {precio}<small>{e(c["list_price"])}</small></div>'
-                   f"<ul>{li(incl)}</ul>"
-                   f'<a class="btn d" href="{e(app("/datos/planes?plan=" + pid, lang))}">{e(c["plans_cta"])}</a></article>')
-    limites = "".join(f"<dt>{e(a)}</dt><dd>{e(b)}</dd>" for a, b in c["limits"])
-    faq = "".join(f"<details><summary>{e(q)}</summary><p>{e(a)}</p></details>" for q, a in c["faq"])
-    foot = "".join(f'<a href="{app(h, lang)}">{e(t)}</a>' for t, h in c["foot_links"])
-    sec = lambda i: i  # noqa: E731
-    return f"""<!DOCTYPE html>
-<html lang="{lang}">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>{e(c["title"])}</title>
-<meta name="description" content="{e(c["description"])}">
+           "inLanguage": list(LANGS), "publisher": {"@id": SITE + "/#org"}}
+    page = {"@type": "WebPage", "@id": url(lang) + "#page", "url": url(lang), "name": x["title"],
+            "description": x["description"], "inLanguage": lang, "isPartOf": {"@id": SITE + "/#web"},
+            "about": {"@id": SITE + "/#org"}, "dateModified": UPDATED, "datePublished": "2026-11-23",
+            "primaryImageOfPage": {"@type": "ImageObject", "url": SITE + "/og.png", "width": 1200, "height": 630}}
+    ld = json.dumps({"@context": "https://schema.org", "@graph": [org, web, page]}, ensure_ascii=False, indent=1)
+    return f"""<title>{e(x["title"])}</title>
+<meta name="description" content="{e(x["description"])}">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <link rel="canonical" href="{url(lang)}">
-{alternates(lang)}
+{hreflang}<link rel="alternate" hreflang="x-default" href="{url("en")}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Zonorah">
-<meta property="og:title" content="{e(c["title"])}">
-<meta property="og:description" content="{e(c["description"])}">
+<meta property="og:title" content="{e(x["og_title"])}">
+<meta property="og:description" content="{e(x["description"])}">
 <meta property="og:url" content="{url(lang)}">
-<meta property="og:locale" content="{c["locale"]}">
+<meta property="og:locale" content="{LOCALES[lang]}">
+{alt}
 <meta property="og:image" content="{SITE}/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="{e(c["og_alt"])}">
+<meta property="og:image:alt" content="{e(x["og_title"])}">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="{e(c["title"])}">
-<meta name="twitter:description" content="{e(c["description"])}">
+<meta name="twitter:title" content="{e(x["og_title"])}">
+<meta name="twitter:description" content="{e(x["description"])}">
 <meta name="twitter:image" content="{SITE}/og.png">
 <meta name="theme-color" content="#0b1f00">
-<link rel="icon" type="image/svg+xml" href="{FAVICON}">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <script type="application/ld+json">
-{json_ld(c)}
-</script>
-<style>{CSS}</style>
+{ld}
+</script>"""
+
+
+def script_idioma(lang: str, x: dict) -> str:
+    """Sustituye al traductor del navegador: fija el idioma, da `zt` al script de la cuenta y
+    guarda la cookie `zonorah_lang`, que es la que lee la app de datos."""
+    d = {"Salir": x["n_logout"], "Iniciar sesión / Registrarse": x["n_login"], " · ir al chat": x["n_tochat"]}
+    return ("<script>\nwindow.ZLANG=" + json.dumps(lang) + ";\n(function(){var T=" + json.dumps(d, ensure_ascii=False)
+            + ";window.zt=function(s){return Object.prototype.hasOwnProperty.call(T,s)?T[s]:s};\n"
+            "try{document.cookie=\"zonorah_lang=" + lang + "; path=/; max-age=31536000; SameSite=Lax\"}catch(e){}})();\n</script>")
+
+
+def pagina(lang: str) -> str:
+    x = textos(lang)
+    p = Plantilla(PLANTILLA)
+    rp, rs = p.rp, p.re_sub
+    ll = f"lang={lang}"
+    app = lambda r: r + ("&" if "?" in r else "?") + ll  # noqa: E731
+
+    # ------------------------------------------------------------ documento
+    rp('<html lang="es">', f'<html lang="{lang}">', 1)
+    # El comentario de edición empieza ANTES de <title> y lo nombra en su texto: hay que partir de su apertura.
+    rs(r"<!--\s*═+\s*ZONA EDITABLE Nº 1 ·.*?FIN DE LA ZONA EDITABLE Nº 1 ═+ -->", lambda m: head_nuevo(lang, x), 1)
+    rs(r"<!-- ═+ IDIOMA \(ES / ID\) ═+.*?</script>", lambda m: script_idioma(lang, x), 1)
+    rs(r"<script>\s*/\* ── Idioma: traduce textos y atributos antes de las animaciones ── \*/.*?</script>", "", 1)
+
+    # ------------------------------------------------------------ cabecera y menú
+    rp('aria-label="Canales y emisoras que sintonizamos"', f'aria-label="{e(x["aria_logos"])}"', 1)
+    enlaces = (f'<a href="#como" data-scroll data-nav-for="como">{e(x["n_how"])}</a>\n'
+               f'    <a href="#casos" data-scroll data-nav-for="casos">{e(x["n_research"])}</a>\n'
+               f'    <a href="{app("/datos/")}">{e(x["n_chat"])}</a>\n'
+               f'    <a href="{app("/datos/aprende")}">{e(x["n_learn"])}</a>\n'
+               f'    <a href="{app("/datos/planes")}">{e(x["n_plans"])}</a>\n')
+    rs(r'(<nav class="nav-links" aria-label=")[^"]*(">).*?(</nav>)',
+       lambda m: m.group(1) + e(x["aria_nav"]) + m.group(2) + "\n    " + enlaces + "  " + m.group(3), 1)
+    rs(r'(<nav class="menu-links" aria-label=")[^"]*(">).*?(</nav>)',
+       lambda m: m.group(1) + e(x["aria_menu"]) + m.group(2) + "\n    "
+       + enlaces.replace(' data-nav-for="como"', "").replace(' data-nav-for="casos"', "")
+       + f'    <a href="{app("/datos/")}" id="menuCuenta" hidden>{e(x["n_login"])}</a>\n  ' + m.group(3), 1)
+    switch = "".join(
+        f'<a href="{RUTAS[o]}" hreflang="{o}" lang="{o}" data-lang="{o}" aria-current="{str(o == lang).lower()}">{o.upper()}</a>'
+        for o in LANGS)
+    rs(r'<span class="lang" role="group" aria-label="[^"]*">.*?</span>',
+       f'<span class="lang" role="group" aria-label="{e(x["aria_lang"])}">{switch}</span>', 1)
+    rp(">Ver planes</a>", f'>{e(x["n_seeplans"])}</a>', 1)          # botón de la cabecera (el del contacto lleva icono)
+    rp('aria-label="Abrir menú"', f'aria-label="{e(x["menu_open"])}"', 1)
+    rp("'Cerrar menú'", "'" + x["menu_close"].replace("'", "\\'") + "'", 1)
+    rp("'Abrir menú'", "'" + x["menu_open"].replace("'", "\\'") + "'", 1)
+    rp('<a href="https://dashboard.zonorah.com" target="_blank" rel="noopener">Entrar al panel</a>',
+       f'<a href="https://dashboard.zonorah.com" target="_blank" rel="noopener">{e(x["n_dash"])}</a>', 1)
+
+    # ------------------------------------------------------------ hero
+    rp('<span class="line-inner">Radio, TV<br class="br-m"> e internet.</span>', f'<span class="line-inner">{e(x["h1a"])}</span>', 1)
+    rp('<span class="line-inner">Sintonizados</span>', f'<span class="line-inner">{e(x["h1b"])}</span>', 1)
+    rp('<span class="line-inner"><em>las 24 horas.</em></span>', f'<span class="line-inner"><em>{e(x["h1c"])}</em></span>', 1)
+    # La frase va ENCIMA del bloque de botones (dentro de él se aplastaba al lado de los botones en móvil).
+    rp('<div class="hero-bottom">', f'<p class="lead hero-lead" data-reveal>{e(x["hero_lead"])}</p>\n      <div class="hero-bottom">', 1)
+    rp('href="/datos/planes" data-cursor="Ir">Empieza gratis', f'href="{app("/datos/")}" data-cursor="Ir">{e(x["hero_cta1"])}', 1)
+    rp('data-cursor="Bajar">Cómo funciona</a>', f'data-cursor="Bajar">{e(x["hero_cta2"])}</a>', 1)
+
+    # ------------------------------------------------------------ problema → preguntas de investigación
+    citas = ["“Me enteré por un cliente, no por mi equipo.”", "“Grabamos la radio a mano cada mañana.”",
+             "“La emisora local no sale en ningún informe.”", "“Lo vimos tres días tarde.”",
+             "“Nadie escucha los fines de semana.”", "“El clipping llega en PDF y sin audio.”",
+             "“Pagamos por menciones que no nos interesan.”"]
+    for i, viejo in enumerate(citas, 1):
+        rp(f">{viejo}<", f">{e(x[f'q{i}'])}<", 1)
+    rp("Enterarte de lo tuyo no debería ser un turno de guardia.", e(x["problema_h"]), 1)
+
+    # ------------------------------------------------------------ cómo funciona
+    rp(">Cómo funciona<", f'>{e(x["como_h"])}<', None)  # nav, menú, botón, título y pie: el mismo texto
+    for n, viejo, nuevo in (("1", "24 h · en continuo", "s1r"), ("2", "Whisper · español", "s2r"),
+                            ("3", "Análisis · IA", "s3r"), ("4", "07:00 · o en &lt;3 min", "s4r")):
+        rp(f"<span>Paso 0{n}</span><span>{viejo}</span>", f'<span>{e(x["step"])} 0{n}</span><span>{e(x[nuevo])}</span>', 1)
+    for viejo, k in (("Captura", "s1t"), ("Transcripción", "s2t"), ("Análisis", "s3t"), ("Entrega", "s4t")):
+        rp(f"<h3>{viejo}</h3>", f"<h3>{e(x[k])}</h3>", 1)
+    for viejo, k in (
+            ("Grabamos la emisión completa de cada fuente que elijas. Si una cae, reconectamos.", "s1p"),
+            ("Audio a texto con marcas de tiempo. Locución rápida y acentos locales incluidos.", "s2p"),
+            ("Por cada mención: quién habla, de qué, en qué tono y si es urgente según tus reglas.", "s3p"),
+            ("Informe diario a la hora que elijas. Si algo es crítico, alerta en menos de 3 minutos.", "s4p")):
+        rp(f"<p>{viejo}</p>", f"<p>{e(x[k])}</p>", 1)
+    tags = [[x["s1g1"], x["s1g2"], x["s1g3"], x["s1g4"]], [x["s2g1"], x["s2g2"], x["s2g3"]],
+            [x["s3g1"], x["s3g2"], x["s3g3"], x["s3g4"]], [x["s4g1"], x["s4g2"], x["s4g3"]]]
+    it = iter(tags)
+    rs(r'<ul class="step-tags">.*?</ul>',
+       lambda m: '<ul class="step-tags">' + "".join(f"<li>{e(t)}</li>" for t in next(it)) + "</ul>", 4)
+    rs(r'<div class="vis-tags">.*?</div>',
+       f'<div class="vis-tags"><span>{e(x["v3a"])}<b>{e(x["v3av"])}</b></span><span>{e(x["v3b"])}<b>{e(x["v3bv"])}</b></span>'
+       f'<span>{e(x["v3c"])}<b>{e(x["v3cv"])}</b></span><span class="hot">{e(x["v3d"])}<b>{e(x["v3dv"])}</b></span></div>', 1)
+    rs(r'<div class="vis-mail">.*?<div class="row">.*?</div>\s*</div>',
+       f'<div class="vis-mail"><div class="mono"><span>{e(x["v4t"])}</span><span>07:00</span></div>'
+       f'<strong>{e(x["v4h"])}</strong>{e(x["v4p"])}<div class="row"><span class="neg">{e(x["v4r1"])}</span>'
+       f'<span>{e(x["v4r2"])}</span><span>{e(x["v4r3"])}</span></div></div>', 1)
+
+    # ------------------------------------------------------------ dos frentes
+    rp('data-split>Para quién</h2>', f'data-split>{e(x["casos_h"])}</h2>\n      <p class="lead" data-reveal>{e(x["casos_lead"])}</p>', 1)
+    cx = {
+        "c3x": f'<a href="{app("/datos/")}">zonorah.com/datos</a> · {e(x["c3x"])}',
+        "c6x": f'<a href="{LAB_URL}" target="_blank" rel="noopener noreferrer">medianeuroscience.org ↗</a>',
+    }
+    filas = "".join(
+        f'<article class="caso" data-cursor="Ver">\n          <span class="mono">{e(x[f"c{i}m"])}</span>\n          <h3>{e(x[f"c{i}h"])}</h3>\n'
+        f'          <div><p>{e(x[f"c{i}p"])}</p><span class="ex">{cx.get(f"c{i}x") or e(x.get(f"c{i}x", ""))}</span></div>\n        </article>\n        '
+        for i in range(1, 7))
+    rs(r'(<div class="casos-list" data-stagger>).*?(</div>\s*</div>\s*</section>)',
+       lambda m: m.group(1) + "\n        " + filas + m.group(2), 1)
+
+    # ------------------------------------------------------------ informes de muestra
+    rp(">Informes<", f'>{e(x["inf_h"])}<', None)
+    rs(r'(<p class="mono inf-meta" data-reveal>).*?(</p>)', lambda m: m.group(1) + e(x["inf_meta"]) + m.group(2), 1)
+    rp('src="informes/', 'src="/informes/' + ("id/" if lang == "id" else ""), None)
+    for slug, en, es, idn in SECTORES:
+        nombre_es = es
+        nombre = {"en": en, "es": es, "id": idn}[lang]
+
+        def tarjeta(m, nombre=nombre, nombre_es=nombre_es):
+            b = m.group(0)
+            n, pg = re.search(r"(\d+) menciones · (\d+) págs · PDF", b).groups()
+            b = b.replace(f"Portada del informe {nombre_es}", x["inf_alt"].format(name=nombre))
+            b = b.replace(f'<span class="inf-cover-t">{nombre_es}</span>', f'<span class="inf-cover-t">{e(nombre)}</span>')
+            b = b.replace(f"<h3>{nombre_es}</h3>", f"<h3>{e(nombre)}</h3>")
+            b = re.sub(r"\d+ menciones · \d+ págs · PDF", x["inf_data"].format(n=n, p=pg), b)
+            b = b.replace("Descargar PDF</span>", e(x["inf_dl"]) + "</span>")
+            return b
+        rs(r'<a class="inf" href="/datos/informes/' + re.escape(slug) + r'".*?</a>', tarjeta, 1)
+
+    # ------------------------------------------------------------ precios
+    rp(">Precios<", f'>{e(x["precios_h"])}<', None)
+    rp("Todos los planes, gratis hasta el 31 de diciembre de 2026. Sin datos de pago.", e(x["precios_lead"]), 1)
+    for viejo, k in (("Profesional", "p1n"), ("Intensivo", "p2n"), ("Redacción", "p3n")):
+        rp(f"<div class=\"mono\"><span>{viejo}</span>", f'<div class="mono"><span>{e(x[k])}</span>', 1)
+    rp('<span class="tag">Más elegido</span>', f'<span class="tag">{e(x["p_pop"])}</span>', 1)
+    for viejo, k in (("Para periodistas, docentes e investigadores.", "p1b"), ("Para quien trabaja con los datos a diario.", "p2b"),
+                     ("Para redacciones, equipos de investigación y agencias.", "p3b")):
+        rp(f'<p class="body">{viejo}</p>', f'<p class="body">{e(x[k])}</p>', 1)
+    for viejo, k in (("100 preguntas a la IA al día", "p1l1"), ("Comparador y gráficos para insertar", "p1l2"),
+                     ("Descargas CSV sin límite", "p1l3"), ("Laboratorio de estadística", "p1l4"),
+                     ("500 preguntas a la IA al día", "p2l1"), ("Todo lo de Profesional", "p2l2"),
+                     ("5 veces más consultas", "p2l3"), ("2.000 preguntas a la IA al día", "p3l1"),
+                     ("Todo lo de Intensivo", "p3l2"), ("20 veces más consultas", "p3l3")):
+        rp(f"</svg>{viejo}</li>", f"</svg>{e(x[k])}</li>", 1)
+    rp("</svg>Gratis hasta el 31/12</li>", f'</svg>{e(x["p2l4"])}</li>', 2)
+    rp("Activar gratis", e(x["p_cta"]), 3)
+    rs(r'(<p class="lead" style="margin-top:48px" data-reveal>).*?(</p>)',
+       lambda m: m.group(1) + e(x["p_foot"]) + f'<a href="mailto:{EMAIL}?subject={e(x["mail_subject"]).replace(" ", "%20")}" style="text-decoration:underline">'
+       + e(x["p_foot_a"]) + "</a>." + m.group(2), 1)
+
+    # ------------------------------------------------------------ preguntas: se borra la sección
+    rs(r"<!-- ═+ FAQ ═+ -->\s*<section class=\"faq.*?</section>", "", 1)
+
+    # ------------------------------------------------------------ contacto
+    rp("Deja de enterarte tarde.", e(x["demo_h"]), 1)
+    rp("Te enseñamos el panel con tus propias fuentes en 15 minutos. Si encaja, tu primer informe llega mañana.", e(x["demo_lead"]), 1)
+    rp('href="/datos/planes" data-cursor="Ir">Ver planes<svg', f'href="{app("/datos/")}" data-cursor="Ir">{e(x["hero_cta1"])}<svg', 1)
+    rp(">Ver precios<", f'>{e(x["demo_prices"])}<', 1)
+    rp('for="demoEmail">Tu correo</label>', f'for="demoEmail">{e(x["demo_label"])}</label>', 1)
+    rp('placeholder="tu@organizacion.es"', f'placeholder="{e(x["demo_ph"])}"', 1)
+    rp(">Enviar</button>", f'>{e(x["demo_send"])}</button>', 1)
+    rp("O escríbenos y te llamamos hoy mismo", e(x["demo_note"]), 1)
+    rp('action="mailto:hola@zonorah.com"', f'action="mailto:{EMAIL}"', 1)
+
+    # ------------------------------------------------------------ pie
+    rp("<p>Radio, televisión y streaming escuchados con IA, las 24 horas.</p>", f'<p>{e(x["f_tag"])}</p>', 1)
+    cols = iter([
+        f'<div class="foot-col"><h4>{e(x["f_product"])}</h4><a href="#como" data-scroll>{e(x["n_how"])}</a>'
+        f'<a href="#casos" data-scroll>{e(x["n_research"])}</a><a href="#informes" data-scroll>{e(x["f_reports"])}</a>'
+        f'<a href="#precios" data-scroll>{e(x["f_prices"])}</a></div>',
+        f'<div class="foot-col"><h4>{e(x["f_contact"])}</h4><a href="https://dashboard.zonorah.com" target="_blank" rel="noopener">{e(x["f_dash"])}</a>'
+        f'<a href="mailto:{EMAIL}">{EMAIL}</a></div>',
+        f'<div class="foot-col"><h4>{e(x["f_legal"])}</h4><a href="{app("/datos/privacidad")}">{e(x["f_privacy"])}</a>'
+        f'<a href="{app("/datos/metodologia")}">{e(x["f_method"])}</a></div>'])
+    rs(r'<div class="foot-col">.*?</div>', lambda m: next(cols), 3)
+    rp("Volver arriba ↑", e(x["f_up"]), 1)
+    rp("<span>© 2026 Zonorah</span>", f'<span>© 2026 Zonorah · <time datetime="{UPDATED}">{e(x["updated"])} {fecha_larga(lang)}</time></span>', 1)
+
+    # ------------------------------------------------------------ cursor y enlaces a la app
+    cur = {"Ir": x["cur_go"], "Ver": x["cur_view"], "Bajar": x["cur_down"], "Abrir PDF": x["cur_pdf"]}
+    rs(r'data-cursor="([^"]*)"', lambda m: f'data-cursor="{e(cur[m.group(1)])}"')
+    # toda ruta de la app lleva el idioma, para que se abra en el mismo que se está leyendo
+    rs(r'href="(/datos[^"#?]*)(\?[^"#]*)?"',
+       lambda m: f'href="{m.group(1)}{(m.group(2) + "&amp;") if m.group(2) else "?"}{ll}"')
+    # Los comentarios de edición de la plantilla (en español) no tienen sentido en la página servida.
+    rs(r"<!--.*?-->", "")
+    # Red de seguridad: un reemplazo que se coma media página debe fallar, no publicarse.
+    for etiqueta in ("<style", "</style>", "<body", "</body>", "<main", "</main>", "<header", "<footer", "</html>"):
+        if etiqueta not in p.s:
+            raise SystemExit(f"[{lang}] la página generada perdió «{etiqueta}»")
+    if p.s.count("<style") != PLANTILLA.count("<style"):
+        raise SystemExit(f"[{lang}] cambió el número de bloques <style>")
+    return p.s
+
+
+PALABRAS_ES = re.compile(r"[áéíóúñ¿¡]|\b(el|la|los|las|de|del|para|con|por|una|que|es|se|su|tu|sus|y|o|en|al|más|sin|cada|todo|gratis|planes|precios|empieza|cómo)\b", re.I)
+
+
+def fugas(s: str, lang: str):
+    """Texto visible que quedó en español en una página que no es la española."""
+    t = re.sub(r"<(script|style|svg)\b.*?</\1>", " ", s, flags=re.S)
+    t = re.sub(r"<[^>]+>", "\n", t)
+    t = html.unescape(t)
+    return [l.strip() for l in t.split("\n") if len(l.strip()) > 2 and PALABRAS_ES.search(l)]
+
+
+NO_ENCONTRADA = {
+    "en": ("Page not found", "The page you are looking for does not exist or has moved.", "Go to the home page"),
+    "es": ("Página no encontrada", "La página que buscas no existe o ha cambiado de sitio.", "Ir a la portada"),
+    "id": ("Halaman tidak ditemukan", "Halaman yang Anda cari tidak ada atau telah dipindahkan.", "Ke beranda"),
+}
+
+
+def pagina_404() -> str:
+    """Una URL que no existe debe responder 404, no la portada con un 200 (Cloudflare Pages
+    trata un sitio sin `404.html` como una app de una sola página y devuelve `index.html`)."""
+    bloques = "".join(
+        f'<section lang="{l}"><h2>{e(t)}</h2><p>{e(d)}</p><p><a href="{RUTAS[l]}">{e(a)} →</a></p></section>'
+        for l, (t, d, a) in NO_ENCONTRADA.items())
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>404 · Zonorah</title>
+<meta name="robots" content="noindex,follow">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+<style>body{{margin:0;background:#0b1f00;color:#eaf7dc;font:400 18px/1.6 'Archivo',system-ui,sans-serif;padding:clamp(32px,8vw,96px) clamp(20px,6vw,80px)}}
+p.k{{font:500 13px ui-monospace,Menlo,monospace;letter-spacing:.16em;text-transform:uppercase;color:#9fe870;margin:0 0 28px}}
+section{{margin:0 0 40px}}h2{{font-size:clamp(28px,5vw,48px);line-height:1.1;margin:0 0 8px;font-stretch:90%}}
+p{{margin:0 0 12px;color:#cfe3bd}}a{{color:#9fe870;font-weight:700}}</style>
 </head>
-<body>
-<a class="skip" href="#main">{e(c["skip"])}</a>
-<header class="top"><div class="wrap bar">
-<a class="brand" href="{ruta}" aria-label="Zonorah">{LOGO}<span>ZONORAH</span></a>
-<nav class="main" aria-label="{e(c["nav_label"])}">{nav}
-<a class="btn d" href="{app("/datos/", lang)}">{e(c["nav_cta"])}</a>
-<span class="langs" role="group" aria-label="{e(c["lang_label"])}">{langs}</span></nav>
-</div></header>
-<main id="main">
-<section class="hero" aria-labelledby="t"><div class="wrap">
-<p class="eyebrow">{e(c["eyebrow"])}</p>
-<h1 id="t">{e(c["h1_a"])} <span>{e(c["h1_b"])}</span></h1>
-<p class="lead">{e(c["lead"])}</p>
-<div class="cta"><a class="btn p" href="{app("/datos/", lang)}">{e(c["cta1"])}</a>
-<a class="btn s" href="{mail}?subject={asunto}">{e(c["cta2"])}</a></div>
-</div></section>
-<div class="facts"><div class="wrap"><ul>{facts}</ul></div></div>
-
-<section id="lab" class="alt"><div class="wrap">
-<h2>{e(c["lab_h"])}</h2>
-{"".join(f"<p>{e(p)}</p>" for p in c["lab_p"])}
-</div></section>
-
-<section id="method"><div class="wrap">
-<h2>{e(c["method_h"])}</h2>
-<div class="grid">{steps}</div>
-</div></section>
-
-<section id="research" class="alt"><div class="wrap">
-<h2>{e(c["research_h"])}</h2>
-<div class="two">
-<article class="card"><h3>{e(c["sci_h"])}</h3><p class="tag">{e(c["sci_for"])}</p>
-<ul>{li(c["sci_li"])}</ul><a class="btn d" href="{app("/datos/", lang)}">{e(c["sci_cta"])}</a></article>
-<article class="card"><h3>{e(c["com_h"])}</h3><p class="tag">{e(c["com_for"])}</p>
-<ul>{li(c["com_li"])}</ul><a class="btn o" href="{mail}?subject={asunto}">{e(c["com_cta"])}</a></article>
-</div>
-<h3 style="margin-top:44px">{e(c["q_h"])}</h3>
-<ul class="list">{li(c["q_li"])}</ul>
-</div></section>
-
-<section id="foundations"><div class="wrap">
-<h2>{e(c["found_h"])}</h2>
-{"".join(f"<p>{e(p)}</p>" for p in c["found_p"])}
-<p><a href="{LAB_URL}" rel="noopener" target="_blank">{e(c["found_link"])} ↗</a></p>
-</div></section>
-
-<section id="data" class="alt"><div class="wrap">
-<h2>{e(c["data_h"])}</h2>
-<p>{e(c["data_p"])}</p>
-<p class="note">{e(c["plans_note"])}</p>
-<div class="grid" style="margin-top:28px">{planes}</div>
-</div></section>
-
-<section id="limits"><div class="wrap">
-<h2>{e(c["limits_h"])}</h2>
-<dl class="limits">{limites}</dl>
-<h3 style="margin-top:44px">{e(c["privacy_h"])}</h3>
-<ul class="list">{li(c["privacy"])}</ul>
-<h3 style="margin-top:44px">{e(c["cite_h"])}</h3>
-<p>{e(c["cite_p"])}</p>
-<pre class="cite">{e(c["cite_fmt"])}</pre>
-</div></section>
-
-<section id="faq" class="alt"><div class="wrap">
-<h2>{e(c["faq_h"])}</h2>
-{faq}
-</div></section>
-
-<section id="contact" class="contact"><div class="wrap">
-<h2>{e(c["contact_h"])}</h2>
-<p>{e(c["contact_p"])}</p>
-<p><a class="mail" href="{mail}">{EMAIL}</a></p>
-</div></section>
-</main>
-<footer><div class="wrap"><strong>ZONORAH</strong><span>{e(c["footer_tag"])}</span>{foot}
-<span class="sp">{e(c["rights"])}</span></div></footer>
-<script>try{{document.cookie="zonorah_lang={lang}; path=/; max-age=31536000; SameSite=Lax"}}catch(e){{}}</script>
-</body>
+<body><p class="k">404 · Zonorah</p>{bloques}</body>
 </html>
 """
-
-
-def comprobar():
-    base = set(IDIOMAS["en"])
-    for l, c in IDIOMAS.items():
-        faltan, sobran = base - set(c), set(c) - base
-        if faltan or sobran:
-            sys.exit(f"[{l}] claves distintas: faltan {sorted(faltan)} sobran {sorted(sobran)}")
-        for k in ("facts", "steps", "sci_li", "com_li", "q_li", "limits", "privacy", "faq", "nav"):
-            if len(c[k]) != len(IDIOMAS["en"][k]):
-                sys.exit(f"[{l}] «{k}» tiene {len(c[k])} elementos y en inglés {len(IDIOMAS['en'][k])}")
-        if len(c["description"]) > 175:
-            print(f"[{l}] aviso: description de {len(c['description'])} caracteres")
 
 
 def escribir(ruta: Path, texto: str):
@@ -306,41 +351,52 @@ def escribir(ruta: Path, texto: str):
     print(f"  {ruta.relative_to(RAIZ)}  {len(texto.encode()) / 1024:.0f} KB")
 
 
+def llms_full() -> str:
+    x = textos("en")
+    pl = ("- Professional: S/ 89 per month at list price, 100 AI questions a day.\n"
+          "- Intensive: S/ 229 per month at list price, 500 AI questions a day.\n"
+          "- Newsroom: S/ 429 per month at list price, 2,000 AI questions a day.\n")
+    casos = "".join(f"### {x[f'c{i}m']}: {x[f'c{i}h']}\n\n{x[f'c{i}p']}\n\n{x.get(f'c{i}x', LAB_URL)}\n\n" for i in range(1, 7))
+    return (f"# Zonorah, Media Neuroscience Lab\n\n> {x['description']}\n\nLast updated: {UPDATED}\n\n{x['hero_lead']}\n\n"
+            f"{x['problema_h']}\n\n## {x['como_h']}\n\n"
+            + "".join(f"{i}. {x[f's{i}t']}. {x[f's{i}p']}\n" for i in range(1, 5))
+            + f"\n## {x['casos_h']}\n\n{x['casos_lead']}\n\n{casos}## {x['precios_h']}\n\n{x['precios_lead']}\n\n{pl}\n"
+            f"Contact: {EMAIL}\n\n## Other languages\n\n"
+            + "".join(f"- {NOMBRES[l]}: {url(l)}\n" for l in ("es", "id")))
+
+
 def main():
     comprobar()
-    for l, c in IDIOMAS.items():
-        destino = PUBLIC / "index.html" if l == "en" else PUBLIC / l / "index.html"
-        escribir(destino, pagina(c))
+    for l in LANGS:
+        s = pagina(l)
+        escribir(PUBLIC / "index.html" if l == "en" else PUBLIC / l / "index.html", s)
+        if l != "es":
+            f = fugas(s, l)
+            # Residuos legítimos: nombres propios, citas literales en español y el nombre de los informes.
+            print(f"    [{l}] líneas con rastro de español: {len(f)}" + ("" if not f else " → " + " | ".join(f[:30])))
+    escribir(PUBLIC / "404.html", pagina_404())
     urls = "".join(
-        f"<url><loc>{url(l)}</loc><lastmod>{HOY}</lastmod>"
-        + "".join(f'<xhtml:link rel="alternate" hreflang="{m}" href="{url(m)}"/>' for m in IDIOMAS)
-        + f'<xhtml:link rel="alternate" hreflang="x-default" href="{url("en")}"/></url>\n'
-        for l in IDIOMAS)
-    escribir(PUBLIC / "sitemap.xml",
-             '<?xml version="1.0" encoding="UTF-8"?>\n<urlset '
-             'xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
+        f"<url><loc>{url(l)}</loc><lastmod>{UPDATED}</lastmod>"
+        + "".join(f'<xhtml:link rel="alternate" hreflang="{m}" href="{url(m)}"/>' for m in LANGS)
+        + f'<xhtml:link rel="alternate" hreflang="x-default" href="{url("en")}"/></url>\n' for l in LANGS)
+    escribir(PUBLIC / "sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
              'xmlns:xhtml="http://www.w3.org/1999/xhtml">\n' + urls + "</urlset>\n")
     bots = ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "Claude-User", "Claude-SearchBot",
             "PerplexityBot", "Perplexity-User", "Google-Extended", "Applebot-Extended", "CCBot"]
+    grupo = lambda ua: f"User-agent: {ua}\nAllow: /\nDisallow: /datos/api/\n\n"  # noqa: E731
     escribir(PUBLIC / "robots.txt",
-             "# Zonorah publica su metodología y sus cifras para que se citen: se permite a todos los\n"
-             "# rastreadores, incluidos los de buscadores con IA. /datos es la aplicación.\n"
-             "User-agent: *\nAllow: /\n\n"
-             + "".join(f"User-agent: {b}\nAllow: /\n\n" for b in bots)
-             + f"Sitemap: {SITE}/sitemap.xml\n")
-    en = IDIOMAS["en"]
+             "# Zonorah publica su metodología y sus cifras para que se citen: se permite a todos los rastreadores,\n"
+             "# incluidos los de buscadores con IA. Todo el contenido está en la portada (/, /es/, /id/).\n"
+             "# /datos es la aplicación: sus páginas llevan noindex y su API se bloquea.\n"
+             + grupo("*") + "".join(grupo(b) for b in bots) + f"Sitemap: {SITE}/sitemap.xml\n")
+    x = textos("en")
     escribir(PUBLIC / "llms.txt",
-             f"# Zonorah, Media Neuroscience Lab\n\n> {en['description']}\n\n"
-             + "".join(f"{p}\n\n" for p in en["lab_p"])
-             + "## Key facts\n\n"
-             + "".join(f"- {a}: {b}\n" for a, b in en["facts"])
-             + "\n## Pages\n\n"
-             + "".join(f"- [{IDIOMAS[l]['dir_name']}]({url(l)}): home page in {IDIOMAS[l]['dir_name']}\n"
-                       for l in IDIOMAS)
-             + f"- [Methodology]({SITE}/datos/metodologia): how figures are measured, limits and how to cite\n"
-             + f"- [Zonorah Data]({SITE}/datos/): comparator, charts, CSV downloads and AI chat\n"
-             + "\n## Limits\n\n" + "".join(f"- {a} {b}\n" for a, b in en["limits"])
-             + f"\n## Cite\n\n{en['cite_fmt']}\n\n## Contact\n\n{EMAIL}\n")
+             f"# Zonorah, Media Neuroscience Lab\n\n> {x['description']}\n\n{x['casos_lead']}\n\n## Pages\n\n"
+             + "".join(f"- [{NOMBRES[l]}]({url(l)}): home page in {NOMBRES[l]}\n" for l in LANGS)
+             + f"- [Full content as plain text]({SITE}/llms-full.txt)\n"
+             + f"- [Zonorah Data]({SITE}/datos/): the application (comparator, charts, CSV downloads, AI chat)\n"
+             + f"\n## Limits\n\n{x['c4p']}\n\n## Cite\n\n{CITA}\n\n## Contact\n\n{EMAIL}\n")
+    escribir(PUBLIC / "llms-full.txt", llms_full())
 
 
 if __name__ == "__main__":

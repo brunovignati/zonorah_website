@@ -1,36 +1,24 @@
 # Zonorah, Media Neuroscience Lab
 
-> Zonorah is a Media Neuroscience Lab. We listen to Peruvian radio, TV and YouTube and measure what is said: open data for scientific research, custom research for business.
+> Zonorah is a Media Neuroscience Lab. We listen to Peruvian radio, TV and YouTube and measure what is said: open data for science, research for business.
 
-Zonorah is a Media Neuroscience Lab. Our research links media and the brain. The Zonorah computational tool takes care of the media side: it listens to Peruvian radio, television and YouTube, transcribes what is said and measures how much, when, by whom and how each topic is framed.
-
-The tool is software and does not record brain activity. Our research on the brain side is separate, and it draws on the tool's data about what was actually broadcast.
-
-## Key facts
-
-- Live listening: Peruvian radio stations, TV channels and YouTube broadcasts, recorded in the time windows of their schedules.
-- Minutes, not mentions: Every public figure is minutes on air per 100 hours recorded, so stations can be compared fairly.
-- No recordings kept: Audio is deleted as soon as it has been transcribed.
+Zonorah is a Media Neuroscience Lab. Its computational tool takes care of the media side; our research on the brain side is separate and draws on that data.
 
 ## Pages
 
 - [English](https://zonorah.com/): home page in English
 - [Español](https://zonorah.com/es/): home page in Español
 - [Bahasa Indonesia](https://zonorah.com/id/): home page in Bahasa Indonesia
-- [Methodology](https://zonorah.com/datos/metodologia): how figures are measured, limits and how to cite
-- [Zonorah Data](https://zonorah.com/datos/): comparator, charts, CSV downloads and AI chat
+- [Full content as plain text](https://zonorah.com/llms-full.txt)
+- [Zonorah Data](https://zonorah.com/datos/): the application (comparator, charts, CSV downloads, AI chat)
 
 ## Limits
 
-- Speech-recognition errors. Transcription is automatic. A badly transcribed term is not counted, so figures tend to fall short, especially for proper names, acronyms and brands.
-- Coverage. Only what was recorded is measured. “Not recorded” is not the same as “not said”.
-- Music and advertising. Recorded minutes include songs and adverts. A term in an advert also counts.
-- Comparing stations. A music station and a news station are not directly comparable. Compare stations of the same type, or the same term over time.
-- Rounding. Figures are rounded, so adding groups may not give exactly the total. AI summaries come from automatic transcripts and can contain errors.
+Transcription is automatic and errs on names, acronyms and brands, so figures tend to fall short. Only what was recorded is measured, music and adverts count, and figures are rounded.
 
 ## Cite
 
-Zonorah (2026). Memoria de los medios del Perú: minutos al aire por cada 100 horas grabadas. Consulted [date], terms: [terms]. [link to the comparison]
+Zonorah (2026). Memoria de los medios del Perú: minutos al aire por cada 100 horas grabadas.
 
 ## Contact
 
