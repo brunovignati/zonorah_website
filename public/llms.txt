@@ -1,24 +1,31 @@
 # Zonorah, Media Neuroscience Lab
 
-> Zonorah is a Media Neuroscience Lab. Our instrument transcribes Peruvian radio, TV and YouTube and measures what is said: open data and applied studies.
+> Zonorah is a Media Neuroscience Lab. It writes down what radio, TV and YouTube broadcast and counts it. Open data and studies on commission.
 
-Zonorah is a Media Neuroscience Lab. Its computational instrument measures the media side of the question; our research on the brain side is separate and builds on that data.
+Zonorah is a Media Neuroscience Lab. It records and counts what media broadcast. Research on the brain is done separately and uses these counts.
 
 ## Pages
 
-- [English](https://zonorah.com/): home page in English
-- [Español](https://zonorah.com/es/): home page in Español
-- [Bahasa Indonesia](https://zonorah.com/id/): home page in Bahasa Indonesia
+- [Home](https://zonorah.com/): Zonorah is a Media Neuroscience Lab. It writes down what radio, TV and YouTube broadcast and counts it. Open data and studies on commission.
+- [Method](https://zonorah.com/method/): How Zonorah records, transcribes and counts radio, TV and YouTube, what the numbers cannot tell you, and how to cite them.
+- [Research](https://zonorah.com/research/): Two lines of work on broadcast media: open data for science and journalism, and studies on commission for organisations.
+- [Zonorah Data](https://zonorah.com/data/): See how many minutes a word got on radio, TV and YouTube, download the table and ask the AI assistant. Free until 31 December 2026.
+- [Sample studies](https://zonorah.com/studies/): Ten PDF reports from one week of radio and TV in September 2026, one per sector. The reports are in Spanish.
+- [Privacy](https://zonorah.com/privacy/): What Zonorah stores, what it does not store and how to delete your account. No recordings are kept.
+
+## Other languages
+
+- [Español](https://zonorah.com/es/)
+- [Bahasa Indonesia](https://zonorah.com/id/)
+
+## More
+
 - [Full content as plain text](https://zonorah.com/llms-full.txt)
-- [Zonorah Data](https://zonorah.com/datos/): the application (comparator, charts, CSV downloads, AI chat)
-
-## Limits
-
-Transcription is automatic and errs on names, acronyms and brands, so figures tend to fall short. Only what was recorded is measured, music and adverts count, and figures are rounded.
+- [Zonorah Data](https://zonorah.com/datos/): the application (comparator, charts, CSV downloads, AI assistant)
 
 ## Cite
 
-Zonorah (2026). Memoria de los medios del Perú: minutos al aire por cada 100 horas grabadas.
+Zonorah (2026). Minutes on air per 100 hours recorded. Consulted [date], terms: [terms]. [link to the comparison]
 
 ## Contact
 

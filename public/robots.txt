@@ -1,6 +1,5 @@
 # Zonorah publica su metodología y sus cifras para que se citen: se permite a todos los rastreadores,
-# incluidos los de buscadores con IA. Todo el contenido está en la portada (/, /es/, /id/).
-# /datos es la aplicación: sus páginas llevan noindex y su API se bloquea.
+# incluidos los de buscadores con IA. /datos es la aplicación: sus páginas llevan noindex y su API se bloquea.
 User-agent: *
 Allow: /
 Disallow: /datos/api/

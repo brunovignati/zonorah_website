@@ -36,41 +36,42 @@ cd ~/zonorah-web/public && python3 -m http.server 8080
 # abrir http://localhost:8080
 ```
 
-## Idiomas: una URL por idioma
+## Sitio: seis páginas en tres idiomas
 
-El DISEÑO de la portada es el original y no se toca: `build/plantilla.html` (CSS, animaciones
-GSAP, estructura y clases). `build/build.py` cambia solo el TEXTO y lo necesario para SEO, y
-genera tres páginas HTML completas:
+El DISEÑO es el de la portada original y no se toca: `build/plantilla.html` (CSS, animaciones GSAP,
+estructura y clases). `build/build.py` cambia solo el TEXTO y lo necesario para SEO, y arma cada página
+con las secciones de esa plantilla.
 
-| URL | Idioma | Archivo generado |
-|---|---|---|
-| `zonorah.com/` | inglés (por omisión) | `public/index.html` |
-| `zonorah.com/es/` | español | `public/es/index.html` |
-| `zonorah.com/id/` | indonesio | `public/id/index.html` |
+| Página | Inglés | Español | Indonesio |
+|---|---|---|---|
+| Portada | `/` | `/es/` | `/id/` |
+| Método (pasos, límites, cómo citar) | `/method/` | `/es/metodo/` | `/id/metode/` |
+| Investigación | `/research/` | `/es/investigacion/` | `/id/riset/` |
+| Zonorah Data y acceso | `/data/` | `/es/datos-abiertos/` | `/id/data/` |
+| Estudios de muestra | `/studies/` | `/es/estudios/` | `/id/studi/` |
+| Privacidad | `/privacy/` | `/es/privacidad/` | `/id/privasi/` |
 
 ```bash
-python3 build/build.py     # regenera las tres páginas, 404.html, sitemap.xml, robots.txt y llms*.txt
+python3 build/build.py     # 18 páginas + 404.html, sitemap.xml, robots.txt, llms.txt y llms-full.txt
 ```
 
-**Cambiar un texto:** edita `build/content.py` (cada fila trae inglés, español e indonesio) y vuelve a
-ejecutar `build.py`. No edites los `index.html`: se sobrescriben. **Cambiar el diseño:** edita
-`build/plantilla.html`; cada reemplazo de `build.py` comprueba que su fragmento original existe, así
-que si algo cambia falla en voz alta en vez de dejar texto colado. También falla si una página
-generada pierde el CSS o el cuerpo.
+**Cambiar un texto:** edita `build/content.py` (cada fila trae inglés, español e indonesio) y vuelve a ejecutar
+`build.py`. No edites los `index.html`: se sobrescriben. **Cambiar el diseño:** edita `build/plantilla.html`;
+cada reemplazo de `build.py` comprueba que su fragmento original existe y la generación falla si una página
+pierde el CSS, el cuerpo o su único `<h1>`.
 
-No hay traducción en el navegador: el contenido se lee entero sin JavaScript, que es lo que necesitan
-los buscadores y las IA. Un script mínimo guarda la cookie `zonorah_lang` para que la app de datos
-abra en el mismo idioma.
+**Voz del texto:** documentación, no publicidad. Títulos que son sustantivos, frases descriptivas, nada de
+eslóganes, simetrías ni listas de tres por costumbre. Cada afirmación sale de la metodología publicada, de
+`planes.py` o del código del análisis. Sin referencias a un país: Zonorah es global.
 
-**Regla de contenido:** cada afirmación sale de la metodología publicada (`/datos/metodologia`), de
-`planes.py` o del código del análisis. Nada de «24 horas», «audio guardado», «alerta en 3 minutos» ni
-«RGPD». Si no se puede defender, no entra.
+**SEO y GEO:** `hreflang` entre las tres versiones de cada página y `x-default` al inglés; datos estructurados
+(Organization, WebSite, WebPage, BreadcrumbList); `og.png`; `sitemap.xml` con las 18 URLs y sus alternativas;
+`llms.txt` y `llms-full.txt`; `robots.txt` que permite los rastreadores de IA y bloquea `/datos/api/`;
+`404.html` (sin él, Cloudflare Pages responde 200 con la portada a cualquier ruta). La app (`/datos` y
+`datos.zonorah.com`) sale con `X-Robots-Tag: noindex`: todo el contenido está en estas páginas.
 
-**SEO y GEO:** `hreflang` en las tres páginas y `x-default` al inglés; datos estructurados
-(Organization, WebSite, WebPage); `og.png`; `sitemap.xml`; `llms.txt` y `llms-full.txt`;
-`robots.txt` que permite los rastreadores de IA y bloquea `/datos/api/`; `404.html` (sin él,
-Cloudflare Pages responde 200 con la portada a cualquier ruta); las páginas de la app salen con
-`X-Robots-Tag: noindex` porque todo el contenido está en la portada.
+No hay traducción en el navegador. Un script mínimo guarda la cookie `zonorah_lang` para que la app abra en el
+mismo idioma.
 
 ## zonorah.com/datos
 
