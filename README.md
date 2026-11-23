@@ -7,7 +7,9 @@ este repositorio: cada `push` a `main` despliega la web.
 
 | Ruta | Qué es |
 |---|---|
-| `public/index.html` | La portada completa: HTML, CSS y JS en un solo archivo |
+| `build/content.py`, `build/build.py` | La fuente de la portada y su generador (ver «Idiomas») |
+| `public/index.html`, `public/es/`, `public/id/` | Las portadas generadas (no editar a mano) |
+| `public/og.png`, `sitemap.xml`, `llms.txt` | Imagen para redes y archivos para buscadores e IA |
 | `public/_headers` | Cabeceras de seguridad y caché |
 | `public/robots.txt` | Indexación abierta + referencia al sitemap |
 | `wrangler.jsonc` | Configuración de Cloudflare: qué carpeta publicar y qué rutas pasan por el Worker |
@@ -34,17 +36,32 @@ cd ~/zonorah-web/public && python3 -m http.server 8080
 # abrir http://localhost:8080
 ```
 
-## Idioma (español / indonesio)
+## Idiomas: una URL por idioma
 
-La portada se escribe en español. El botón **ES · ID** de la cabecera cambia
-al indonesio: guarda la elección y recarga, y la traducción se aplica antes de
-que arranquen las animaciones. También funciona con `zonorah.com/?lang=id` y
-para quien tenga el navegador en indonesio.
+La portada se **genera**, no se edita a mano. Una sola fuente, `build/content.py`,
+produce tres páginas HTML completas:
 
-Las traducciones están en el diccionario del bloque «IDIOMA» del `<head>` de
-`public/index.html`: frase española exacta → frase indonesia. **Si cambias un
-texto en español, cambia también su clave en el diccionario**; si no, ese texto
-saldrá en español en la versión indonesia.
+| URL | Idioma | Archivo generado |
+|---|---|---|
+| `zonorah.com/` | inglés (por omisión) | `public/index.html` |
+| `zonorah.com/es/` | español | `public/es/index.html` |
+| `zonorah.com/id/` | indonesio | `public/id/index.html` |
+
+```bash
+python3 build/build.py     # regenera las tres páginas, sitemap.xml, robots.txt y llms.txt
+```
+
+No hay traducción en el navegador: el contenido se lee entero sin JavaScript, que es
+lo que necesitan los buscadores y las IA. Un script mínimo solo guarda la cookie
+`zonorah_lang` para que la app de datos abra en el mismo idioma. El script falla si a un idioma le falta
+una clave o tiene distinto número de elementos que el inglés.
+
+**Regla de contenido:** cada afirmación sale de la metodología publicada
+(`/datos/metodologia`), de `planes.py` o del código del análisis. Nada de «24 horas»,
+«audio guardado» ni cifras que envejecen. Si no se puede defender, no entra.
+
+**Cambiar un texto:** edita `build/content.py` (los tres idiomas) y vuelve a ejecutar
+`build.py`. No edites los `index.html`: se sobrescriben.
 
 ## zonorah.com/datos
 
