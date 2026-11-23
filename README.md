@@ -38,8 +38,9 @@ cd ~/zonorah-web/public && python3 -m http.server 8080
 
 ## Idiomas: una URL por idioma
 
-La portada se **genera**, no se edita a mano. Una sola fuente, `build/content.py`,
-produce tres páginas HTML completas:
+El DISEÑO de la portada es el original y no se toca: `build/plantilla.html` (CSS, animaciones
+GSAP, estructura y clases). `build/build.py` cambia solo el TEXTO y lo necesario para SEO, y
+genera tres páginas HTML completas:
 
 | URL | Idioma | Archivo generado |
 |---|---|---|
@@ -48,20 +49,28 @@ produce tres páginas HTML completas:
 | `zonorah.com/id/` | indonesio | `public/id/index.html` |
 
 ```bash
-python3 build/build.py     # regenera las tres páginas, sitemap.xml, robots.txt y llms.txt
+python3 build/build.py     # regenera las tres páginas, 404.html, sitemap.xml, robots.txt y llms*.txt
 ```
 
-No hay traducción en el navegador: el contenido se lee entero sin JavaScript, que es
-lo que necesitan los buscadores y las IA. Un script mínimo solo guarda la cookie
-`zonorah_lang` para que la app de datos abra en el mismo idioma. El script falla si a un idioma le falta
-una clave o tiene distinto número de elementos que el inglés.
+**Cambiar un texto:** edita `build/content.py` (cada fila trae inglés, español e indonesio) y vuelve a
+ejecutar `build.py`. No edites los `index.html`: se sobrescriben. **Cambiar el diseño:** edita
+`build/plantilla.html`; cada reemplazo de `build.py` comprueba que su fragmento original existe, así
+que si algo cambia falla en voz alta en vez de dejar texto colado. También falla si una página
+generada pierde el CSS o el cuerpo.
 
-**Regla de contenido:** cada afirmación sale de la metodología publicada
-(`/datos/metodologia`), de `planes.py` o del código del análisis. Nada de «24 horas»,
-«audio guardado» ni cifras que envejecen. Si no se puede defender, no entra.
+No hay traducción en el navegador: el contenido se lee entero sin JavaScript, que es lo que necesitan
+los buscadores y las IA. Un script mínimo guarda la cookie `zonorah_lang` para que la app de datos
+abra en el mismo idioma.
 
-**Cambiar un texto:** edita `build/content.py` (los tres idiomas) y vuelve a ejecutar
-`build.py`. No edites los `index.html`: se sobrescriben.
+**Regla de contenido:** cada afirmación sale de la metodología publicada (`/datos/metodologia`), de
+`planes.py` o del código del análisis. Nada de «24 horas», «audio guardado», «alerta en 3 minutos» ni
+«RGPD». Si no se puede defender, no entra.
+
+**SEO y GEO:** `hreflang` en las tres páginas y `x-default` al inglés; datos estructurados
+(Organization, WebSite, WebPage); `og.png`; `sitemap.xml`; `llms.txt` y `llms-full.txt`;
+`robots.txt` que permite los rastreadores de IA y bloquea `/datos/api/`; `404.html` (sin él,
+Cloudflare Pages responde 200 con la portada a cualquier ruta); las páginas de la app salen con
+`X-Robots-Tag: noindex` porque todo el contenido está en la portada.
 
 ## zonorah.com/datos
 

@@ -1,0 +1,71 @@
+# Zonorah, Media Neuroscience Lab
+
+> Zonorah is a Media Neuroscience Lab. We listen to Peruvian radio, TV and YouTube and measure what is said: open data for science, research for business.
+
+Last updated: 2026-11-24
+
+We listen to Peruvian radio, television and YouTube and measure what is said: how much, where, when and by whom.
+
+Before asking what media do to the brain, measure what the media say.
+
+## How it works
+
+1. Capture. We receive each station's live signal over the internet and record it in the time windows of its schedule.
+2. Transcribe. A speech-recognition model runs locally and transcribes the audio with a timestamp for every sentence. The audio is deleted as soon as it is transcribed.
+3. Analyse. Terms are searched in the transcript, with variants. Each relevant passage is classified in closed fields: who speaks, role of the subject, topic, tone, framing, and evidence or rumour.
+4. Deliver. Commissioned research arrives as a PDF by email on the schedule you choose. Public figures go to Zonorah Data as minutes on air per 100 hours recorded.
+
+## Two fronts, one system
+
+Zonorah is a Media Neuroscience Lab. Its computational tool takes care of the media side; our research on the brain side is separate and draws on that data.
+
+### Scientific research: The media side of the question
+
+Published, literal rules and open data for journalists, teachers and researchers: a comparator, embeddable charts, CSV downloads and an AI chat that quotes short fragments with their station and time.
+
+Every figure: minutes on air per 100 hours recorded
+
+### Commercial research: Custom research for organisations
+
+You define the sources, keywords and rules. Each mention is analysed for speaker, topic, tone, framing, evidence or rumour, risk and urgency, and delivered as a PDF report by email.
+
+Your commission is private: public data never reveals who asked for what
+
+### Zonorah Data: The open instrument
+
+Compare any term across stations, days and regions. To cite a figure, use the permanent link of the comparison and the date you consulted it.
+
+Cite as: Zonorah (2026). Memoria de los medios del Perú: minutos al aire por cada 100 horas grabadas.
+
+### Limits: What the figures do not say
+
+Transcription is automatic and errs on names, acronyms and brands, so figures tend to fall short. Only what was recorded is measured, music and adverts count, and figures are rounded.
+
+“Not recorded” is not the same as “not said”
+
+### Privacy: No recordings kept
+
+Audio is deleted as soon as it is transcribed. Your AI questions go to an AI service (Groq, United States) without your email or name. You can delete your account and data at any time.
+
+Access, correction or deletion: hola@zonorah.com
+
+### Foundations: Computational media neuroscience
+
+Zonorah takes the computational side of media neuroscience, such as the work of the Media Neuroscience Lab at UC Santa Barbara on moral narratives, text mining and large media datasets. The tool does not do brain imaging or experiments with participants.
+
+https://www.medianeuroscience.org/
+
+## Prices
+
+All plans are free until 31 December 2026. No payment details.
+
+- Professional: S/ 89 per month at list price, 100 AI questions a day.
+- Intensive: S/ 229 per month at list price, 500 AI questions a day.
+- Newsroom: S/ 429 per month at list price, 2,000 AI questions a day.
+
+Contact: hola@zonorah.com
+
+## Other languages
+
+- Español: https://zonorah.com/es/
+- Bahasa Indonesia: https://zonorah.com/id/
