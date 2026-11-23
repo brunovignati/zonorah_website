@@ -51,8 +51,9 @@ produce tres páginas HTML completas:
 python3 build/build.py     # regenera las tres páginas, sitemap.xml, robots.txt y llms.txt
 ```
 
-No hay traducción en el navegador: cada página se lee entera sin JavaScript, que es
-lo que necesitan los buscadores y las IA. El script falla si a un idioma le falta
+No hay traducción en el navegador: el contenido se lee entero sin JavaScript, que es
+lo que necesitan los buscadores y las IA. Un script mínimo solo guarda la cookie
+`zonorah_lang` para que la app de datos abra en el mismo idioma. El script falla si a un idioma le falta
 una clave o tiene distinto número de elementos que el inglés.
 
 **Regla de contenido:** cada afirmación sale de la metodología publicada

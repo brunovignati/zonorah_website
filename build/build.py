@@ -281,6 +281,7 @@ def pagina(c: dict) -> str:
 </main>
 <footer><div class="wrap"><strong>ZONORAH</strong><span>{e(c["footer_tag"])}</span>{foot}
 <span class="sp">{e(c["rights"])}</span></div></footer>
+<script>try{{document.cookie="zonorah_lang={lang}; path=/; max-age=31536000; SameSite=Lax"}}catch(e){{}}</script>
 </body>
 </html>
 """
