@@ -1,8 +1,8 @@
 # Zonorah, Media Neuroscience Lab
 
-> Zonorah is a Media Neuroscience Lab. We listen to Peruvian radio, TV and YouTube and measure what is said: open data for science, research for business.
+> Zonorah is a Media Neuroscience Lab. Our instrument transcribes Peruvian radio, TV and YouTube and measures what is said: open data and applied studies.
 
-Zonorah is a Media Neuroscience Lab. Its computational tool takes care of the media side; our research on the brain side is separate and draws on that data.
+Zonorah is a Media Neuroscience Lab. Its computational instrument measures the media side of the question; our research on the brain side is separate and builds on that data.
 
 ## Pages
 
