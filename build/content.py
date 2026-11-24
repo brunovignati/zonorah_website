@@ -59,7 +59,7 @@ FILAS = {
     "method": ("ml1", "ml2", "ml3", "ml4", "ml5", "ml6"),
     "research": ("rr1", "rr2", "rr3"),
     "data": ("dr1", "dr2", "dr3"),
-    "privacy": ("pv1", "pv2", "pv3", "pv4", "pv5", "pv6"),
+    "privacy": ("pv1", "pv2", "pv3", "pv7", "pv8", "pv4", "pv5", "pv6"),
 }
 # En portada cada fila es un enlace a su página.
 ENLACE_FILA = {"hr1": "method", "hr2": "research", "hr3": "data", "hr4": "studies"}
@@ -458,6 +458,18 @@ T = {
              "Una pregunta se envía a un servicio de IA (Groq, en Estados Unidos) sin tu correo ni tu nombre. El texto de tus preguntas no se guarda junto a tu cuenta. No escribas datos personales en las preguntas.",
              "Sebuah pertanyaan dikirim ke layanan AI (Groq, di Amerika Serikat) tanpa email dan nama Anda. Teks pertanyaan Anda tidak disimpan bersama akun Anda. Jangan menulis data pribadi dalam pertanyaan."),
     "pv3x": ("", "", ""),
+    "pv7m": ("Payments", "Pagos", "Pembayaran"),
+    "pv7h": ("Stripe handles the card", "La tarjeta la gestiona Stripe", "Stripe mengelola kartu"),
+    "pv7p": ("Card payments are processed by Stripe. Zonorah never sees or stores your card number. It keeps your Stripe customer reference, your plan, the status of the subscription and its dates, and a card fingerprint, an identifier Stripe assigns that is not the number, to apply the rule of one free trial per card.",
+             "Los pagos con tarjeta los procesa Stripe. Zonorah nunca ve ni guarda el número de tu tarjeta. Guarda tu referencia de cliente en Stripe, tu plan, el estado de la suscripción y sus fechas, y una huella de la tarjeta, un identificador que asigna Stripe y que no es el número, para aplicar la regla de una prueba gratuita por tarjeta.",
+             "Pembayaran kartu diproses oleh Stripe. Zonorah tidak pernah melihat atau menyimpan nomor kartu Anda. Zonorah menyimpan referensi pelanggan Stripe Anda, paket, status langganan beserta tanggalnya, dan sidik kartu, pengenal yang diberikan Stripe dan bukan nomornya, untuk menerapkan aturan satu uji coba gratis per kartu."),
+    "pv7x": ("Stripe keeps payment records for as long as the law requires.", "Stripe conserva los registros de pago el tiempo que exija la ley.", "Stripe menyimpan catatan pembayaran selama yang diwajibkan hukum."),
+    "pv8m": ("Your monitors", "Tus monitoreos", "Pemantauan Anda"),
+    "pv8h": ("Saved with your account", "Se guardan con tu cuenta", "Disimpan bersama akun Anda"),
+    "pv8p": ("The searches and monitoring requests you save in the platform (keywords, sources, schedules and languages) belong to your account. When you delete the account, the monitors stop and those data are deleted, including the transcripts and reports made for them.",
+             "Las búsquedas y las solicitudes de monitoreo que guardas en la plataforma (palabras clave, medios, horarios e idiomas) pertenecen a tu cuenta. Al borrar la cuenta, los monitoreos se detienen y esos datos se borran, incluidas las transcripciones y los informes hechos para ellos.",
+             "Pencarian dan permintaan pemantauan yang Anda simpan di platform (kata kunci, sumber, jadwal, dan bahasa) milik akun Anda. Saat Anda menghapus akun, pemantauan berhenti dan data itu dihapus, termasuk transkrip dan laporan yang dibuat untuknya."),
+    "pv8x": ("", "", ""),
     "pv4m": ("How long", "Cuánto tiempo", "Berapa lama"),
     "pv4h": ("Until you delete the account", "Hasta que borres la cuenta", "Sampai Anda menghapus akun"),
     "pv4p": ("A session lasts 30 days. Your data stays while the account exists. You can delete the account whenever you want, and everything goes: email, name, sessions and question count.",
@@ -501,12 +513,38 @@ T = {
 }
 
 
+# ---- cobro con Stripe
+# Mientras sea False, el sitio dice lo de siempre: gratis hasta el 31 de diciembre, sin datos de pago.
+# El día que Stripe esté conectado en la app (bloque `stripe:` de config.yaml), se pone True, se ejecuta
+# `python3 build/build.py` y se publica: los precios dejan de ir tachados y el sitio habla de la prueba con tarjeta.
+COBRO_ACTIVO = False
+PRUEBA_DIAS = 7            # el mismo número que `stripe.prueba_dias` en la app
+
+T_COBRO = {
+    "precios_lead": (
+        f"Every plan starts with a {PRUEBA_DIAS}-day free trial, once per person. A card is required: it is charged when the trial ends unless you cancel before.",
+        f"Todos los planes empiezan con {PRUEBA_DIAS} días de prueba gratis, una sola vez por persona. Hace falta tarjeta: se cobra al terminar la prueba si no cancelas antes.",
+        f"Setiap paket dimulai dengan uji coba gratis {PRUEBA_DIAS} hari, hanya sekali per orang. Perlu kartu: ditagih saat uji coba berakhir kecuali Anda membatalkan sebelumnya."),
+    "p2l4": (f"{PRUEBA_DIAS}-day free trial", f"{PRUEBA_DIAS} días de prueba gratis", f"Uji coba gratis {PRUEBA_DIAS} hari"),
+    "p3l4": (f"{PRUEBA_DIAS}-day free trial", f"{PRUEBA_DIAS} días de prueba gratis", f"Uji coba gratis {PRUEBA_DIAS} hari"),
+    "p_cta": ("Start free trial", "Empezar la prueba gratis", "Mulai uji coba gratis"),
+    "d_data": (
+        "See how many minutes a word got on radio, TV and YouTube, download the table and ask the AI assistant.",
+        "Mira cuántos minutos tuvo una palabra en la radio, la TV y YouTube, descarga la tabla y pregunta al asistente de IA.",
+        "Lihat berapa menit sebuah kata tayang di radio, TV, dan YouTube, unduh tabelnya, dan tanya asisten AI."),
+}
+
+
 def textos(lang: str) -> dict:
     i = LANGS.index(lang)
-    return {k: v[i] for k, v in T.items()}
+    base = {**T, **T_COBRO} if COBRO_ACTIVO else T
+    return {k: v[i] for k, v in base.items()}
 
 
 def comprobar():
+    for k, v in T_COBRO.items():
+        if k not in T or len(v) != 3 or not all(v):
+            raise SystemExit(f"[content] T_COBRO «{k}» no existe en T o no tiene tres textos")
     for k, v in T.items():
         if len(v) != 3 or not all(isinstance(x, str) for x in v):
             raise SystemExit(f"[content] «{k}» necesita exactamente tres textos")

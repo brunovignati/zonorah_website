@@ -88,6 +88,17 @@ antigua y redirige.
 
 Aquí no hay datos ni claves: la función no guarda nada.
 
+## Cuando se conecte Stripe
+
+El sitio dice «gratis hasta el 31 de diciembre, sin datos de pago» mientras `COBRO_ACTIVO = False` en
+`build/content.py`. El día que el bloque `stripe:` esté en la configuración de la app (ver
+`~/Zonorah/zonorah/web/pagos.py`):
+
+1. `COBRO_ACTIVO = True` (y `PRUEBA_DIAS` igual que `stripe.prueba_dias` de la app).
+2. `python3 build/build.py`: los precios dejan de ir tachados, los botones dicen «Empezar la prueba gratis»
+   y el texto habla de la prueba con tarjeta, una por persona.
+3. Publicar. No debe quedar ninguna página prometiendo «sin datos de pago» con el cobro activo.
+
 ## Reglas
 
 - El HTML de la web va en `public/index.html`, **nunca** en el README.
