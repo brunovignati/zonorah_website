@@ -157,6 +157,16 @@ The password is handled by Google. It is not stored here.
 
 A question is sent to an AI service (Groq, in the United States) without your email or name. The text of your questions is not kept with your account. Please do not write personal data in a question.
 
+### Payments: Stripe handles the card
+
+Card payments are processed by Stripe. Zonorah never sees or stores your card number. It keeps your Stripe customer reference, your plan, the status of the subscription and its dates, and a card fingerprint, an identifier Stripe assigns that is not the number, to apply the rule of one free trial per card.
+
+Stripe keeps payment records for as long as the law requires.
+
+### Your monitors: Saved with your account
+
+The searches and monitoring requests you save in the platform (keywords, sources, schedules and languages) belong to your account. When you delete the account, the monitors stop and those data are deleted, including the transcripts and reports made for them.
+
 ### How long: Until you delete the account
 
 A session lasts 30 days. Your data stays while the account exists. You can delete the account whenever you want, and everything goes: email, name, sessions and question count.

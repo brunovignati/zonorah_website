@@ -23,7 +23,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
-from content import (CITA, EMAIL, ENLACE_FILA, FILAS, LAB_URL, LANGS, LOCALES, NOMBRES, PAGINAS,  # noqa: E402
+from content import (COBRO_ACTIVO, CITA, EMAIL, ENLACE_FILA, FILAS, LAB_URL, LANGS, LOCALES, NOMBRES, PAGINAS,  # noqa: E402
                      SECTORES, SITE, UPDATED, comprobar, ruta, textos)
 
 RAIZ = Path(__file__).resolve().parent.parent
@@ -289,6 +289,9 @@ def pagina(lang: str, pg: str) -> str:
     # Precios en dólares estadounidenses (mismas cifras que los antiguos precios en soles (1 S/ = 1 US$)).
     for viejo, nuevo in (("S/ 89", "US$ 89"), ("S/ 229", "US$ 229"), ("S/ 429", "US$ 429"), ("S/ 0", "US$ 0")):
         p.s = p.s.replace(viejo, nuevo)
+    if COBRO_ACTIVO:
+        # Con el cobro conectado no hay promoción: el precio no va tachado ni «a 0».
+        p.s = re.sub(r"<s>(US\$ \d+)</s> US\$ 0", r"\1", p.s)
     rp('data-split>Precios</h2>', f'data-split>{e(x["precios_h"])}</h2>', 1)
     rp("Todos los planes, gratis hasta el 31 de diciembre de 2026. Sin datos de pago.", e(x["precios_lead"]), 1)
     for viejo, k in (("Profesional", "p1n"), ("Intensivo", "p2n"), ("Redacción", "p3n")):
