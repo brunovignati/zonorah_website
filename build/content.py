@@ -121,6 +121,7 @@ T = {
                 "Radio · Televisión · YouTube · Podcasts · Streaming · Medios digitales · Radio · Televisión · YouTube · Podcasts",
                 "Radio · Televisi · YouTube · Podcast · Streaming · Media daring · Radio · Televisi · YouTube · Podcast"),
     # ---- navegación (las páginas y dos accesos a la app)
+    "n_learn": ("Learn", "Aprende", "Belajar"),
     "n_chat": ("Ask the data", "Pregunta a los datos", "Tanya data"),
     "n_login": ("Sign in / Sign up", "Iniciar sesión / Registrarse", "Masuk / Daftar"),
     "n_logout": ("Sign out", "Salir", "Keluar"),
@@ -131,9 +132,9 @@ T = {
     # ---- portada: hero
     "h1a": ("Zonorah.",) * 3, "h1b": ("Media Neuroscience",) * 3, "h1c": ("Lab.",) * 3,
     "hero_lead": (
-        "Zonorah records radio, TV and YouTube, transcribes the audio, and counts how many minutes each topic is on air, on which station and at what time. The audio is deleted after transcription.",
-        "Zonorah graba radio, TV y YouTube, transcribe el audio y cuenta cuántos minutos está al aire cada tema, en qué emisora y a qué hora. El audio se borra después de transcribirlo.",
-        "Zonorah merekam radio, TV, dan YouTube, mentranskripsi audionya, dan menghitung berapa menit setiap topik tayang, di stasiun mana, dan pada jam berapa. Audio dihapus setelah transkripsi."),
+        "Zonorah is a computational media lab. We record radio, TV and YouTube, transcribe the audio and measure what is said: how many minutes, on which station and when. Open data for research, and studies on commission.",
+        "Zonorah es un laboratorio computacional de medios. Grabamos radio, TV y YouTube, transcribimos el audio y medimos lo que se dice: cuántos minutos, en qué emisora y cuándo. Datos abiertos para investigar y estudios por encargo.",
+        "Zonorah adalah laboratorium komputasi media. Kami merekam radio, TV, dan YouTube, mentranskripsi audionya, dan mengukur apa yang dikatakan: berapa menit, di stasiun mana, dan kapan. Data terbuka untuk riset dan studi berdasarkan pesanan."),
     "hero_cta1": ("Open the data", "Abrir los datos", "Buka data"),
     "hero_cta2": (
         "Method",

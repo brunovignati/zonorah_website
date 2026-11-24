@@ -204,6 +204,7 @@ def pagina(lang: str, pg: str) -> str:
             act = ' class="active" aria-current="page"' if destino == pg else ""
             items.append(f'<a href="{ruta(lang, destino)}"{act}>{e(x["pg_" + destino])}</a>')
         items.append(f'<a href="{app("/datos/")}">{e(x["n_chat"])}</a>')
+        items.append(f'<a href="{app("/datos/aprende")}">{e(x["n_learn"])}</a>')
         return "\n    ".join(items) + "\n"
     rs(r'(<nav class="nav-links" aria-label=")[^"]*(">).*?(</nav>)',
        lambda m: m.group(1) + e(x["aria_nav"]) + m.group(2) + "\n    " + enlaces(False) + "  " + m.group(3), 1)
@@ -363,6 +364,40 @@ def pagina(lang: str, pg: str) -> str:
     # Scroll nativo: el scroll virtual de ScrollSmoother falla con rueda, trackpad y anclas.
     # El resto de la animación (pines, revelados) no depende de él.
     rp("if (window.ScrollSmoother && !reduce) {", "if (false) {", 1)
+    # El logo lleva a la portada (antes «#top»: en las páginas interiores no salía de ahí).
+    home = ruta(lang, "home")
+    p.s = p.s.replace('<a class="nav-brand magnetic" href="#top" data-scroll>', f'<a class="nav-brand magnetic" href="{home}">')
+    p.s = p.s.replace('<a class="foot-brand" href="#top" data-scroll>', f'<a class="foot-brand" href="{home}">')
+    # Scroll y revelados a prueba de fallos: sin pines ni recorrido horizontal, y cada bloque aparece
+    # al entrar en pantalla (o a los 3,5 s, pase lo que pase). Antes, si un disparador fallaba, la
+    # página quedaba en blanco.
+    p.s = p.s.replace("desktop: '(min-width: 901px)', mobile: '(max-width: 900px)'", "desktop: '(min-width: 100000px)', mobile: '(min-width: 0px)'")
+    rs(r"gsap\.from\(qs, \{[^\n]*\n", "", 1)
+    rs(r"gsap\.from\(head, \{[^\n]*\n", "", 1)
+    rs(r"gsap\.from\(\$\$\('\.step'\), \{[^\n]*\n", "", 1)
+    nuevo_reveal = """    (function () {
+      var els = $$('[data-split],[data-reveal],[data-stagger]').filter(function (e) { return !e.closest('.hero'); });
+      if (!('IntersectionObserver' in window)) return;
+      els.forEach(function (e) { e.classList.add('zv'); });
+      var io = new IntersectionObserver(function (es) { es.forEach(function (x) { if (x.isIntersecting) { x.target.classList.add('in'); io.unobserve(x.target); } }); }, { rootMargin: '0px 0px -6% 0px' });
+      els.forEach(function (e) { io.observe(e); });
+      setTimeout(function () { els.forEach(function (e) { e.classList.add('in'); }); }, 3500);
+    })();
+"""
+    rs(r"    \$\$\('\[data-split\]'\)\.forEach.*?(?=    \$\$\('\[data-count\]'\))", lambda m: nuevo_reveal, 1)
+    css_extra = """
+.zv{opacity:0;transform:translateY(22px);transition:opacity .8s ease,transform .8s ease}
+.zv.in{opacity:1;transform:none}
+.problema-pin{min-height:0;display:block;padding:clamp(96px,14vh,150px) var(--gx)}
+.quotes{position:relative;inset:auto;display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:44px}
+.q{position:static}
+.como-pin{min-height:0;display:block;padding:20px 0 90px}
+.signal{display:none}
+.como-track{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:16px;transform:none!important}
+.step{width:auto;min-height:0;gap:28px;padding:26px 22px}
+"""
+    i = p.s.rindex("</style>")
+    p.s = p.s[:i] + css_extra + p.s[i:]
     # ---- cursor y enlaces a la app
     cur = {"Ir": x["cur_go"], "Ver": x["cur_view"], "Bajar": x["cur_down"], "Abrir PDF": x["cur_pdf"]}
     rs(r'data-cursor="([^"]*)"', lambda m: f'data-cursor="{e(cur[m.group(1)])}"')

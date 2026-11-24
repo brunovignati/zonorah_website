@@ -4,7 +4,7 @@
 
 Last updated: 2026-11-24
 
-Zonorah records radio, TV and YouTube, transcribes the audio, and counts how many minutes each topic is on air, on which station and at what time. The audio is deleted after transcription.
+Zonorah is a computational media lab. We record radio, TV and YouTube, transcribe the audio and measure what is said: how many minutes, on which station and when. Open data for research, and studies on commission.
 
 Questions the data can answer
 

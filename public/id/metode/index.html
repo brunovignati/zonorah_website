@@ -720,6 +720,16 @@ try{document.cookie="zonorah_lang=id; path=/; max-age=31536000; SameSite=Lax"}ca
 .lang a{display:grid;place-items:center;height:28px;min-width:34px;padding:0 9px;border-radius:999px;opacity:.7;transition:opacity .2s,background .2s,color .2s}
 .lang a:hover{opacity:1}
 .lang a[aria-current="true"]{opacity:1;background:var(--bosque);color:var(--lima)}
+
+.zv{opacity:0;transform:translateY(22px);transition:opacity .8s ease,transform .8s ease}
+.zv.in{opacity:1;transform:none}
+.problema-pin{min-height:0;display:block;padding:clamp(96px,14vh,150px) var(--gx)}
+.quotes{position:relative;inset:auto;display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:44px}
+.q{position:static}
+.como-pin{min-height:0;display:block;padding:20px 0 90px}
+.signal{display:none}
+.como-track{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:16px;transform:none!important}
+.step{width:auto;min-height:0;gap:28px;padding:26px 22px}
 </style>
 </head>
 <body>
@@ -755,13 +765,14 @@ try{document.cookie="zonorah_lang=id; path=/; max-age=31536000; SameSite=Lax"}ca
 
 
 <header class="nav" id="nav">
-  <a class="nav-brand magnetic" href="#top" data-scroll><svg><use href="#i-mark"/></svg>Zonorah</a>
+  <a class="nav-brand magnetic" href="/id/"><svg><use href="#i-mark"/></svg>Zonorah</a>
   <nav class="nav-links" aria-label="Navigasi utama">
     <a href="/id/metode/" class="active" aria-current="page">Metode</a>
     <a href="/id/riset/">Riset</a>
     <a href="/id/data/">Zonorah Data</a>
     <a href="/id/studi/">Studi contoh</a>
     <a href="/datos/?lang=id">Tanya data</a>
+    <a href="/datos/aprende?lang=id">Belajar</a>
   </nav>
   <div class="nav-right">
     <span class="lang" role="group" aria-label="Ganti bahasa"><a href="/method/" hreflang="en" lang="en" data-lang="en" aria-current="false">EN</a><a href="/es/metodo/" hreflang="es" lang="es" data-lang="es" aria-current="false">ES</a><a href="/id/metode/" hreflang="id" lang="id" data-lang="id" aria-current="true">ID</a></span>
@@ -778,6 +789,7 @@ try{document.cookie="zonorah_lang=id; path=/; max-age=31536000; SameSite=Lax"}ca
     <a href="/id/data/">Zonorah Data</a>
     <a href="/id/studi/">Studi contoh</a>
     <a href="/datos/?lang=id">Tanya data</a>
+    <a href="/datos/aprende?lang=id">Belajar</a>
     <a href="/datos/?lang=id" id="menuCuenta" hidden>Masuk / Daftar</a>
   </nav>
   <div class="menu-foot"><span>hola@zonorah.com</span></div>
@@ -900,7 +912,7 @@ try{document.cookie="zonorah_lang=id; path=/; max-age=31536000; SameSite=Lax"}ca
   <div class="container">
     <div class="foot-grid">
       <div>
-        <a class="foot-brand" href="#top" data-scroll><svg style="color:#9fe870"><use href="#i-mark"/></svg>Zonorah</a>
+        <a class="foot-brand" href="/id/"><svg style="color:#9fe870"><use href="#i-mark"/></svg>Zonorah</a>
         <p>Media Neuroscience Lab. Radio, TV, dan YouTube, direkam, ditranskripsi, dan dihitung.</p>
       </div>
       <div class="foot-col"><h4>Laboratorium</h4><a href="/id/metode/">Metode</a><a href="/id/riset/">Riset</a><a href="/id/data/">Zonorah Data</a><a href="/id/studi/">Studi contoh</a></div>
@@ -1119,26 +1131,14 @@ try{document.cookie="zonorah_lang=id; path=/; max-age=31536000; SameSite=Lax"}ca
 
   /* ── Reveals de scroll (títulos, párrafos, grupos) ────────────── */
   if (!reduce) {
-    $$('[data-split]').forEach(function (el) {
-      if (window.SplitText && SplitText.create) {
-        SplitText.create(el, {
-          type: 'lines', mask: 'lines', autoSplit: true, linesClass: 'sl',
-          onSplit: function (self) {
-            self.lines.forEach(function (l) { var m = l.parentElement; if (m && m !== el) { m.style.padding = '.14em 0 .08em'; m.style.margin = '-.14em 0 -.08em'; } });
-            return gsap.from(self.lines, { yPercent: 110, duration: 1.2, ease: 'power4.out', stagger: .08, scrollTrigger: { trigger: el, start: 'top 88%', once: true } });
-          }
-        });
-      } else {
-        gsap.from(el, { opacity: 0, y: 40, scrollTrigger: { trigger: el, start: 'top 88%', once: true } });
-      }
-    });
-    $$('[data-reveal]').forEach(function (el) {
-      if (el.closest('.hero')) return;
-      gsap.from(el, { opacity: 0, y: 28, duration: 1, scrollTrigger: { trigger: el, start: 'top 90%', once: true } });
-    });
-    $$('[data-stagger]').forEach(function (group) {
-      gsap.from(group.children, { opacity: 0, y: 30, duration: .9, stagger: .08, scrollTrigger: { trigger: group, start: 'top 88%', once: true } });
-    });
+    (function () {
+      var els = $$('[data-split],[data-reveal],[data-stagger]').filter(function (e) { return !e.closest('.hero'); });
+      if (!('IntersectionObserver' in window)) return;
+      els.forEach(function (e) { e.classList.add('zv'); });
+      var io = new IntersectionObserver(function (es) { es.forEach(function (x) { if (x.isIntersecting) { x.target.classList.add('in'); io.unobserve(x.target); } }); }, { rootMargin: '0px 0px -6% 0px' });
+      els.forEach(function (e) { io.observe(e); });
+      setTimeout(function () { els.forEach(function (e) { e.classList.add('in'); }); }, 3500);
+    })();
     $$('[data-count]').forEach(function (el) {
       var end = parseFloat(el.getAttribute('data-count')), dec = parseInt(el.getAttribute('data-dec') || '0', 10), o = { v: 0 };
       gsap.to(o, { v: end, duration: 1.8, ease: 'power2.out', scrollTrigger: { trigger: el, start: 'top 85%', once: true },
@@ -1148,7 +1148,7 @@ try{document.cookie="zonorah_lang=id; path=/; max-age=31536000; SameSite=Lax"}ca
 
   /* ── Set pieces (dependen del ancho de pantalla) ──────────────── */
   var mm = gsap.matchMedia();
-  mm.add({ desktop: '(min-width: 901px)', mobile: '(max-width: 900px)', reduce: '(prefers-reduced-motion: reduce)' }, function (ctx) {
+  mm.add({ desktop: '(min-width: 100000px)', mobile: '(min-width: 0px)', reduce: '(prefers-reduced-motion: reduce)' }, function (ctx) {
     var c = ctx.conditions;
     if (c.reduce) return;
 
@@ -1160,9 +1160,7 @@ try{document.cookie="zonorah_lang=id; path=/; max-age=31536000; SameSite=Lax"}ca
          .to(qs, { opacity: 0, y: -40, scale: 1.04, filter: 'blur(6px)', duration: 1, stagger: .06, ease: 'power2.in' }, '+=.6')
          .from(head, { opacity: 0, y: 80, duration: 1.4, ease: 'power3.out' }, '<+.4');
     } else {
-      gsap.from(qs, { opacity: 0, y: 30, stagger: .08, duration: .8, scrollTrigger: { trigger: '.quotes', start: 'top 88%', once: true } });
-      gsap.from(head, { opacity: 0, y: 40, scrollTrigger: { trigger: head, start: 'top 88%', once: true } });
-    }
+                }
 
     // 03 · Cómo funciona: recorrido horizontal anclado
     var track = $('#comoTrack'), comoPin = $('#comoPin'), signal = $('#signal');
@@ -1176,8 +1174,7 @@ try{document.cookie="zonorah_lang=id; path=/; max-age=31536000; SameSite=Lax"}ca
         gsap.from(s, { opacity: .25, y: 40, ease: 'none', scrollTrigger: { trigger: s, containerAnimation: tlC, start: 'left 95%', end: 'left 55%', scrub: true } });
       });
     } else {
-      gsap.from($$('.step'), { opacity: 0, y: 40, stagger: .1, scrollTrigger: { trigger: track, start: 'top 88%', once: true } });
-    }
+          }
 
     // 09 · Pie: la palabra se llena de lima al final del recorrido
     gsap.to('#footFill', { clipPath: 'inset(0 0% 0 0)', ease: 'none', scrollTrigger: { trigger: '#footWord', start: 'top bottom', end: 'max', scrub: true } });
