@@ -517,7 +517,7 @@ T = {
 # Mientras sea False, el sitio dice lo de siempre: gratis hasta el 31 de diciembre, sin datos de pago.
 # El día que Stripe esté conectado en la app (bloque `stripe:` de config.yaml), se pone True, se ejecuta
 # `python3 build/build.py` y se publica: los precios dejan de ir tachados y el sitio habla de la prueba con tarjeta.
-COBRO_ACTIVO = False
+COBRO_ACTIVO = True
 PRUEBA_DIAS = 7            # el mismo número que `stripe.prueba_dias` en la app
 
 T_COBRO = {

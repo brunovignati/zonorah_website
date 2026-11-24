@@ -9,7 +9,7 @@ Zonorah is a Media Neuroscience Lab. It records and counts what media broadcast.
 - [Home](https://zonorah.com/): Zonorah is a Media Neuroscience Lab. It writes down what radio, TV and YouTube broadcast and counts it. Open data and studies on commission.
 - [Method](https://zonorah.com/method/): How Zonorah records, transcribes and counts radio, TV and YouTube, what the numbers cannot tell you, and how to cite them.
 - [Research](https://zonorah.com/research/): Two lines of work on broadcast media: open data for science and journalism, and studies on commission for organisations.
-- [Zonorah Data](https://zonorah.com/data/): See how many minutes a word got on radio, TV and YouTube, download the table and ask the AI assistant. Free until 31 December 2026.
+- [Zonorah Data](https://zonorah.com/data/): See how many minutes a word got on radio, TV and YouTube, download the table and ask the AI assistant.
 - [Sample studies](https://zonorah.com/studies/): Ten PDF reports from one week of radio and TV in September 2026, one per sector. The reports are in Spanish.
 - [Privacy](https://zonorah.com/privacy/): What Zonorah stores, what it does not store and how to delete your account. No recordings are kept.
 

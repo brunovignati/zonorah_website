@@ -125,7 +125,7 @@ It summarises the transcripts and quotes short fragments with station and time. 
 
 ### Access
 
-All plans are free until 31 December 2026. No payment details.
+Every plan starts with a 7-day free trial, once per person. A card is required: it is charged when the trial ends unless you cancel before.
 
 - Professional: US$ 89 per month at list price, 100 AI questions a day.
 - Intensive: US$ 229 per month at list price, 500 AI questions a day.
