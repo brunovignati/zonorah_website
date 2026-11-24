@@ -308,6 +308,13 @@ def pagina(lang: str, pg: str) -> str:
         rp(f"</svg>{viejo}</li>", f"</svg>{e(x[k])}</li>", 1)
     rp("</svg>Gratis hasta el 31/12</li>", f'</svg>{e(x["p2l4"])}</li>', 2)
     rp("Activar gratis", e(x["p_cta"]), 3)
+    # ---- el plan gratis, a la vista: en los precios y bajo los botones de la portada
+    flecha = '<svg aria-hidden="true"><use href="#i-arrow"/></svg>'
+    gratis = (f'<div class="free-plan" data-reveal><div><h3>{e(x["free_h"])}</h3><p>{e(x["free_p"])}</p></div>'
+              f'<a class="btn btn-lime magnetic" href="{app("/platform/planes")}" data-cursor="Ir">{e(x["free_cta"])}{flecha}</a></div>')
+    rs(r'(<p class="lead" style="margin-top:48px" data-reveal>)', lambda m: gratis + m.group(1), 1)
+    rs(r'(<div class="hero-ctas" data-reveal>.*?</div>)', lambda m: m.group(1) +
+       f'\n      <p class="mono hero-free" data-reveal>{e(x["free_hero"])}</p>', 1)
     rs(r'(<p class="lead" style="margin-top:48px" data-reveal>).*?(</p>)',
        lambda m: m.group(1) + e(x["p_foot"]) + f'<a href="mailto:{EMAIL}?subject={e(x["mail_subject"]).replace(" ", "%20")}" style="text-decoration:underline">'
        + e(x["p_foot_a"]) + "</a>." + m.group(2), 1)
@@ -388,6 +395,10 @@ def pagina(lang: str, pg: str) -> str:
 """
     rs(r"    \$\$\('\[data-split\]'\)\.forEach.*?(?=    \$\$\('\[data-count\]'\))", lambda m: nuevo_reveal, 1)
     css_extra = """
+.free-plan{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;margin:44px 0 0;padding:26px 30px;border:1px dashed rgba(22,51,0,.4);border-radius:22px}
+.free-plan h3{font:600 22px/1.2 var(--fd);margin:0 0 6px}
+.free-plan p{margin:0;max-width:44em;opacity:.8}
+.hero-free{margin:18px 0 0;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;opacity:.7}
 .zv{opacity:0;transform:translateY(22px);transition:opacity .8s ease,transform .8s ease}
 .zv.in{opacity:1;transform:none}
 .problema-pin{min-height:0;display:block;padding:clamp(96px,14vh,150px) var(--gx)}
@@ -481,7 +492,8 @@ def destino(lang: str, pg: str) -> Path:
 
 def llms_full() -> str:
     x = textos("en")
-    pl = ("- Professional: US$ 89 per month at list price, 100 AI questions a day.\n"
+    pl = ("- Free: one source and 1 hour of listening a week, no card. When it runs out, wait 7 days or subscribe.\n"
+          "- Professional: US$ 89 per month at list price, 100 AI questions a day.\n"
           "- Intensive: US$ 229 per month at list price, 500 AI questions a day.\n"
           "- Newsroom: US$ 429 per month at list price, 2,000 AI questions a day.\n")
 

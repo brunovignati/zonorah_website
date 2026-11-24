@@ -721,6 +721,10 @@ try{document.cookie="zonorah_lang=en; path=/; max-age=31536000; SameSite=Lax"}ca
 .lang a:hover{opacity:1}
 .lang a[aria-current="true"]{opacity:1;background:var(--bosque);color:var(--lima)}
 
+.free-plan{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;margin:44px 0 0;padding:26px 30px;border:1px dashed rgba(22,51,0,.4);border-radius:22px}
+.free-plan h3{font:600 22px/1.2 var(--fd);margin:0 0 6px}
+.free-plan p{margin:0;max-width:44em;opacity:.8}
+.hero-free{margin:18px 0 0;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;opacity:.7}
 .zv{opacity:0;transform:translateY(22px);transition:opacity .8s ease,transform .8s ease}
 .zv.in{opacity:1;transform:none}
 .problema-pin{min-height:0;display:block;padding:clamp(96px,14vh,150px) var(--gx)}
@@ -824,7 +828,7 @@ try{document.cookie="zonorah_lang=en; path=/; max-age=31536000; SameSite=Lax"}ca
   <div class="container">
     <div class="sec-head">
       <h2 class="display h-xl" id="preciosTitle" data-split>Access</h2>
-      <p class="lead" data-reveal>Every plan starts with a 7-day free trial, once per person. A card is required: it is charged when the trial ends unless you cancel before.</p>
+      <p class="lead" data-reveal>Every paid plan starts with a 7-day free trial, once per person. A card is required: it is charged when the trial ends unless you cancel before.</p>
     </div>
     
     <div class="plans" data-stagger>
@@ -865,7 +869,7 @@ try{document.cookie="zonorah_lang=en; path=/; max-age=31536000; SameSite=Lax"}ca
         <a class="btn btn-ghost" href="/platform/?plan=redaccion&amp;lang=en">Start free trial</a>
       </article>
     </div>
-    <p class="lead" style="margin-top:48px" data-reveal>Prices are per month, in US dollars (USD). Want a study for your organisation? <a href="mailto:hola@zonorah.com?subject=Study%20on%20commission" style="text-decoration:underline">Write to us</a>.</p>
+    <div class="free-plan" data-reveal><div><h3>Free plan</h3><p>One source and 1 hour of listening a week. No card. If you use it up, wait 7 days for it to come back, or subscribe to keep listening.</p></div><a class="btn btn-lime magnetic" href="/platform/planes?lang=en" data-cursor="Go">Start free<svg aria-hidden="true"><use href="#i-arrow"/></svg></a></div><p class="lead" style="margin-top:48px" data-reveal>Prices are per month, in US dollars (USD). Want a study for your organisation? <a href="mailto:hola@zonorah.com?subject=Study%20on%20commission" style="text-decoration:underline">Write to us</a>.</p>
     
   </div>
 </section>

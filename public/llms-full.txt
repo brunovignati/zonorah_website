@@ -125,8 +125,9 @@ It summarises the transcripts and quotes short fragments with station and time. 
 
 ### Access
 
-Every plan starts with a 7-day free trial, once per person. A card is required: it is charged when the trial ends unless you cancel before.
+Every paid plan starts with a 7-day free trial, once per person. A card is required: it is charged when the trial ends unless you cancel before.
 
+- Free: one source and 1 hour of listening a week, no card. When it runs out, wait 7 days or subscribe.
 - Professional: US$ 89 per month at list price, 100 AI questions a day.
 - Intensive: US$ 229 per month at list price, 500 AI questions a day.
 - Newsroom: US$ 429 per month at list price, 2,000 AI questions a day.
@@ -165,7 +166,7 @@ Stripe keeps payment records for as long as the law requires.
 
 ### Your monitors: Saved with your account
 
-The searches and monitoring requests you save in the platform (keywords, sources, schedules and languages) belong to your account. When you delete the account, the monitors stop and those data are deleted, including the transcripts and reports made for them.
+The searches and monitoring requests you save in the platform (keywords, sources, schedules and languages) belong to your account. When you delete the account, the monitors stop and those data are deleted, including the transcripts and reports made for them. The one thing that can stay is a one-way fingerprint of your email, not the email itself, and only while free listening time you already used or a wait for it to come back is still running: it stops deleting and re-creating the account from resetting the free time.
 
 ### How long: Until you delete the account
 
