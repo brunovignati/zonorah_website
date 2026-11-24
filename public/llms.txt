@@ -12,6 +12,7 @@ Zonorah is a Media Neuroscience Lab. It records and counts what media broadcast.
 - [Zonorah Data](https://zonorah.com/data/): See how many minutes a word got on radio, TV and YouTube, download the table and ask the AI assistant.
 - [Sample studies](https://zonorah.com/studies/): Ten PDF reports from one week of radio and TV in September 2026, one per sector. The reports are in Spanish.
 - [Privacy](https://zonorah.com/privacy/): What Zonorah stores, what it does not store and how to delete your account. No recordings are kept.
+- [Terms and refunds](https://zonorah.com/terms/): The terms of use, billing and refund rules for Zonorah plans. Draft pending legal review.
 
 ## Other languages
 

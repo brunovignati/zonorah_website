@@ -24,11 +24,11 @@ LOCALES = {"en": "en_US", "es": "es_PE", "id": "id_ID"}
 NOMBRES = {"en": "English", "es": "Español", "id": "Bahasa Indonesia"}
 
 # Páginas: una URL por tema e idioma. «home» es la raíz de cada idioma.
-PAGINAS = ("home", "method", "research", "data", "studies", "privacy")
+PAGINAS = ("home", "method", "research", "data", "studies", "privacy", "terms")
 SLUGS = {
-    "en": {"home": "", "method": "method", "research": "research", "data": "data", "studies": "studies", "privacy": "privacy"},
-    "es": {"home": "", "method": "metodo", "research": "investigacion", "data": "datos-abiertos", "studies": "estudios", "privacy": "privacidad"},
-    "id": {"home": "", "method": "metode", "research": "riset", "data": "data", "studies": "studi", "privacy": "privasi"},
+    "en": {"home": "", "method": "method", "research": "research", "data": "data", "studies": "studies", "privacy": "privacy", "terms": "terms"},
+    "es": {"home": "", "method": "metodo", "research": "investigacion", "data": "datos-abiertos", "studies": "estudios", "privacy": "privacidad", "terms": "terminos"},
+    "id": {"home": "", "method": "metode", "research": "riset", "data": "data", "studies": "studi", "privacy": "privasi", "terms": "ketentuan"},
 }
 PREFIJO = {"en": "", "es": "es/", "id": "id/"}
 
@@ -60,6 +60,7 @@ FILAS = {
     "research": ("rr1", "rr2", "rr3"),
     "data": ("dr1", "dr2", "dr3"),
     "privacy": ("pv1", "pv2", "pv3", "pv7", "pv8", "pv4", "pv5", "pv6"),
+    "terms": ("tm1", "tm2", "tm3", "tm4", "tm5", "tm6", "tm7"),
 }
 # En portada cada fila es un enlace a su página.
 ENLACE_FILA = {"hr1": "method", "hr2": "research", "hr3": "data", "hr4": "studies"}
@@ -101,6 +102,10 @@ T = {
     "d_privacy": ("What Zonorah stores, what it does not store and how to delete your account. No recordings are kept.",
                   "Qué guarda Zonorah, qué no guarda y cómo borrar tu cuenta. No se guardan grabaciones.",
                   "Apa yang disimpan Zonorah, apa yang tidak, dan cara menghapus akun Anda. Rekaman tidak disimpan."),
+    "t_terms": ("Terms and refunds | Zonorah", "Términos y reembolsos | Zonorah", "Ketentuan dan pengembalian dana | Zonorah"),
+    "d_terms": ("The terms of use, billing and refund rules for Zonorah plans. Draft pending legal review.",
+                "Los términos de uso, la facturación y las reglas de reembolso de los planes de Zonorah. Borrador pendiente de revisión legal.",
+                "Ketentuan penggunaan, penagihan, dan aturan pengembalian dana untuk paket Zonorah. Draf menunggu tinjauan hukum."),
     "og_title": ("Zonorah · Media Neuroscience Lab",) * 3,
     "pg_home": ("Home", "Inicio", "Beranda"),
     "pg_method": ("Method", "Método", "Metode"),
@@ -108,6 +113,7 @@ T = {
     "pg_data": ("Zonorah Data", "Zonorah Datos", "Zonorah Data"),
     "pg_studies": ("Sample studies", "Estudios de muestra", "Studi contoh"),
     "pg_privacy": ("Privacy", "Privacidad", "Privasi"),
+    "pg_terms": ("Terms and refunds", "Términos y reembolsos", "Ketentuan dan pengembalian dana"),
     "updated": ("Last updated", "Actualizado", "Diperbarui"),
     # ---- accesibilidad
     "aria_nav": ("Main navigation", "Navegación principal", "Navigasi utama"),
@@ -444,6 +450,39 @@ T = {
                "Harga per bulan, dalam dolar AS (USD). Ingin studi untuk organisasi Anda? "),
     "p_foot_a": ("Write to us", "Escríbenos", "Hubungi kami"),
     "mail_subject": ("Study on commission", "Estudio a medida", "Studi pesanan"),
+    # ---- términos y reembolsos (borrador pendiente de revisión legal)
+    "terms_lead": (
+        "How the service, billing and refunds work. It is a draft pending legal review.",
+        "Cómo funcionan el servicio, el cobro y los reembolsos. Es un borrador pendiente de revisión legal.",
+        "Cara kerja layanan, penagihan, dan pengembalian dana. Ini adalah draf yang menunggu tinjauan hukum."),
+    "tm1m": ('Service', 'Servicio', 'Layanan'),
+    "tm1h": ('What Zonorah is', 'Qué es Zonorah', 'Apa itu Zonorah'),
+    "tm1p": ('Zonorah listens to public radio, television and streaming broadcasts, turns the audio into text and analyses it. You use it through an account. The transcripts and analyses are tools to help you read the media; they are not legal, medical or financial advice.', 'Zonorah escucha emisiones públicas de radio, televisión y streaming, convierte el audio en texto y lo analiza. Se usa con una cuenta. Las transcripciones y los análisis son una ayuda para leer los medios; no son asesoramiento legal, médico ni financiero.', 'Zonorah mendengarkan siaran publik radio, televisi, dan streaming, mengubah audio menjadi teks, lalu menganalisisnya. Layanan digunakan melalui sebuah akun. Transkrip dan analisis adalah alat bantu membaca media; bukan nasihat hukum, medis, atau keuangan.'),
+    "tm1x": ("", "", ""),
+    "tm2m": ('Plans', 'Planes', 'Paket'),
+    "tm2h": ('Free and paid plans', 'Plan gratis y planes de pago', 'Paket gratis dan berbayar'),
+    "tm2p": ('The free plan gives one source and 1 hour of listening a week, with no card. When the hour is used up you wait 7 days for it to come back, or you subscribe. Paid plans are monthly, priced in US dollars, and are listed on the plans page.', 'El plan gratis da un medio y 1 hora de escucha por semana, sin tarjeta. Cuando se gasta la hora, esperas 7 días a que vuelva o te suscribes. Los planes de pago son mensuales, en dólares estadounidenses, y están en la página de planes.', 'Paket gratis memberi satu sumber dan 1 jam pemantauan per minggu, tanpa kartu. Setelah jam itu habis, Anda menunggu 7 hari agar kembali, atau berlangganan. Paket berbayar bersifat bulanan, dalam dolar AS, dan tercantum di halaman paket.'),
+    "tm2x": ("", "", ""),
+    "tm3m": ('Billing', 'Cobro', 'Penagihan'),
+    "tm3h": ('Trial, renewal and cancelling', 'Prueba, renovación y cancelación', 'Uji coba, perpanjangan, dan pembatalan'),
+    "tm3p": ('Paid plans start with a 7-day free trial that needs a card. There is one trial per account and per card. If you do not cancel before the trial ends, the card is charged and the plan renews every month until you cancel. You can cancel at any time from the billing portal; access continues until the end of the period already paid. Payments are handled by Stripe; Zonorah never sees your card number.', 'Los planes de pago empiezan con 7 días de prueba gratis que piden tarjeta. Hay una prueba por cuenta y por tarjeta. Si no cancelas antes de que termine la prueba, se cobra la tarjeta y el plan se renueva cada mes hasta que canceles. Puedes cancelar cuando quieras desde el portal de facturación; el acceso sigue hasta el final del periodo ya pagado. Los pagos los gestiona Stripe; Zonorah nunca ve el número de tu tarjeta.', 'Paket berbayar dimulai dengan uji coba gratis 7 hari yang memerlukan kartu. Ada satu uji coba per akun dan per kartu. Jika Anda tidak membatalkan sebelum uji coba berakhir, kartu akan ditagih dan paket diperpanjang setiap bulan sampai Anda membatalkan. Anda dapat membatalkan kapan saja dari portal penagihan; akses berlanjut hingga akhir periode yang sudah dibayar. Pembayaran ditangani Stripe; Zonorah tidak pernah melihat nomor kartu Anda.'),
+    "tm3x": ("", "", ""),
+    "tm4m": ('Refunds', 'Reembolsos', 'Pengembalian dana'),
+    "tm4h": ('When money is returned', 'Cuándo se devuelve el dinero', 'Kapan uang dikembalikan'),
+    "tm4p": ('Cancelling stops the next charge; it does not return the month already started. If you were charged by mistake, or you cancelled inside the trial and were charged anyway, write to info@zonorah.com within 14 days and the charge will be returned. Where the law of your country gives you a right to a refund, that right applies.', 'Cancelar detiene el siguiente cobro; no devuelve el mes ya empezado. Si te cobraron por error, o cancelaste dentro de la prueba y te cobraron igual, escribe a info@zonorah.com en un plazo de 14 días y se te devolverá el cobro. Si la ley de tu país te da derecho a un reembolso, ese derecho se aplica.', 'Pembatalan menghentikan penagihan berikutnya; tidak mengembalikan bulan yang sudah berjalan. Jika Anda ditagih karena kesalahan, atau membatalkan dalam masa uji coba tetapi tetap ditagih, tulis ke info@zonorah.com dalam 14 hari dan tagihan akan dikembalikan. Jika hukum negara Anda memberi hak pengembalian dana, hak itu berlaku.'),
+    "tm4x": ("", "", ""),
+    "tm5m": ('Use', 'Uso', 'Penggunaan'),
+    "tm5h": ('What you agree not to do', 'Qué te comprometes a no hacer', 'Yang Anda setujui untuk tidak dilakukan'),
+    "tm5p": ('Use Zonorah only to follow public broadcasts. Do not try to get around the free-plan limits with repeated accounts, do not resell access, and do not use the reports to harass or to profile private individuals. We may suspend an account that does.', 'Usa Zonorah solo para seguir emisiones públicas. No intentes saltarte los límites del plan gratis con cuentas repetidas, no revendas el acceso y no uses los informes para acosar ni para perfilar a personas privadas. Podemos suspender una cuenta que lo haga.', 'Gunakan Zonorah hanya untuk mengikuti siaran publik. Jangan mencoba menghindari batas paket gratis dengan akun berulang, jangan menjual kembali akses, dan jangan menggunakan laporan untuk melecehkan atau memprofil individu pribadi. Kami dapat menangguhkan akun yang melakukannya.'),
+    "tm5x": ("", "", ""),
+    "tm6m": ('Accuracy', 'Exactitud', 'Akurasi'),
+    "tm6h": ('Automatic transcripts can be wrong', 'Las transcripciones automáticas pueden fallar', 'Transkrip otomatis bisa salah'),
+    "tm6p": ('Speech recognition and AI analysis make mistakes: a name can be misheard, a word missed, a tone misread. Check any quote against the source before you publish or act on it. Zonorah gives no guarantee that every mention is found.', 'El reconocimiento de voz y el análisis con IA se equivocan: un nombre puede oírse mal, una palabra perderse, un tono leerse mal. Comprueba cualquier cita con la fuente antes de publicarla o actuar. Zonorah no garantiza que se encuentre cada mención.', 'Pengenalan suara dan analisis AI bisa salah: nama bisa terdengar keliru, kata terlewat, nada disalahbaca. Periksa setiap kutipan dengan sumbernya sebelum menerbitkan atau bertindak. Zonorah tidak menjamin setiap sebutan ditemukan.'),
+    "tm6x": ("", "", ""),
+    "tm7m": ('Changes', 'Cambios', 'Perubahan'),
+    "tm7h": ('Changes and contact', 'Cambios y contacto', 'Perubahan dan kontak'),
+    "tm7p": ('These terms are a draft pending legal review and may change; the date at the foot of the page shows the last update. The governing law and the court that decides disputes will be fixed after that review. Questions: info@zonorah.com.', 'Estos términos son un borrador pendiente de revisión legal y pueden cambiar; la fecha al pie de la página indica la última actualización. La ley aplicable y el tribunal que resuelve las disputas se fijarán tras esa revisión. Preguntas: info@zonorah.com.', 'Ketentuan ini adalah draf yang menunggu tinjauan hukum dan dapat berubah; tanggal di bagian bawah halaman menunjukkan pembaruan terakhir. Hukum yang berlaku dan pengadilan yang memutus sengketa akan ditetapkan setelah tinjauan itu. Pertanyaan: info@zonorah.com.'),
+    "tm7x": ("", "", ""),
     # ---- privacidad
     "privacy_lead": (
         "No recordings are kept. This page says what is kept about people who sign in. It is a draft pending legal review.",

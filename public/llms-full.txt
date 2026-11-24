@@ -180,6 +180,40 @@ You can ask for access to your data, for it to be corrected or for it to be dele
 
 The wording may change after the review. Companies that order studies are covered by their own agreement, not by this page.
 
+## Terms and refunds
+
+https://zonorah.com/terms/
+
+How the service, billing and refunds work. It is a draft pending legal review.
+
+### Service: What Zonorah is
+
+Zonorah listens to public radio, television and streaming broadcasts, turns the audio into text and analyses it. You use it through an account. The transcripts and analyses are tools to help you read the media; they are not legal, medical or financial advice.
+
+### Plans: Free and paid plans
+
+The free plan gives one source and 1 hour of listening a week, with no card. When the hour is used up you wait 7 days for it to come back, or you subscribe. Paid plans are monthly, priced in US dollars, and are listed on the plans page.
+
+### Billing: Trial, renewal and cancelling
+
+Paid plans start with a 7-day free trial that needs a card. There is one trial per account and per card. If you do not cancel before the trial ends, the card is charged and the plan renews every month until you cancel. You can cancel at any time from the billing portal; access continues until the end of the period already paid. Payments are handled by Stripe; Zonorah never sees your card number.
+
+### Refunds: When money is returned
+
+Cancelling stops the next charge; it does not return the month already started. If you were charged by mistake, or you cancelled inside the trial and were charged anyway, write to info@zonorah.com within 14 days and the charge will be returned. Where the law of your country gives you a right to a refund, that right applies.
+
+### Use: What you agree not to do
+
+Use Zonorah only to follow public broadcasts. Do not try to get around the free-plan limits with repeated accounts, do not resell access, and do not use the reports to harass or to profile private individuals. We may suspend an account that does.
+
+### Accuracy: Automatic transcripts can be wrong
+
+Speech recognition and AI analysis make mistakes: a name can be misheard, a word missed, a tone misread. Check any quote against the source before you publish or act on it. Zonorah gives no guarantee that every mention is found.
+
+### Changes: Changes and contact
+
+These terms are a draft pending legal review and may change; the date at the foot of the page shows the last update. The governing law and the court that decides disputes will be fixed after that review. Questions: info@zonorah.com.
+
 Contact: hola@zonorah.com
 
 ## Other languages

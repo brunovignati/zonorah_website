@@ -339,7 +339,8 @@ def pagina(lang: str, pg: str) -> str:
         f'<div class="foot-col"><h4>{e(x["f_lab"])}</h4>'
         + "".join(f'<a href="{ruta(lang, d)}">{e(x["pg_" + d])}</a>' for d in ("method", "research", "data", "studies")) + "</div>",
         f'<div class="foot-col"><h4>{e(x["f_contact"])}</h4><a href="mailto:{EMAIL}">{EMAIL}</a></div>',
-        f'<div class="foot-col"><h4>{e(x["f_legal"])}</h4><a href="{ruta(lang, "privacy")}">{e(x["pg_privacy"])}</a></div>'])
+        f'<div class="foot-col"><h4>{e(x["f_legal"])}</h4><a href="{ruta(lang, "privacy")}">{e(x["pg_privacy"])}</a>'
+        f'<a href="{ruta(lang, "terms")}">{e(x["pg_terms"])}</a></div>'])
     rs(r'<div class="foot-col">.*?</div>', lambda m: next(cols), 3)
     rp("Volver arriba ↑", e(x["f_up"]), 1)
     rp("<span>© 2026 Zonorah</span>", f'<span>© 2026 Zonorah · <time datetime="{UPDATED}">{e(x["updated"])} {fecha_larga(lang)}</time></span>', 1)
@@ -365,6 +366,8 @@ def pagina(lang: str, pg: str) -> str:
         cuerpo = [a_h1(sec("informes"), "infTitle"), demo]
     elif pg == "privacy":
         cuerpo = [seccion_filas(x["pg_privacy"], x["privacy_lead"], filas(lang, x, "privacy"), h1=True), demo]
+    elif pg == "terms":
+        cuerpo = [seccion_filas(x["pg_terms"], x["terms_lead"], filas(lang, x, "terms"), h1=True), demo]
     else:
         raise SystemExit(f"página desconocida: {pg}")
     main = '<main id="top">\n' + "\n".join(cuerpo) + "\n</main>"
@@ -500,7 +503,8 @@ def llms_full() -> str:
     def bloque(pg):
         out = f"## {x['pg_' + pg]}\n\n{url('en', pg)}\n\n"
         lead = {"home": x["home_lead"], "method": x["limits_lead"], "research": x["research_lead"],
-                "data": x["data_lead"], "studies": x["studies_lead"], "privacy": x["privacy_lead"]}[pg]
+                "data": x["data_lead"], "studies": x["studies_lead"], "privacy": x["privacy_lead"],
+                "terms": x["terms_lead"]}[pg]
         out += lead + "\n\n"
         for pre in FILAS.get(pg, ()):
             out += f"### {x[pre + 'm']}: {x[pre + 'h']}\n\n{x[pre + 'p']}\n\n"
@@ -511,7 +515,7 @@ def llms_full() -> str:
     return (f"# Zonorah, Media Neuroscience Lab\n\n> {x['d_home']}\n\nLast updated: {UPDATED}\n\n{x['hero_lead']}\n\n"
             + bloque("home") + f"## How the numbers are made\n\n{pasos}\n"
             + "".join(bloque(p) for p in ("method", "research", "data")) + f"### Access\n\n{x['precios_lead']}\n\n{pl}\n"
-            + bloque("studies") + bloque("privacy") + f"Contact: {EMAIL}\n\n## Other languages\n\n"
+            + bloque("studies") + bloque("privacy") + bloque("terms") + f"Contact: {EMAIL}\n\n## Other languages\n\n"
             + "".join(f"- {NOMBRES[l]}: {url(l, 'home')}\n" for l in ("es", "id")))
 
 
