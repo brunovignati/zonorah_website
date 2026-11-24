@@ -492,7 +492,7 @@ def destino(lang: str, pg: str) -> Path:
 
 def llms_full() -> str:
     x = textos("en")
-    pl = ("- Free: one source and 10 hours of listening a month, no card. When the hours run out, wait 30 days or subscribe.\n"
+    pl = ("- Free: one source and 1 hour of listening a week, no card. When it runs out, wait 7 days or subscribe.\n"
           "- Professional: US$ 89 per month at list price, 100 AI questions a day.\n"
           "- Intensive: US$ 229 per month at list price, 500 AI questions a day.\n"
           "- Newsroom: US$ 429 per month at list price, 2,000 AI questions a day.\n")
