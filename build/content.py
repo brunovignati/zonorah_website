@@ -122,7 +122,7 @@ T = {
                 "Radio · Televisi · YouTube · Podcast · Streaming · Media daring · Radio · Televisi · YouTube · Podcast"),
     # ---- navegación (las páginas y dos accesos a la app)
     "n_learn": ("Learn", "Aprende", "Belajar"),
-    "n_chat": ("Ask the data", "Pregunta a los datos", "Tanya data"),
+    "n_chat": ("Platform", "Plataforma", "Platform"),
     "n_login": ("Sign in / Sign up", "Iniciar sesión / Registrarse", "Masuk / Daftar"),
     "n_logout": ("Sign out", "Salir", "Keluar"),
     "n_tochat": (" · go to chat", " · ir al chat", " · ke chat"),

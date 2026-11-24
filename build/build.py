@@ -204,7 +204,6 @@ def pagina(lang: str, pg: str) -> str:
             act = ' class="active" aria-current="page"' if destino == pg else ""
             items.append(f'<a href="{ruta(lang, destino)}"{act}>{e(x["pg_" + destino])}</a>')
         items.append(f'<a href="{app("/datos/")}">{e(x["n_chat"])}</a>')
-        items.append(f'<a href="{app("/datos/aprende")}">{e(x["n_learn"])}</a>')
         return "\n    ".join(items) + "\n"
     rs(r'(<nav class="nav-links" aria-label=")[^"]*(">).*?(</nav>)',
        lambda m: m.group(1) + e(x["aria_nav"]) + m.group(2) + "\n    " + enlaces(False) + "  " + m.group(3), 1)
