@@ -286,6 +286,9 @@ def pagina(lang: str, pg: str) -> str:
         rs(r'<a class="inf" href="/datos/informes/' + re.escape(slug) + r'".*?</a>', tarjeta, 1)
 
     # ---- acceso y precios
+    # Precios en dólares estadounidenses (equivalente de los antiguos S/ 89, 229 y 429 a ~3,7 PEN/USD).
+    for viejo, nuevo in (("S/ 89", "US$ 24"), ("S/ 229", "US$ 62"), ("S/ 429", "US$ 116"), ("S/ 0", "US$ 0")):
+        p.s = p.s.replace(viejo, nuevo)
     rp('data-split>Precios</h2>', f'data-split>{e(x["precios_h"])}</h2>', 1)
     rp("Todos los planes, gratis hasta el 31 de diciembre de 2026. Sin datos de pago.", e(x["precios_lead"]), 1)
     for viejo, k in (("Profesional", "p1n"), ("Intensivo", "p2n"), ("Redacción", "p3n")):
@@ -439,9 +442,9 @@ def destino(lang: str, pg: str) -> Path:
 
 def llms_full() -> str:
     x = textos("en")
-    pl = ("- Professional: S/ 89 per month at list price, 100 AI questions a day.\n"
-          "- Intensive: S/ 229 per month at list price, 500 AI questions a day.\n"
-          "- Newsroom: S/ 429 per month at list price, 2,000 AI questions a day.\n")
+    pl = ("- Professional: US$ 24 per month at list price, 100 AI questions a day.\n"
+          "- Intensive: US$ 62 per month at list price, 500 AI questions a day.\n"
+          "- Newsroom: US$ 116 per month at list price, 2,000 AI questions a day.\n")
 
     def bloque(pg):
         out = f"## {x['pg_' + pg]}\n\n{url('en', pg)}\n\n"

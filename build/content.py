@@ -429,9 +429,9 @@ T = {
     "p3l3": ("20 times more questions", "20 veces más consultas", "Pertanyaan 20 kali lebih banyak"),
     "p3l4": ("Free until 31/12", "Gratis hasta el 31/12", "Gratis hingga 31/12"),
     "p_cta": ("Activate for free", "Activar gratis", "Aktifkan gratis"),
-    "p_foot": ("Prices are per month, in PEN. Want a study for your organisation? ",
-               "Los precios son al mes, en PEN. ¿Quieres un estudio para tu organización? ",
-               "Harga per bulan, dalam PEN. Ingin studi untuk organisasi Anda? "),
+    "p_foot": ("Prices are per month, in US dollars (USD). Want a study for your organisation? ",
+               "Los precios son al mes, en dólares estadounidenses (USD). ¿Quieres un estudio para tu organización? ",
+               "Harga per bulan, dalam dolar AS (USD). Ingin studi untuk organisasi Anda? "),
     "p_foot_a": ("Write to us", "Escríbenos", "Hubungi kami"),
     "mail_subject": ("Study on commission", "Estudio a medida", "Studi pesanan"),
     # ---- privacidad
