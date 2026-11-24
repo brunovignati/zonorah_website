@@ -126,7 +126,7 @@ T = {
     "n_login": ("Sign in / Sign up", "Iniciar sesión / Registrarse", "Masuk / Daftar"),
     "n_logout": ("Sign out", "Salir", "Keluar"),
     "n_tochat": (" · go to chat", " · ir al chat", " · ke chat"),
-    "n_access": ("Access plans", "Planes de acceso", "Paket akses"),
+    "n_access": ("Get access", "Obtener acceso", "Dapatkan akses"),
     "cur_go": ("Go", "Ir", "Buka"), "cur_view": ("View", "Ver", "Lihat"),
     "cur_down": ("Down", "Bajar", "Turun"), "cur_pdf": ("Open PDF", "Abrir PDF", "Buka PDF"),
     # ---- portada: hero
@@ -485,7 +485,7 @@ T = {
         "To commission a study or ask for access, write with the topics, stations or sources and the language of the report. Researchers working on the brain side can write too.",
         "Para encargar un estudio o pedir acceso, escribe con los temas, emisoras o fuentes y el idioma del informe. Los investigadores que trabajan el lado del cerebro también pueden escribir.",
         "Untuk memesan studi atau meminta akses, tulislah dengan topik, stasiun, atau sumber dan bahasa laporan. Peneliti yang menggarap sisi otak juga boleh menulis."),
-    "demo_prices": ("Access plans", "Planes de acceso", "Paket akses"),
+    "demo_prices": ("Get access", "Obtener acceso", "Dapatkan akses"),
     "demo_label": ("Your email", "Tu correo", "Email Anda"),
     "demo_ph": ("you@organisation.org", "tu@organizacion.org", "anda@organisasi.org"),
     "demo_send": ("Send", "Enviar", "Kirim"),

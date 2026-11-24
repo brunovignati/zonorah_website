@@ -55,6 +55,8 @@ function fueraDeLinea(request) {
   return new Response(
     `<!doctype html><html lang="${lang}"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <title>Zonorah · Data</title>
 <body style="margin:0;background:#163300;color:#fff;font:17px/1.6 system-ui,sans-serif;display:grid;place-items:center;min-height:100vh;padding:16px">
 <div style="max-width:32em"><p style="color:#9FE870;font-weight:900;letter-spacing:.28em">ZONORAH</p>

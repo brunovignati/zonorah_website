@@ -216,7 +216,7 @@ def pagina(lang: str, pg: str) -> str:
     rs(r'<span class="lang" role="group" aria-label="[^"]*">.*?</span>',
        f'<span class="lang" role="group" aria-label="{e(x["aria_lang"])}">{switch}</span>', 1)
     rp('id="navPlanes" class="btn btn-lime btn-nav magnetic" href="/datos/planes" data-cursor="Ir">Ver planes</a>',
-       f'id="navPlanes" class="btn btn-lime btn-nav magnetic" href="{data_precios}" data-cursor="Ir">{e(x["n_access"])}</a>', 1)
+       f'id="navPlanes" class="btn btn-lime btn-nav magnetic" href="{app("/datos/")}" data-cursor="Ir">{e(x["n_access"])}</a>', 1)
     rp('aria-label="Abrir menú"', f'aria-label="{e(x["menu_open"])}"', 1)
     rp("'Cerrar menú'", "'" + x["menu_close"].replace("'", "\\'") + "'", 1)
     rp("'Abrir menú'", "'" + x["menu_open"].replace("'", "\\'") + "'", 1)
@@ -316,7 +316,7 @@ def pagina(lang: str, pg: str) -> str:
     rp("Deja de enterarte tarde.", e(x["demo_h"]), 1)
     rp("Te enseñamos el panel con tus propias fuentes en 15 minutos. Si encaja, tu primer informe llega mañana.", e(x["demo_lead"]), 1)
     rp('href="/datos/planes" data-cursor="Ir">Ver planes<svg', f'href="{app("/datos/")}" data-cursor="Ir">{e(x["hero_cta1"])}<svg', 1)
-    rp('href="#precios" data-scroll>Ver precios', f'href="{data_precios}">{e(x["demo_prices"])}', 1)
+    rp('href="#precios" data-scroll>Ver precios', f'href="{app("/datos/")}">{e(x["demo_prices"])}', 1)
     rp('for="demoEmail">Tu correo</label>', f'for="demoEmail">{e(x["demo_label"])}</label>', 1)
     rp('placeholder="tu@organizacion.es"', f'placeholder="{e(x["demo_ph"])}"', 1)
     rp(">Enviar</button>", f'>{e(x["demo_send"])}</button>', 1)
@@ -401,6 +401,7 @@ def pagina(lang: str, pg: str) -> str:
     cur = {"Ir": x["cur_go"], "Ver": x["cur_view"], "Bajar": x["cur_down"], "Abrir PDF": x["cur_pdf"]}
     rs(r'data-cursor="([^"]*)"', lambda m: f'data-cursor="{e(cur[m.group(1)])}"')
     # toda ruta de la app lleva el idioma, para que se abra en el mismo que se está leyendo
+    p.s = p.s.replace('href="/datos/planes?plan=', 'href="/datos/?plan=').replace('href="/datos/planes"', 'href="/datos/"')
     rs(r'href="(/datos[^"#?]*)(\?[^"#]*)?"',
        lambda m: m.group(0) if "lang=" in (m.group(2) or "") else f'href="{m.group(1)}{(m.group(2) + "&amp;") if m.group(2) else "?"}{ll}"')
     # Los comentarios de edición de la plantilla (en español) no tienen sentido en la página servida.
