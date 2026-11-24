@@ -129,9 +129,9 @@ It summarises the transcripts and quotes short fragments with station and time. 
 
 All plans are free until 31 December 2026. No payment details.
 
-- Professional: US$ 24 per month at list price, 100 AI questions a day.
-- Intensive: US$ 62 per month at list price, 500 AI questions a day.
-- Newsroom: US$ 116 per month at list price, 2,000 AI questions a day.
+- Professional: US$ 89 per month at list price, 100 AI questions a day.
+- Intensive: US$ 229 per month at list price, 500 AI questions a day.
+- Newsroom: US$ 429 per month at list price, 2,000 AI questions a day.
 
 ## Sample studies
 
