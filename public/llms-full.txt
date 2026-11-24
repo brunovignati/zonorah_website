@@ -4,7 +4,7 @@
 
 Last updated: 2026-11-24
 
-Zonorah is an instrument for observing broadcast media. Since its first use in academic research it has recorded radio, television and YouTube streams, transcribed their audio and counted the minutes given to each topic, by station and by day. The laboratory that now bears the same name, a Media Neuroscience Lab, makes the instrument available to the public through subscription, on the understanding that wider use will extend the research carried out with it.
+Zonorah is an instrument for observing broadcast media, developed for academic research. The Media Neuroscience Lab that bears its name now offers it to the public by subscription.
 
 ## Home
 
