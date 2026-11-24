@@ -144,9 +144,9 @@ T = {
     # ---- portada: hero
     "h1a": ("Zonorah.",) * 3, "h1b": ("Media Neuroscience",) * 3, "h1c": ("Lab.",) * 3,
     "hero_lead": (
-        "Zonorah is an instrument for observing broadcast media. Since its first use in academic research it has recorded radio, television and YouTube streams, transcribed their audio and counted the minutes given to each topic, by station and by day. The laboratory that now bears the same name, a Media Neuroscience Lab, makes the instrument available to the public through subscription, on the understanding that wider use will extend the research carried out with it.",
-        "Zonorah es un instrumento de observación de los medios de difusión. Desde sus primeros usos en la investigación académica, registra las emisiones de radio, televisión y YouTube, transcribe su audio y contabiliza los minutos dedicados a cada tema, por emisora y por día. El laboratorio que hoy lleva su nombre, un Media Neuroscience Lab, pone el instrumento a disposición del público mediante suscripción, con la expectativa de que un uso más amplio extienda la investigación que se realiza con él.",
-        "Zonorah adalah instrumen pengamatan media siaran. Sejak pemakaian awalnya dalam riset akademik, instrumen ini merekam siaran radio, televisi, dan YouTube, mentranskripsi audionya, dan menghitung menit yang diberikan pada setiap topik, menurut stasiun dan hari. Laboratorium yang kini memakai nama yang sama, sebuah Media Neuroscience Lab, menyediakan instrumen ini bagi publik melalui langganan, dengan harapan pemakaian yang lebih luas memperluas riset yang dikerjakan dengannya."),
+        "Zonorah is an instrument for observing broadcast media, developed for academic research. The Media Neuroscience Lab that bears its name now offers it to the public by subscription.",
+        "Zonorah es un instrumento de observación de los medios de difusión, desarrollado para la investigación académica. El Media Neuroscience Lab que lleva su nombre lo ofrece ahora al público por suscripción.",
+        "Zonorah adalah instrumen pengamatan media siaran yang dikembangkan untuk riset akademik. Media Neuroscience Lab yang memakai namanya kini menawarkannya kepada publik lewat langganan."),
     "hero_cta1": (
         "Open the platform",
         "Abrir la plataforma",
