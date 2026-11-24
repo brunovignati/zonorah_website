@@ -746,7 +746,7 @@ try{document.cookie="zonorah_lang=es; path=/; max-age=31536000; SameSite=Lax"}ca
   <div class="loader-inner">
     <svg class="loader-mark" viewBox="0 0 780 825" aria-hidden="true"><defs><linearGradient id="loaderG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2F6B14"/><stop offset=".55" stop-color="#58B22E"/><stop offset="1" stop-color="#1F8A7A"/></linearGradient></defs><path d="M138 0 L0 782 L380 162 L228 189 Z M780 36 L382 690 L679 649 L780 825 Z" fill="url(#loaderG)"/></svg>
     <div class="loader-bar"><i id="loaderBar"></i></div>
-    <div class="loader-row mono"><span>Sintonizando</span><b id="loaderSrc">América TV</b></div>
+    <div class="loader-row mono"><span>Sintonizando</span><b id="loaderSrc">Radio</b></div>
   </div>
 </div>
 
@@ -761,7 +761,7 @@ try{document.cookie="zonorah_lang=es; path=/; max-age=31536000; SameSite=Lax"}ca
     <a href="/es/investigacion/">Investigación</a>
     <a href="/es/datos-abiertos/">Zonorah Datos</a>
     <a href="/es/estudios/">Estudios de muestra</a>
-    <a href="/datos/?lang=es&amp;lang=es">Pregunta a los datos</a>
+    <a href="/datos/?lang=es">Pregunta a los datos</a>
   </nav>
   <div class="nav-right">
     <span class="lang" role="group" aria-label="Cambiar idioma"><a href="/privacy/" hreflang="en" lang="en" data-lang="en" aria-current="false">EN</a><a href="/es/privacidad/" hreflang="es" lang="es" data-lang="es" aria-current="true">ES</a><a href="/id/privasi/" hreflang="id" lang="id" data-lang="id" aria-current="false">ID</a></span>
@@ -777,8 +777,8 @@ try{document.cookie="zonorah_lang=es; path=/; max-age=31536000; SameSite=Lax"}ca
     <a href="/es/investigacion/">Investigación</a>
     <a href="/es/datos-abiertos/">Zonorah Datos</a>
     <a href="/es/estudios/">Estudios de muestra</a>
-    <a href="/datos/?lang=es&amp;lang=es">Pregunta a los datos</a>
-    <a href="/datos/?lang=es&amp;lang=es" id="menuCuenta" hidden>Iniciar sesión / Registrarse</a>
+    <a href="/datos/?lang=es">Pregunta a los datos</a>
+    <a href="/datos/?lang=es" id="menuCuenta" hidden>Iniciar sesión / Registrarse</a>
   </nav>
   <div class="menu-foot"><span>hola@zonorah.com</span></div>
 </div>
@@ -832,7 +832,7 @@ try{document.cookie="zonorah_lang=es; path=/; max-age=31536000; SameSite=Lax"}ca
     <div>
       <p class="lead" data-reveal>Para encargar un estudio o pedir acceso, escribe con los temas, emisoras o fuentes y el idioma del informe. Los investigadores que trabajan el lado del cerebro también pueden escribir.</p>
       <div class="demo-actions" data-reveal>
-        <a class="btn btn-lime magnetic" href="/datos/?lang=es&amp;lang=es" data-cursor="Ir">Abrir los datos<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-lime magnetic" href="/datos/?lang=es" data-cursor="Ir">Abrir los datos<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
         <a class="btn btn-ghost magnetic" href="/es/datos-abiertos/#precios">Planes de acceso</a>
       </div>
       
@@ -895,7 +895,7 @@ try{document.cookie="zonorah_lang=es; path=/; max-age=31536000; SameSite=Lax"}ca
 
   /* ── Scroll suave ─────────────────────────────────────────────── */
   var smoother = null;
-  if (window.ScrollSmoother && !reduce) {
+  if (false) {
     smoother = ScrollSmoother.create({
       wrapper: '#smooth-wrapper', content: '#smooth-content',
       smooth: 1.1, effects: true, smoothTouch: 0.08, normalizeScroll: false
@@ -1040,7 +1040,7 @@ try{document.cookie="zonorah_lang=es; path=/; max-age=31536000; SameSite=Lax"}ca
 
   /* ── Preloader → intro ────────────────────────────────────────── */
   var seen = false; try { seen = sessionStorage.getItem('z-seen') === '1'; } catch (e) {}
-  var SOURCES = ['América TV', 'Latina', 'Willax Televisión', 'RPP', 'Exitosa 95.5 FM', 'Zaca TV', 'Q+', 'La Roro Network'];
+  var SOURCES = ["Radio", "Televisión", "YouTube", "Podcasts", "Streaming", "Medios digitales"];
   var heroReveals = $$('.hero [data-reveal]');
   if (!reduce) { gsap.set(heroLines, { yPercent: 110 }); gsap.set(heroReveals, { opacity: 0, y: 24 }); }
   function intro() {

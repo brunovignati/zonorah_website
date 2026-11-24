@@ -115,7 +115,11 @@ T = {
     "aria_menu": ("Menu", "Menú", "Menu"),
     "menu_open": ("Open menu", "Abrir menú", "Buka menu"),
     "menu_close": ("Close menu", "Cerrar menú", "Tutup menu"),
-    "aria_logos": ("Stations and channels we record", "Emisoras y canales que grabamos", "Stasiun dan kanal yang kami rekam"),
+    "aria_logos": ("Source types we record", "Tipos de fuente que grabamos", "Jenis sumber yang kami rekam"),
+    "loader_tuning": ("Tuning in", "Sintonizando", "Menyetel"),
+    "fuentes": ("Radio · Television · YouTube · Podcasts · Streaming · News sites · Radio · Television · YouTube · Podcasts",
+                "Radio · Televisión · YouTube · Podcasts · Streaming · Medios digitales · Radio · Televisión · YouTube · Podcasts",
+                "Radio · Televisi · YouTube · Podcast · Streaming · Media daring · Radio · Televisi · YouTube · Podcast"),
     # ---- navegación (las páginas y dos accesos a la app)
     "n_chat": ("Ask the data", "Pregunta a los datos", "Tanya data"),
     "n_login": ("Sign in / Sign up", "Iniciar sesión / Registrarse", "Masuk / Daftar"),

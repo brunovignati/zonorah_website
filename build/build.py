@@ -190,6 +190,13 @@ def pagina(lang: str, pg: str) -> str:
 
     # ---- cabecera y menú: ahora enlazan a páginas
     rp('aria-label="Canales y emisoras que sintonizamos"', f'aria-label="{e(x["aria_logos"])}"', 1)
+    # Sin logos de emisoras de un país: la tira muestra los tipos de fuente, en el idioma activo.
+    tipos = "".join(f'<span class="mono" style="font-size:13px;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;opacity:.7">{e(t)}</span>'
+                    for t in x["fuentes"].split(" · ")[:6])
+    rs(r'(<div class="logos-track" id="logoTrack">).*?(\n    </div>\n  </div>\n</section>)', lambda m: m.group(1) + tipos + m.group(2), 1)
+    rp('<span>Sintonizando</span><b id="loaderSrc">América TV</b>', f'<span>{e(x["loader_tuning"])}</span><b id="loaderSrc">Radio</b>', 1)
+    fu = json.dumps(x["fuentes"].split(" · ")[:6], ensure_ascii=False)
+    rs(r"var SOURCES = \[[^\]]*\];", lambda m: "var SOURCES = " + fu + ";", 1)
 
     def enlaces(menu: bool) -> str:
         items = []
@@ -350,12 +357,15 @@ def pagina(lang: str, pg: str) -> str:
     main = '<main id="top">\n' + "\n".join(cuerpo) + "\n</main>"
     rs(r'<main id="top">.*?</main>', lambda m: main, 1)
 
+    # Scroll nativo: el scroll virtual de ScrollSmoother falla con rueda, trackpad y anclas.
+    # El resto de la animación (pines, revelados) no depende de él.
+    rp("if (window.ScrollSmoother && !reduce) {", "if (false) {", 1)
     # ---- cursor y enlaces a la app
     cur = {"Ir": x["cur_go"], "Ver": x["cur_view"], "Bajar": x["cur_down"], "Abrir PDF": x["cur_pdf"]}
     rs(r'data-cursor="([^"]*)"', lambda m: f'data-cursor="{e(cur[m.group(1)])}"')
     # toda ruta de la app lleva el idioma, para que se abra en el mismo que se está leyendo
     rs(r'href="(/datos[^"#?]*)(\?[^"#]*)?"',
-       lambda m: f'href="{m.group(1)}{(m.group(2) + "&amp;") if m.group(2) else "?"}{ll}"')
+       lambda m: m.group(0) if "lang=" in (m.group(2) or "") else f'href="{m.group(1)}{(m.group(2) + "&amp;") if m.group(2) else "?"}{ll}"')
     # Los comentarios de edición de la plantilla (en español) no tienen sentido en la página servida.
     rs(r"<!--.*?-->", "")
     # Red de seguridad: un reemplazo que se coma media página debe fallar, no publicarse.
