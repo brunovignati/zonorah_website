@@ -13,8 +13,10 @@ este repositorio: cada `push` a `main` despliega la web.
 | `public/_headers` | Cabeceras de seguridad y caché |
 | `public/robots.txt` | Indexación abierta + referencia al sitemap |
 | `wrangler.jsonc` | Configuración de Cloudflare: qué carpeta publicar y qué rutas pasan por el Worker |
-| `functions/datos/[[ruta]].js` | Cloudflare Pages: reenvía `/datos/…` a la app de datos (datos.zonorah.com). Nada más |
-| `src/worker.js` | Lo mismo, por si el sitio pasa de Pages a Workers |
+| `functions/_app.js` | El proxy hacia la plataforma (datos.zonorah.com). Nada más |
+| `functions/platform/[[ruta]].js` | Cloudflare Pages: `/platform/…` va a la plataforma |
+| `functions/datos/[[ruta]].js` | La dirección antigua: las páginas redirigen (301) a `/platform`; `/datos/api/` sigue pasando |
+| `src/worker.js` | Lo mismo que `/platform`, por si el sitio pasa de Pages a Workers |
 
 Solo se publica el contenido de `public/`. Todo lo que esté fuera de esa
 carpeta (este README, la configuración) no acaba en la web.
@@ -66,23 +68,25 @@ eslóganes, simetrías ni listas de tres por costumbre. Cada afirmación sale de
 
 **SEO y GEO:** `hreflang` entre las tres versiones de cada página y `x-default` al inglés; datos estructurados
 (Organization, WebSite, WebPage, BreadcrumbList); `og.png`; `sitemap.xml` con las 18 URLs y sus alternativas;
-`llms.txt` y `llms-full.txt`; `robots.txt` que permite los rastreadores de IA y bloquea `/datos/api/`;
-`404.html` (sin él, Cloudflare Pages responde 200 con la portada a cualquier ruta). La app (`/datos` y
+`llms.txt` y `llms-full.txt`; `robots.txt` que permite los rastreadores de IA y bloquea `/platform/api/`;
+`404.html` (sin él, Cloudflare Pages responde 200 con la portada a cualquier ruta). La plataforma (`/platform` y
 `datos.zonorah.com`) sale con `X-Robots-Tag: noindex`: todo el contenido está en estas páginas.
 
 No hay traducción en el navegador. Un script mínimo guarda la cookie `zonorah_lang` para que la app abra en el
 mismo idioma.
 
-## zonorah.com/datos
+## zonorah.com/platform
 
-La memoria de los medios en cifras. No vive en este repositorio: es la app
-de datos de Zonorah (`~/Zonorah/zonorah/web`), que corre en el Mac y sale a
-internet por un túnel de Cloudflare como `datos.zonorah.com`. El Worker de
-`src/worker.js` solo reenvía `zonorah.com/datos/…` a esa dirección, así que
-la misma app se ve en las dos. Si el Mac está apagado, `/datos` muestra un
-aviso en vez de un error de Cloudflare.
+La plataforma de Zonorah: tras el acceso con Google, el panel donde cada persona configura sus monitoreos y
+sus búsquedas, con «Ask Zonorah» y «Learn» dentro. No vive en este repositorio: es la app de
+`~/Zonorah/zonorah/web`, que corre en el Mac y sale a internet por un túnel de Cloudflare como
+`datos.zonorah.com`. La función de `functions/platform/` solo reenvía `zonorah.com/platform/…` a esa
+dirección. Si el Mac está apagado, `/platform` muestra un aviso en vez de un error de Cloudflare.
 
-Aquí no hay datos ni claves: el Worker no guarda nada.
+Todos los botones del sitio llevan a `/platform/` (alta o acceso con Google). `/datos` es la dirección
+antigua y redirige.
+
+Aquí no hay datos ni claves: la función no guarda nada.
 
 ## Reglas
 
