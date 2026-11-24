@@ -761,7 +761,7 @@ try{document.cookie="zonorah_lang=en; path=/; max-age=31536000; SameSite=Lax"}ca
     <a href="/research/" class="active" aria-current="page">Research</a>
     <a href="/data/">Zonorah Data</a>
     <a href="/studies/">Sample studies</a>
-    <a href="/datos/?lang=en&amp;lang=en">Ask the data</a>
+    <a href="/datos/?lang=en">Ask the data</a>
   </nav>
   <div class="nav-right">
     <span class="lang" role="group" aria-label="Change language"><a href="/research/" hreflang="en" lang="en" data-lang="en" aria-current="true">EN</a><a href="/es/investigacion/" hreflang="es" lang="es" data-lang="es" aria-current="false">ES</a><a href="/id/riset/" hreflang="id" lang="id" data-lang="id" aria-current="false">ID</a></span>
@@ -777,8 +777,8 @@ try{document.cookie="zonorah_lang=en; path=/; max-age=31536000; SameSite=Lax"}ca
     <a href="/research/" class="active" aria-current="page">Research</a>
     <a href="/data/">Zonorah Data</a>
     <a href="/studies/">Sample studies</a>
-    <a href="/datos/?lang=en&amp;lang=en">Ask the data</a>
-    <a href="/datos/?lang=en&amp;lang=en" id="menuCuenta" hidden>Sign in / Sign up</a>
+    <a href="/datos/?lang=en">Ask the data</a>
+    <a href="/datos/?lang=en" id="menuCuenta" hidden>Sign in / Sign up</a>
   </nav>
   <div class="menu-foot"><span>hola@zonorah.com</span></div>
 </div>
@@ -817,7 +817,7 @@ try{document.cookie="zonorah_lang=en; path=/; max-age=31536000; SameSite=Lax"}ca
     <div>
       <p class="lead" data-reveal>To commission a study or ask for access, write with the topics, stations or sources and the language of the report. Researchers working on the brain side can write too.</p>
       <div class="demo-actions" data-reveal>
-        <a class="btn btn-lime magnetic" href="/datos/?lang=en&amp;lang=en" data-cursor="Go">Open the data<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-lime magnetic" href="/datos/?lang=en" data-cursor="Go">Open the data<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
         <a class="btn btn-ghost magnetic" href="/data/#precios">Access plans</a>
       </div>
       
@@ -880,7 +880,7 @@ try{document.cookie="zonorah_lang=en; path=/; max-age=31536000; SameSite=Lax"}ca
 
   /* ── Scroll suave ─────────────────────────────────────────────── */
   var smoother = null;
-  if (window.ScrollSmoother && !reduce) {
+  if (false) {
     smoother = ScrollSmoother.create({
       wrapper: '#smooth-wrapper', content: '#smooth-content',
       smooth: 1.1, effects: true, smoothTouch: 0.08, normalizeScroll: false

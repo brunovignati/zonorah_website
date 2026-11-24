@@ -350,12 +350,15 @@ def pagina(lang: str, pg: str) -> str:
     main = '<main id="top">\n' + "\n".join(cuerpo) + "\n</main>"
     rs(r'<main id="top">.*?</main>', lambda m: main, 1)
 
+    # Scroll nativo: el scroll virtual de ScrollSmoother falla con rueda, trackpad y anclas.
+    # El resto de la animación (pines, revelados) no depende de él.
+    rp("if (window.ScrollSmoother && !reduce) {", "if (false) {", 1)
     # ---- cursor y enlaces a la app
     cur = {"Ir": x["cur_go"], "Ver": x["cur_view"], "Bajar": x["cur_down"], "Abrir PDF": x["cur_pdf"]}
     rs(r'data-cursor="([^"]*)"', lambda m: f'data-cursor="{e(cur[m.group(1)])}"')
     # toda ruta de la app lleva el idioma, para que se abra en el mismo que se está leyendo
     rs(r'href="(/datos[^"#?]*)(\?[^"#]*)?"',
-       lambda m: f'href="{m.group(1)}{(m.group(2) + "&amp;") if m.group(2) else "?"}{ll}"')
+       lambda m: m.group(0) if "lang=" in (m.group(2) or "") else f'href="{m.group(1)}{(m.group(2) + "&amp;") if m.group(2) else "?"}{ll}"')
     # Los comentarios de edición de la plantilla (en español) no tienen sentido en la página servida.
     rs(r"<!--.*?-->", "")
     # Red de seguridad: un reemplazo que se coma media página debe fallar, no publicarse.
