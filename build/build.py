@@ -343,7 +343,7 @@ def pagina(lang: str, pg: str) -> str:
         return m.group(0)
     demo = sec("demo")
     if pg == "home":
-        cuerpo = [sec("hero"), sec("problema"),
+        cuerpo = [sec("hero"),
                   seccion_filas(x["home_h"], x["home_lead"], filas(lang, x, "home"), h1=False), demo]
     elif pg == "method":
         cuerpo = [a_h1(sec("como"), "comoTitle"),
@@ -493,7 +493,7 @@ def llms_full() -> str:
         return out
     pasos = "".join(f"{i}. {x[f's{i}t']}. {x[f's{i}p']}\n" for i in range(1, 5))
     return (f"# Zonorah, Media Neuroscience Lab\n\n> {x['d_home']}\n\nLast updated: {UPDATED}\n\n{x['hero_lead']}\n\n"
-            f"{x['problema_h']}\n\n" + bloque("home") + f"## How the numbers are made\n\n{pasos}\n"
+            + bloque("home") + f"## How the numbers are made\n\n{pasos}\n"
             + "".join(bloque(p) for p in ("method", "research", "data")) + f"### Access\n\n{x['precios_lead']}\n\n{pl}\n"
             + bloque("studies") + bloque("privacy") + f"Contact: {EMAIL}\n\n## Other languages\n\n"
             + "".join(f"- {NOMBRES[l]}: {url(l, 'home')}\n" for l in ("es", "id")))
