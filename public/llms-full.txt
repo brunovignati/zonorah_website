@@ -83,7 +83,7 @@ Zonorah (2026). Minutes on air per 100 hours recorded. Consulted [date], terms: 
 
 https://zonorah.com/research/
 
-The laboratory pursues a single objective, the expansion of research on broadcast media, and the instrument and its recordings support two kinds of work.
+The laboratory pursues a single objective, the expansion of research on broadcast media. The instrument supplies recordings, transcripts and methods of analysis, and each field described below states what the instrument contributes and what the researcher must add.
 
 ### The instrument: Public access by subscription
 
@@ -96,6 +96,24 @@ Every figure: minutes on air per 100 hours recorded
 Each paid plan includes a custom report. Its design is agreed with the subscriber in working sessions, in which the sources, the keywords, the coding rules and the format of the report are defined. Every mention is entered on a fixed form that records, among other fields, risk and urgency, and a PDF is sent by email on the schedule the subscriber selects. The public figures do not reveal who commissioned which report.
 
 Not tied to a country: the client picks the stations and their language. Reports in English, Spanish or Indonesian
+
+### Computational social science: Descriptive and longitudinal study of media content
+
+The instrument produces the recordings, the transcripts, the identification of topics, the longitudinal counts and the classification of narratives. The researcher formulates the hypotheses, validates the classifications against human annotators and applies suitable statistical methods. A descriptive study of media content requires neither a laboratory nor participants, although what the media say does not permit inferences about what a population thinks.
+
+The researcher adds: hypotheses, validation by human annotators and statistics
+
+### Media psychology: Selection of real stimuli for online experiments
+
+The instrument locates broadcast items on one subject that differ in framing, so that the researcher can select and validate stimuli, recruit participants online and measure emotions, risk perception, recall or attitudes. No physical laboratory is required, but an experimental protocol, informed consent, valid instruments and, where applicable, ethical review are. Zonorah supplies stimuli and analysis; by itself it does not measure emotions or mental processes.
+
+The researcher adds: protocol, participants, psychological measures and ethical review
+
+### Computational cognitive neuroscience: Linguistic features of stimuli, joined to existing neural data
+
+The instrument can extract linguistic and narrative features from the original stimuli of an already published neuroimaging dataset, so that their association with brain activity can be studied. The features must come from exactly the stimuli that correspond to the neural recordings: transcripts of broadcasts cannot be linked automatically to the brains of people who watched other material. The work demands knowledge of neuroimaging, temporal alignment and statistics, but not a scanner of one's own.
+
+The researcher adds: external neural data and its temporal alignment with the stimuli
 
 ### Foundations: Origin
 

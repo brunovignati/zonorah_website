@@ -57,7 +57,7 @@ SECTORES = [
 FILAS = {
     "home": ("hr1", "hr2", "hr3", "hr4"),
     "method": ("ml1", "ml2", "ml3", "ml4", "ml5", "ml6"),
-    "research": ("rr1", "rr2", "rr3"),
+    "research": ("rr1", "rr2", "rr4", "rr5", "rr6", "rr3"),
     "data": ("dr1", "dr2", "dr3"),
     "privacy": ("pv1", "pv2", "pv3", "pv7", "pv8", "pv4", "pv5", "pv6"),
     "terms": ("tm1", "tm2", "tm3", "tm4", "tm5", "tm6", "tm7"),
@@ -347,9 +347,9 @@ T = {
              "Zonorah (2026). Menit siaran per 100 jam rekaman. Diakses [tanggal], istilah: [istilah]. [tautan perbandingan]"),
     # ---- investigación
     "research_lead": (
-        "The laboratory pursues a single objective, the expansion of research on broadcast media, and the instrument and its recordings support two kinds of work.",
-        "El laboratorio persigue un único objetivo, la ampliación de la investigación sobre los medios de difusión, y el instrumento y sus grabaciones sostienen dos tipos de trabajo.",
-        "Laboratorium mengejar satu tujuan, yaitu perluasan riset tentang media siaran, dan instrumen beserta rekamannya menopang dua jenis pekerjaan."),
+        "The laboratory pursues a single objective, the expansion of research on broadcast media. The instrument supplies recordings, transcripts and methods of analysis, and each field described below states what the instrument contributes and what the researcher must add.",
+        "El laboratorio persigue un único objetivo, la ampliación de la investigación sobre los medios de difusión. El instrumento suministra grabaciones, transcripciones y métodos de análisis, y cada campo descrito a continuación indica qué aporta el instrumento y qué debe añadir el investigador.",
+        "Laboratorium mengejar satu tujuan, yaitu perluasan riset tentang media siaran. Instrumen menyediakan rekaman, transkrip, dan metode analisis, dan setiap bidang di bawah ini menyebutkan apa yang disumbangkan instrumen dan apa yang harus ditambahkan peneliti."),
     "rr1m": (
         "The instrument",
         "El instrumento",
@@ -376,6 +376,54 @@ T = {
         "Cada plan de pago incluye un informe a medida. Su diseño se acuerda con el suscriptor en sesiones de trabajo, en las que se definen las fuentes, las palabras clave, las reglas de codificación y el formato del informe. Cada mención se anota en una ficha fija que registra, entre otros campos, el riesgo y la urgencia, y se envía un PDF por correo según el horario que el suscriptor elija. Las cifras públicas no revelan quién encargó cada informe.",
         "Setiap paket berbayar mencakup laporan khusus. Rancangannya disepakati bersama pelanggan dalam sesi kerja, yang menetapkan sumber, kata kunci, aturan pengodean, dan format laporan. Setiap sebutan dicatat pada formulir tetap yang merekam, antara lain, risiko dan urgensi, dan PDF dikirim lewat email sesuai jadwal yang dipilih pelanggan. Angka publik tidak mengungkap siapa yang memesan laporan mana."),
     "rr2x": ("Not tied to a country: the client picks the stations and their language. Reports in English, Spanish or Indonesian", "Sin atarse a un país: el cliente elige las emisoras y su idioma. Informes en inglés, español o indonesio", "Tidak terikat negara: klien memilih stasiun dan bahasanya. Laporan dalam bahasa Inggris, Spanyol, atau Indonesia"),
+    "rr4m": (
+        "Computational social science",
+        "Ciencias sociales computacionales",
+        "Ilmu sosial komputasional"),
+    "rr4h": (
+        "Descriptive and longitudinal study of media content",
+        "Estudio descriptivo y longitudinal del contenido mediático",
+        "Kajian deskriptif dan longitudinal isi media"),
+    "rr4p": (
+        "The instrument produces the recordings, the transcripts, the identification of topics, the longitudinal counts and the classification of narratives. The researcher formulates the hypotheses, validates the classifications against human annotators and applies suitable statistical methods. A descriptive study of media content requires neither a laboratory nor participants, although what the media say does not permit inferences about what a population thinks.",
+        "El instrumento aporta las grabaciones, las transcripciones, la identificación de temas, los conteos longitudinales y la clasificación de narrativas. Corresponde al investigador formular las hipótesis, validar las clasificaciones con anotadores humanos y aplicar métodos estadísticos adecuados. Un estudio descriptivo del contenido mediático no exige laboratorio ni participantes, aunque lo que dicen los medios no autoriza inferencias sobre lo que piensa una población.",
+        "Instrumen menghasilkan rekaman, transkrip, identifikasi topik, hitungan longitudinal, dan klasifikasi narasi. Peneliti merumuskan hipotesis, memvalidasi klasifikasi dengan penganotasi manusia, dan menerapkan metode statistik yang sesuai. Kajian deskriptif isi media tidak memerlukan laboratorium maupun partisipan, tetapi apa yang dikatakan media tidak memungkinkan inferensi tentang apa yang dipikirkan suatu populasi."),
+    "rr4x": (
+        "The researcher adds: hypotheses, validation by human annotators and statistics",
+        "El investigador aporta: hipótesis, validación con anotadores humanos y estadística",
+        "Peneliti menambahkan: hipotesis, validasi oleh penganotasi manusia, dan statistik"),
+    "rr5m": (
+        "Media psychology",
+        "Psicología de los medios",
+        "Psikologi media"),
+    "rr5h": (
+        "Selection of real stimuli for online experiments",
+        "Selección de estímulos reales para experimentos en línea",
+        "Pemilihan stimulus nyata untuk eksperimen daring"),
+    "rr5p": (
+        "The instrument locates broadcast items on one subject that differ in framing, so that the researcher can select and validate stimuli, recruit participants online and measure emotions, risk perception, recall or attitudes. No physical laboratory is required, but an experimental protocol, informed consent, valid instruments and, where applicable, ethical review are. Zonorah supplies stimuli and analysis; by itself it does not measure emotions or mental processes.",
+        "El instrumento localiza piezas emitidas sobre un mismo asunto que difieren en su encuadre, de modo que el investigador pueda seleccionar y validar estímulos, reclutar participantes en línea y medir emociones, percepción del riesgo, recuerdo o actitudes. No se requiere un laboratorio físico, pero sí un protocolo experimental, consentimiento informado, instrumentos válidos y, cuando corresponda, revisión ética. Zonorah suministra estímulos y análisis; por sí sola no mide emociones ni procesos mentales.",
+        "Instrumen menemukan tayangan tentang satu pokok yang berbeda pembingkaiannya, sehingga peneliti dapat memilih dan memvalidasi stimulus, merekrut partisipan secara daring, dan mengukur emosi, persepsi risiko, ingatan, atau sikap. Laboratorium fisik tidak diperlukan, tetapi protokol eksperimen, persetujuan tertulis, instrumen yang valid, dan, bila berlaku, tinjauan etik diperlukan. Zonorah menyediakan stimulus dan analisis; dengan sendirinya ia tidak mengukur emosi atau proses mental."),
+    "rr5x": (
+        "The researcher adds: protocol, participants, psychological measures and ethical review",
+        "El investigador aporta: protocolo, participantes, medidas psicológicas y revisión ética",
+        "Peneliti menambahkan: protokol, partisipan, ukuran psikologis, dan tinjauan etik"),
+    "rr6m": (
+        "Computational cognitive neuroscience",
+        "Neurociencia cognitiva computacional",
+        "Neurosains kognitif komputasional"),
+    "rr6h": (
+        "Linguistic features of stimuli, joined to existing neural data",
+        "Rasgos lingüísticos de los estímulos, unidos a datos neuronales existentes",
+        "Ciri linguistik stimulus, digabungkan dengan data saraf yang sudah ada"),
+    "rr6p": (
+        "The instrument can extract linguistic and narrative features from the original stimuli of an already published neuroimaging dataset, so that their association with brain activity can be studied. The features must come from exactly the stimuli that correspond to the neural recordings: transcripts of broadcasts cannot be linked automatically to the brains of people who watched other material. The work demands knowledge of neuroimaging, temporal alignment and statistics, but not a scanner of one's own.",
+        "El instrumento puede extraer rasgos lingüísticos y narrativos de los estímulos originales de un conjunto de datos de neuroimagen ya publicado, para estudiar su asociación con la actividad cerebral. Los rasgos deben proceder exactamente de los estímulos que corresponden a los registros neuronales: las transcripciones de emisiones no pueden vincularse de forma automática con el cerebro de personas que vieron otro material. El trabajo exige conocimientos de neuroimagen, de sincronización temporal y de estadística, pero no un escáner propio.",
+        "Instrumen dapat mengekstraksi ciri linguistik dan naratif dari stimulus asli sebuah kumpulan data neuroimaging yang sudah dipublikasikan, agar asosiasinya dengan aktivitas otak dapat dikaji. Ciri itu harus berasal tepat dari stimulus yang sesuai dengan rekaman saraf: transkrip siaran tidak dapat dikaitkan secara otomatis dengan otak orang yang menonton materi lain. Pekerjaan ini menuntut pengetahuan neuroimaging, penyelarasan waktu, dan statistik, tetapi tidak memerlukan pemindai sendiri."),
+    "rr6x": (
+        "The researcher adds: external neural data and its temporal alignment with the stimuli",
+        "El investigador aporta: datos neuronales externos y su alineación temporal con los estímulos",
+        "Peneliti menambahkan: data saraf eksternal dan penyelarasan waktunya dengan stimulus"),
     "rr3m": ("Foundations", "Fundamentos", "Landasan"),
     "rr3h": (
         "Origin",
