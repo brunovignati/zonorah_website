@@ -307,6 +307,9 @@ def pagina(lang: str, pg: str) -> str:
                      ("Todo lo de Intensivo", "p3l2"), ("20 veces más consultas", "p3l3")):
         rp(f"</svg>{viejo}</li>", f"</svg>{e(x[k])}</li>", 1)
     rp("</svg>Gratis hasta el 31/12</li>", f'</svg>{e(x["p2l4"])}</li>', 2)
+    # todos los planes de pago incluyen un informe a medida con sesiones de trabajo
+    li = '<li><svg aria-hidden="true"><use href="#i-check"/></svg>' + e(x["pl_inf"]) + '</li>\n        '
+    rs(r'(</ul>\s*<a class="btn btn-(?:ghost|lime)" href="/datos/planes\?plan=)', lambda m: li + m.group(1), 3)
     rp("Activar gratis", e(x["p_cta"]), 3)
     # ---- el plan gratis, a la vista: en los precios y bajo los botones de la portada
     flecha = '<svg aria-hidden="true"><use href="#i-arrow"/></svg>'
