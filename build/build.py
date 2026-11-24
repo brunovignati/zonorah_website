@@ -190,6 +190,13 @@ def pagina(lang: str, pg: str) -> str:
 
     # ---- cabecera y menú: ahora enlazan a páginas
     rp('aria-label="Canales y emisoras que sintonizamos"', f'aria-label="{e(x["aria_logos"])}"', 1)
+    # Sin logos de emisoras de un país: la tira muestra los tipos de fuente, en el idioma activo.
+    tipos = "".join(f'<span class="mono" style="font-size:13px;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;opacity:.7">{e(t)}</span>'
+                    for t in x["fuentes"].split(" · ")[:6])
+    rs(r'(<div class="logos-track" id="logoTrack">).*?(\n    </div>\n  </div>\n</section>)', lambda m: m.group(1) + tipos + m.group(2), 1)
+    rp('<span>Sintonizando</span><b id="loaderSrc">América TV</b>', f'<span>{e(x["loader_tuning"])}</span><b id="loaderSrc">Radio</b>', 1)
+    fu = json.dumps(x["fuentes"].split(" · ")[:6], ensure_ascii=False)
+    rs(r"var SOURCES = \[[^\]]*\];", lambda m: "var SOURCES = " + fu + ";", 1)
 
     def enlaces(menu: bool) -> str:
         items = []
