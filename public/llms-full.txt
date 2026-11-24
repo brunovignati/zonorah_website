@@ -1,16 +1,16 @@
 # Zonorah, Media Neuroscience Lab
 
-> Zonorah is a Media Neuroscience Lab. Its streaming media monitoring system, used in academic and commercial research, is now open to everyone.
+> Zonorah is a streaming media monitoring tool used in academic research, and a Media Neuroscience Lab that now opens the tool to the public by subscription.
 
 Last updated: 2026-11-24
 
-Zonorah is a Media Neuroscience Lab. Our work runs on a streaming media monitoring system: it records radio, TV and YouTube, transcribes the audio and measures what is said, how many minutes, on which station and when. It has been used for academic and commercial research, and it has just launched for everyone.
+Zonorah is a streaming media monitoring tool, and it has always been used for academic research. It records radio, TV and YouTube, transcribes the audio and measures what is said: how many minutes, on which station and when. Now Zonorah is also a Media Neuroscience Lab. To encourage more research, the lab opens the tool to the public by subscription.
 
 ## Home
 
 https://zonorah.com/
 
-Zonorah is a Media Neuroscience Lab. Its streaming media monitoring system records and counts what media broadcast, and is now open to everyone. Research on the brain is done separately and uses these counts.
+Zonorah is the tool: a streaming media monitoring system built for academic research. It is also a Media Neuroscience Lab that encourages research by opening the tool to the public under a subscription model. Research on the brain is done separately and uses these counts.
 
 ### Method: Recording, transcribing and counting
 
@@ -18,17 +18,17 @@ The procedure, the limits of the counts and how to cite them.
 
 Method →
 
-### Research: Open data and studies on commission
+### Research: A lab built around the tool
 
-Open data for researchers, teachers and journalists, and studies carried out for organisations.
+How the lab encourages research: the tool by subscription, a custom report in every paid plan, and studies for organisations.
 
-Research →
+The lab →
 
-### Zonorah Data: Comparator, downloads and assistant
+### The tool: Compare, download and ask
 
-Compare words by station and day, download tables and charts, and ask the AI assistant.
+The tool itself: compare words by station and day, download tables and charts, and ask the AI assistant. A free plan to start, subscriptions for more.
 
-Zonorah Data →
+The tool →
 
 ### Sample studies: Ten reports, one per sector
 
@@ -41,7 +41,7 @@ Sample studies →
 1. Record. Each station's live signal comes in over the internet. We record it during the hours of its schedule.
 2. Transcribe. A speech-recognition program on our own computer turns the audio into text, with a time for every sentence. Then the audio is deleted.
 3. Code. The text is searched for the words each study uses, including their variants. Every passage that matches is entered on a fixed form: who speaks, the role of the person or cause, topic, tone, framing, and whether the claim has evidence or is rumour.
-4. Report. The public numbers are minutes on air per 100 hours recorded. Work done on commission arrives as a PDF by email, on the schedule you choose.
+4. Report. The public numbers are minutes on air per 100 hours recorded. In the panel, reports are made automatically. Every paid plan adds a custom report designed with you, sent as a PDF by email on the schedule you choose.
 
 ## Method
 
@@ -83,27 +83,27 @@ Zonorah (2026). Minutes on air per 100 hours recorded. Consulted [date], terms: 
 
 https://zonorah.com/research/
 
-Two lines of work share the same recordings: open data, and studies carried out on commission.
+The lab has one aim: more research on broadcast media. The tool and its recordings serve two kinds of work.
 
-### Scientific research: Open data
+### The tool: Open to the public by subscription
 
-For researchers, teachers and journalists. The comparator, the charts, the CSV files and the El Niño index follow rules that are published and fixed, so anyone can check them. An AI assistant answers from the transcripts and quotes short fragments with their station and time.
+Zonorah began as a tool for academic research and has always been used that way. Now anyone can subscribe: researchers, teachers, journalists and organisations. The free plan gives one source and 1 hour of listening a week, with automatic reports from the panel. The comparator, the charts, the CSV files and the El Niño index follow published, fixed rules, so anyone can check them. An AI assistant answers from the transcripts and quotes short fragments with their station and time.
 
 Every figure: minutes on air per 100 hours recorded
 
-### Commercial research: Studies on commission
+### Custom report: Designed with you
 
-An organisation chooses the sources, keywords and rules. Each mention is entered on a fixed form, including risk and urgency, and a PDF is sent by email on the schedule the organisation chooses. The public data does not show who commissioned what.
+Every paid plan includes a custom report. We work with you in sessions to design the report you need: sources, keywords, rules and format. Each mention is entered on a fixed form, including risk and urgency, and a PDF is sent by email on the schedule you choose. The public figures do not show who commissioned what.
 
 Not tied to a country: the client picks the stations and their language. Reports in English, Spanish or Indonesian
 
-### Foundations: Origin of the approach
+### Foundations: Origin
 
-The Media Neuroscience Lab at UC Santa Barbara works, among other topics, on moral narratives in news and entertainment, text mining and large media datasets. Zonorah uses that computational approach. It does no brain imaging and runs no experiments with participants. Research on the brain is done separately and uses these figures.
+Zonorah began as the tool and grew into a lab. The lab encourages research on media by opening the tool to the public under a subscription model. The approach follows the computational work of the Media Neuroscience Lab at UC Santa Barbara, which studies, among other topics, moral narratives in news and entertainment, text mining and large media datasets. Zonorah does no brain imaging and runs no experiments with participants. Research on the brain is done separately and uses these figures.
 
 medianeuroscience.org ↗
 
-## Zonorah Data
+## The tool
 
 https://zonorah.com/data/
 
@@ -192,7 +192,7 @@ Zonorah listens to public radio, television and streaming broadcasts, turns the 
 
 ### Plans: Free and paid plans
 
-The free plan gives one source and 1 hour of listening a week, with no card. When the hour is used up you wait 7 days for it to come back, or you subscribe. Paid plans are monthly, priced in US dollars, and are listed on the plans page.
+The free plan gives one source and 1 hour of listening a week, with no card. When the hour is used up you wait 7 days for it to come back, or you subscribe. Paid plans are monthly, priced in US dollars, and are listed on the plans page. Every paid plan includes a custom report that we design with you in working sessions.
 
 ### Billing: Trial, renewal and cancelling
 

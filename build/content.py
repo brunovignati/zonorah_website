@@ -68,30 +68,36 @@ ENLACE_FILA = {"hr1": "method", "hr2": "research", "hr3": "data", "hr4": "studie
 # clave: (en, es, id)
 T = {
     # ---- etiquetas de página (título del navegador, descripción y encabezado)
-    "t_home": ("Zonorah · Media Neuroscience Lab: open media data",
-               "Zonorah · Media Neuroscience Lab: datos abiertos de medios",
-               "Zonorah · Media Neuroscience Lab: data media terbuka"),
-    "d_home": ("Zonorah is a Media Neuroscience Lab. Its streaming media monitoring system, used in academic and commercial research, is now open to everyone.",
-               "Zonorah es un Media Neuroscience Lab. Su sistema de monitoreo de medios en streaming, usado en investigación académica y comercial, ya está abierto a todo el público.",
-               "Zonorah adalah Media Neuroscience Lab. Sistem pemantauan media streaming-nya, dipakai dalam riset akademik dan komersial, kini terbuka untuk semua orang."),
+    "t_home": (
+        "Zonorah · Media Neuroscience Lab and media monitoring tool",
+        "Zonorah · Media Neuroscience Lab y herramienta de monitoreo de medios",
+        "Zonorah · Media Neuroscience Lab dan alat pemantauan media"),
+    "d_home": (
+        "Zonorah is a streaming media monitoring tool used in academic research, and a Media Neuroscience Lab that now opens the tool to the public by subscription.",
+        "Zonorah es una herramienta de monitoreo de medios en streaming usada siempre en investigación académica, y un Media Neuroscience Lab que ahora abre la herramienta al público por suscripción.",
+        "Zonorah adalah alat pemantauan media streaming yang selalu dipakai dalam riset akademik, dan Media Neuroscience Lab yang kini membuka alat itu untuk publik lewat langganan."),
     "t_method": ("Method: how Zonorah counts what media broadcast",
                  "Método: cómo cuenta Zonorah lo que emiten los medios",
                  "Metode: cara Zonorah menghitung siaran media"),
     "d_method": ("How Zonorah records, transcribes and counts radio, TV and YouTube, what the numbers cannot tell you, and how to cite them.",
                  "Cómo graba, transcribe y cuenta Zonorah la radio, la TV y YouTube, qué no dicen las cifras y cómo citarlas.",
                  "Cara Zonorah merekam, mentranskripsi, dan menghitung radio, TV, dan YouTube, batasan angkanya, dan cara mengutipnya."),
-    "t_research": ("Research: open data and studies on commission | Zonorah",
-                   "Investigación: datos abiertos y estudios a medida | Zonorah",
-                   "Riset: data terbuka dan studi pesanan | Zonorah"),
-    "d_research": ("Two lines of work on broadcast media: open data for science and journalism, and studies on commission for organisations.",
-                   "Dos líneas de trabajo sobre los medios de comunicación: datos abiertos para la ciencia y el periodismo, y estudios a medida para organizaciones.",
-                   "Dua lini kerja tentang media siaran: data terbuka untuk sains dan jurnalisme, serta studi pesanan untuk organisasi."),
-    "t_data": ("Zonorah Data: compare words across radio and TV stations",
-               "Zonorah Datos: compara palabras entre emisoras de radio y TV",
-               "Zonorah Data: bandingkan kata antarstasiun radio dan TV"),
-    "d_data": ("See how many minutes a word got on radio, TV and YouTube, download the table and ask the AI assistant. Free until 31 December 2026.",
-               "Mira cuántos minutos tuvo una palabra en la radio, la TV y YouTube, descarga la tabla y pregunta al asistente de IA. Gratis hasta el 31 de diciembre de 2026.",
-               "Lihat berapa menit sebuah kata tayang di radio, TV, dan YouTube, unduh tabelnya, dan tanya asisten AI. Gratis hingga 31 Desember 2026."),
+    "t_research": (
+        "Research: the lab and its tool | Zonorah",
+        "Investigación: el laboratorio y su herramienta | Zonorah",
+        "Riset: laboratorium dan alatnya | Zonorah"),
+    "d_research": (
+        "How the Zonorah lab encourages research on broadcast media: the tool by subscription, a custom report in every paid plan and studies for organisations.",
+        "Cómo el laboratorio Zonorah fomenta la investigación sobre medios de comunicación: la herramienta por suscripción, un informe a medida en cada plan de pago y estudios para organizaciones.",
+        "Cara laboratorium Zonorah mendorong riset tentang media siaran: alat lewat langganan, laporan khusus di setiap paket berbayar, dan studi untuk organisasi."),
+    "t_data": (
+        "The Zonorah tool: compare words across radio and TV stations",
+        "La herramienta Zonorah: compara palabras entre emisoras de radio y TV",
+        "Alat Zonorah: bandingkan kata antarstasiun radio dan TV"),
+    "d_data": (
+        "See how many minutes a word got on radio, TV and YouTube, download the table and ask the AI assistant. A free plan and paid subscriptions.",
+        "Mira cuántos minutos tuvo una palabra en la radio, la TV y YouTube, descarga la tabla y pregunta al asistente de IA. Plan gratis y suscripciones de pago.",
+        "Lihat berapa menit sebuah kata tayang di radio, TV, dan YouTube, unduh tabelnya, dan tanya asisten AI. Paket gratis dan langganan berbayar."),
     "t_studies": ("Sample studies: ten sector reports | Zonorah",
                   "Estudios de muestra: diez informes por sector | Zonorah",
                   "Studi contoh: sepuluh laporan sektor | Zonorah"),
@@ -110,7 +116,7 @@ T = {
     "pg_home": ("Home", "Inicio", "Beranda"),
     "pg_method": ("Method", "Método", "Metode"),
     "pg_research": ("Research", "Investigación", "Riset"),
-    "pg_data": ("Zonorah Data", "Zonorah Datos", "Zonorah Data"),
+    "pg_data": ("The tool", "La herramienta", "Alat"),
     "pg_studies": ("Sample studies", "Estudios de muestra", "Studi contoh"),
     "pg_privacy": ("Privacy", "Privacidad", "Privasi"),
     "pg_terms": ("Terms and refunds", "Términos y reembolsos", "Ketentuan dan pengembalian dana"),
@@ -138,10 +144,13 @@ T = {
     # ---- portada: hero
     "h1a": ("Zonorah.",) * 3, "h1b": ("Media Neuroscience",) * 3, "h1c": ("Lab.",) * 3,
     "hero_lead": (
-        "Zonorah is a Media Neuroscience Lab. Our work runs on a streaming media monitoring system: it records radio, TV and YouTube, transcribes the audio and measures what is said, how many minutes, on which station and when. It has been used for academic and commercial research, and it has just launched for everyone.",
-        "Zonorah es un Media Neuroscience Lab. Nuestro trabajo se apoya en un sistema de monitoreo de medios en streaming: graba radio, TV y YouTube, transcribe el audio y mide lo que se dice, cuántos minutos, en qué emisora y cuándo. Se ha usado en investigación académica y comercial, y acaba de lanzarse para todo el público.",
-        "Zonorah adalah Media Neuroscience Lab. Pekerjaan kami bertumpu pada sistem pemantauan media streaming: merekam radio, TV, dan YouTube, mentranskripsi audionya, dan mengukur apa yang dikatakan, berapa menit, di stasiun mana, dan kapan. Sistem ini telah dipakai untuk riset akademik dan komersial, dan baru saja diluncurkan untuk semua orang."),
-    "hero_cta1": ("Open the data", "Abrir los datos", "Buka data"),
+        "Zonorah is a streaming media monitoring tool, and it has always been used for academic research. It records radio, TV and YouTube, transcribes the audio and measures what is said: how many minutes, on which station and when. Now Zonorah is also a Media Neuroscience Lab. To encourage more research, the lab opens the tool to the public by subscription.",
+        "Zonorah es una herramienta de monitoreo de medios en streaming, y siempre se ha usado para investigación académica. Graba radio, TV y YouTube, transcribe el audio y mide lo que se dice: cuántos minutos, en qué emisora y cuándo. Ahora Zonorah es también un Media Neuroscience Lab. Para fomentar más investigación, el laboratorio abre la herramienta al público por suscripción.",
+        "Zonorah adalah alat pemantauan media streaming, dan selalu dipakai untuk riset akademik. Alat ini merekam radio, TV, dan YouTube, mentranskripsi audionya, dan mengukur apa yang dikatakan: berapa menit, di stasiun mana, dan kapan. Kini Zonorah juga menjadi Media Neuroscience Lab. Untuk mendorong lebih banyak riset, laboratorium membuka alat ini untuk publik lewat langganan."),
+    "hero_cta1": (
+        "Try it free",
+        "Probar gratis",
+        "Coba gratis"),
     "hero_cta2": (
         "Method",
         "Método",
@@ -164,9 +173,9 @@ T = {
         "En este sitio",
         "Di situs ini"),
     "home_lead": (
-        "Zonorah is a Media Neuroscience Lab. Its streaming media monitoring system records and counts what media broadcast, and is now open to everyone. Research on the brain is done separately and uses these counts.",
-        "Zonorah es un Media Neuroscience Lab. Su sistema de monitoreo de medios en streaming graba y cuenta lo que emiten los medios, y ahora está abierto a todo el público. La investigación sobre el cerebro se hace aparte y usa estos conteos.",
-        "Zonorah adalah Media Neuroscience Lab. Sistem pemantauan media streaming-nya merekam dan menghitung siaran media, dan kini terbuka untuk semua orang. Riset tentang otak dikerjakan terpisah dan memakai hitungan ini."),
+        "Zonorah is the tool: a streaming media monitoring system built for academic research. It is also a Media Neuroscience Lab that encourages research by opening the tool to the public under a subscription model. Research on the brain is done separately and uses these counts.",
+        "Zonorah es la herramienta: un sistema de monitoreo de medios en streaming hecho para la investigación académica. Es también un Media Neuroscience Lab que fomenta la investigación abriendo la herramienta al público con un modelo de suscripción. La investigación sobre el cerebro se hace aparte y usa estos conteos.",
+        "Zonorah adalah alatnya: sistem pemantauan media streaming yang dibuat untuk riset akademik. Zonorah juga Media Neuroscience Lab yang mendorong riset dengan membuka alat ini untuk publik lewat model langganan. Riset tentang otak dikerjakan terpisah dan memakai hitungan ini."),
     "hr1m": ("Method", "Método", "Metode"),
     "hr1h": (
         "Recording, transcribing and counting",
@@ -182,30 +191,30 @@ T = {
         "Metode →"),
     "hr2m": ("Research", "Investigación", "Riset"),
     "hr2h": (
-        "Open data and studies on commission",
-        "Datos abiertos y estudios a medida",
-        "Data terbuka dan studi pesanan"),
+        "A lab built around the tool",
+        "Un laboratorio alrededor de la herramienta",
+        "Laboratorium di sekitar alat ini"),
     "hr2p": (
-        "Open data for researchers, teachers and journalists, and studies carried out for organisations.",
-        "Datos abiertos para investigadores, docentes y periodistas, y estudios hechos para organizaciones.",
-        "Data terbuka untuk peneliti, pengajar, dan jurnalis, serta studi yang dikerjakan untuk organisasi."),
+        "How the lab encourages research: the tool by subscription, a custom report in every paid plan, and studies for organisations.",
+        "Cómo el laboratorio fomenta la investigación: la herramienta por suscripción, un informe a medida en cada plan de pago y estudios para organizaciones.",
+        "Cara laboratorium mendorong riset: alat lewat langganan, laporan khusus di setiap paket berbayar, dan studi untuk organisasi."),
     "hr2x": (
-        "Research →",
-        "Investigación →",
-        "Riset →"),
-    "hr3m": ("Zonorah Data", "Zonorah Datos", "Zonorah Data"),
+        "The lab →",
+        "El laboratorio →",
+        "Laboratorium →"),
+    "hr3m": ("The tool", "La herramienta", "Alat"),
     "hr3h": (
-        "Comparator, downloads and assistant",
-        "Comparador, descargas y asistente",
-        "Pembanding, unduhan, dan asisten"),
+        "Compare, download and ask",
+        "Compara, descarga y pregunta",
+        "Bandingkan, unduh, dan tanya"),
     "hr3p": (
-        "Compare words by station and day, download tables and charts, and ask the AI assistant.",
-        "Compara palabras por emisora y día, descarga tablas y gráficos, y pregunta al asistente de IA.",
-        "Bandingkan kata menurut stasiun dan hari, unduh tabel dan grafik, dan tanya asisten AI."),
+        "The tool itself: compare words by station and day, download tables and charts, and ask the AI assistant. A free plan to start, subscriptions for more.",
+        "La herramienta en sí: compara palabras por emisora y día, descarga tablas y gráficos, y pregunta al asistente de IA. Un plan gratis para empezar y suscripciones para más.",
+        "Alatnya sendiri: bandingkan kata menurut stasiun dan hari, unduh tabel dan grafik, dan tanya asisten AI. Paket gratis untuk memulai, langganan untuk lebih banyak."),
     "hr3x": (
-        "Zonorah Data →",
-        "Zonorah Datos →",
-        "Zonorah Data →"),
+        "The tool →",
+        "La herramienta →",
+        "Alat →"),
     "hr4m": ("Sample studies", "Estudios de muestra", "Studi contoh"),
     "hr4h": (
         "Ten reports, one per sector",
@@ -240,9 +249,10 @@ T = {
         "The text is searched for the words each study uses, including their variants. Every passage that matches is entered on a fixed form: who speaks, the role of the person or cause, topic, tone, framing, and whether the claim has evidence or is rumour.",
         "Se buscan en el texto las palabras que usa cada estudio, con sus variantes. Cada pasaje que coincide se anota en una ficha fija: quién habla, el papel de la persona o la causa, tema, tono, encuadre y si lo dicho tiene respaldo o es rumor.",
         "Teks dicari untuk kata-kata yang dipakai setiap studi, termasuk variannya. Setiap kutipan yang cocok dicatat pada formulir tetap: siapa yang bicara, peran orang atau isu, topik, nada, pembingkaian, dan apakah pernyataannya berbukti atau desas-desus."),
-    "s4p": ("The public numbers are minutes on air per 100 hours recorded. Work done on commission arrives as a PDF by email, on the schedule you choose.",
-            "Las cifras públicas son minutos al aire por cada 100 horas grabadas. El trabajo a medida llega en PDF por correo, en el horario que elijas.",
-            "Angka publik berupa menit siaran per 100 jam rekaman. Pekerjaan pesanan tiba sebagai PDF lewat email, sesuai jadwal yang Anda pilih."),
+    "s4p": (
+        "The public numbers are minutes on air per 100 hours recorded. In the panel, reports are made automatically. Every paid plan adds a custom report designed with you, sent as a PDF by email on the schedule you choose.",
+        "Las cifras públicas son minutos al aire por cada 100 horas grabadas. En el panel, los informes se hacen de forma automática. Todos los planes de pago añaden un informe a medida, diseñado contigo y enviado en PDF por correo en el horario que elijas.",
+        "Angka publik berupa menit siaran per 100 jam rekaman. Di panel, laporan dibuat secara otomatis. Setiap paket berbayar menambahkan laporan khusus yang dirancang bersama Anda, dikirim sebagai PDF lewat email sesuai jadwal yang Anda pilih."),
     "s1g1": ("Radio", "Radio", "Radio"), "s1g2": ("TV", "TV", "TV"), "s1g3": ("YouTube",) * 3,
     "s1g4": ("Station hours", "Horario de la emisora", "Jam stasiun"),
     "s2g1": ("Time for each sentence", "Hora de cada frase", "Waktu tiap kalimat"),
@@ -337,31 +347,44 @@ T = {
              "Zonorah (2026). Menit siaran per 100 jam rekaman. Diakses [tanggal], istilah: [istilah]. [tautan perbandingan]"),
     # ---- investigación
     "research_lead": (
-        "Two lines of work share the same recordings: open data, and studies carried out on commission.",
-        "Dos líneas de trabajo comparten las mismas grabaciones: datos abiertos y estudios hechos por encargo.",
-        "Dua lini kerja memakai rekaman yang sama: data terbuka dan studi yang dikerjakan atas pesanan."),
-    "rr1m": ("Scientific research", "Investigación científica", "Riset ilmiah"),
-    "rr1h": ("Open data", "Datos abiertos", "Data terbuka"),
-    "rr1p": ("For researchers, teachers and journalists. The comparator, the charts, the CSV files and the El Niño index follow rules that are published and fixed, so anyone can check them. An AI assistant answers from the transcripts and quotes short fragments with their station and time.",
-             "Para investigadores, docentes y periodistas. El comparador, los gráficos, los CSV y el índice de El Niño siguen reglas publicadas y fijas, y cualquiera puede comprobarlas. Un asistente de IA responde a partir de las transcripciones y cita fragmentos breves con su emisora y su hora.",
-             "Untuk peneliti, pengajar, dan jurnalis. Pembanding, grafik, berkas CSV, dan indeks El Niño mengikuti aturan yang dipublikasikan dan tetap, sehingga siapa pun bisa memeriksanya. Asisten AI menjawab dari transkrip dan mengutip potongan singkat beserta stasiun dan waktunya."),
+        "The lab has one aim: more research on broadcast media. The tool and its recordings serve two kinds of work.",
+        "El laboratorio tiene un objetivo: más investigación sobre los medios de comunicación. La herramienta y sus grabaciones sirven a dos tipos de trabajo.",
+        "Laboratorium punya satu tujuan: lebih banyak riset tentang media siaran. Alat dan rekamannya melayani dua jenis pekerjaan."),
+    "rr1m": (
+        "The tool",
+        "La herramienta",
+        "Alat"),
+    "rr1h": (
+        "Open to the public by subscription",
+        "Abierta al público por suscripción",
+        "Terbuka untuk publik lewat langganan"),
+    "rr1p": (
+        "Zonorah began as a tool for academic research and has always been used that way. Now anyone can subscribe: researchers, teachers, journalists and organisations. The free plan gives one source and 1 hour of listening a week, with automatic reports from the panel. The comparator, the charts, the CSV files and the El Niño index follow published, fixed rules, so anyone can check them. An AI assistant answers from the transcripts and quotes short fragments with their station and time.",
+        "Zonorah nació como una herramienta para la investigación académica y siempre se ha usado así. Ahora cualquiera puede suscribirse: investigadores, docentes, periodistas y organizaciones. El plan gratis da un medio y 1 hora de escucha por semana, con informes automáticos desde el panel. El comparador, los gráficos, los CSV y el índice de El Niño siguen reglas publicadas y fijas, y cualquiera puede comprobarlas. Un asistente de IA responde a partir de las transcripciones y cita fragmentos breves con su emisora y su hora.",
+        "Zonorah lahir sebagai alat untuk riset akademik dan selalu dipakai begitu. Kini siapa pun bisa berlangganan: peneliti, pengajar, jurnalis, dan organisasi. Paket gratis memberi satu sumber dan 1 jam pemantauan per minggu, dengan laporan otomatis dari panel. Pembanding, grafik, berkas CSV, dan indeks El Niño mengikuti aturan yang dipublikasikan dan tetap, sehingga siapa pun bisa memeriksanya. Asisten AI menjawab dari transkrip dan mengutip potongan singkat beserta stasiun dan waktunya."),
     "rr1x": ("Every figure: minutes on air per 100 hours recorded", "Toda cifra: minutos al aire por cada 100 horas grabadas", "Setiap angka: menit siaran per 100 jam rekaman"),
-    "rr2m": ("Commercial research", "Investigación comercial", "Riset komersial"),
-    "rr2h": ("Studies on commission", "Estudios a medida", "Studi pesanan"),
+    "rr2m": (
+        "Custom report",
+        "Informe a medida",
+        "Laporan khusus"),
+    "rr2h": (
+        "Designed with you",
+        "Diseñado contigo",
+        "Dirancang bersama Anda"),
     "rr2p": (
-        "An organisation chooses the sources, keywords and rules. Each mention is entered on a fixed form, including risk and urgency, and a PDF is sent by email on the schedule the organisation chooses. The public data does not show who commissioned what.",
-        "Una organización elige las fuentes, las palabras clave y las reglas. Cada mención se anota en una ficha fija, con su riesgo y su urgencia, y se envía un PDF por correo en el horario que la organización elija. Los datos públicos no muestran quién encargó qué.",
-        "Sebuah organisasi memilih sumber, kata kunci, dan aturan. Setiap sebutan dicatat pada formulir tetap, termasuk risiko dan urgensinya, dan PDF dikirim lewat email sesuai jadwal yang dipilih organisasi. Data publik tidak menunjukkan siapa memesan apa."),
+        "Every paid plan includes a custom report. We work with you in sessions to design the report you need: sources, keywords, rules and format. Each mention is entered on a fixed form, including risk and urgency, and a PDF is sent by email on the schedule you choose. The public figures do not show who commissioned what.",
+        "Todos los planes de pago incluyen un informe a medida. Trabajamos contigo en sesiones para diseñar el informe que necesitas: fuentes, palabras clave, reglas y formato. Cada mención se anota en una ficha fija, con su riesgo y su urgencia, y se envía un PDF por correo en el horario que elijas. Las cifras públicas no muestran quién encargó qué.",
+        "Setiap paket berbayar mencakup laporan khusus. Kami bekerja bersama Anda dalam sesi untuk merancang laporan yang Anda butuhkan: sumber, kata kunci, aturan, dan format. Setiap sebutan dicatat pada formulir tetap, termasuk risiko dan urgensinya, dan PDF dikirim lewat email sesuai jadwal yang Anda pilih. Angka publik tidak menunjukkan siapa memesan apa."),
     "rr2x": ("Not tied to a country: the client picks the stations and their language. Reports in English, Spanish or Indonesian", "Sin atarse a un país: el cliente elige las emisoras y su idioma. Informes en inglés, español o indonesio", "Tidak terikat negara: klien memilih stasiun dan bahasanya. Laporan dalam bahasa Inggris, Spanyol, atau Indonesia"),
     "rr3m": ("Foundations", "Fundamentos", "Landasan"),
     "rr3h": (
-        "Origin of the approach",
-        "Origen del enfoque",
-        "Asal pendekatan"),
+        "Origin",
+        "Origen",
+        "Asal"),
     "rr3p": (
-        "The Media Neuroscience Lab at UC Santa Barbara works, among other topics, on moral narratives in news and entertainment, text mining and large media datasets. Zonorah uses that computational approach. It does no brain imaging and runs no experiments with participants. Research on the brain is done separately and uses these figures.",
-        "El Media Neuroscience Lab de la UC Santa Bárbara trabaja, entre otros temas, en narrativas morales en noticias y entretenimiento, minería de texto y grandes conjuntos de datos de medios. Zonorah usa ese enfoque computacional. No hace imágenes cerebrales ni experimentos con participantes. La investigación sobre el cerebro se hace aparte y usa estas cifras.",
-        "Media Neuroscience Lab di UC Santa Barbara meneliti antara lain narasi moral dalam berita dan hiburan, penambangan teks, dan kumpulan data media berskala besar. Zonorah memakai pendekatan komputasional itu. Zonorah tidak melakukan pencitraan otak dan tidak menjalankan eksperimen dengan partisipan. Riset tentang otak dikerjakan terpisah dan memakai angka-angka ini."),
+        "Zonorah began as the tool and grew into a lab. The lab encourages research on media by opening the tool to the public under a subscription model. The approach follows the computational work of the Media Neuroscience Lab at UC Santa Barbara, which studies, among other topics, moral narratives in news and entertainment, text mining and large media datasets. Zonorah does no brain imaging and runs no experiments with participants. Research on the brain is done separately and uses these figures.",
+        "Zonorah nació como la herramienta y se convirtió en un laboratorio. El laboratorio fomenta la investigación sobre medios abriendo la herramienta al público con un modelo de suscripción. El enfoque sigue el trabajo computacional del Media Neuroscience Lab de la UC Santa Bárbara, que estudia, entre otros temas, narrativas morales en noticias y entretenimiento, minería de texto y grandes conjuntos de datos de medios. Zonorah no hace imágenes cerebrales ni experimentos con participantes. La investigación sobre el cerebro se hace aparte y usa estas cifras.",
+        "Zonorah lahir sebagai alatnya dan tumbuh menjadi laboratorium. Laboratorium mendorong riset tentang media dengan membuka alat ini untuk publik lewat model langganan. Pendekatannya mengikuti kerja komputasional Media Neuroscience Lab di UC Santa Barbara, yang meneliti antara lain narasi moral dalam berita dan hiburan, penambangan teks, dan kumpulan data media berskala besar. Zonorah tidak melakukan pencitraan otak dan tidak menjalankan eksperimen dengan partisipan. Riset tentang otak dikerjakan terpisah dan memakai angka-angka ini."),
     "rr3x": ("medianeuroscience.org ↗", "medianeuroscience.org ↗", "medianeuroscience.org ↗"),
     # ---- datos
     "data_lead": (
@@ -450,7 +473,7 @@ T = {
                "Los precios son al mes, en dólares estadounidenses (USD). Todos los planes de pago incluyen un informe a medida: trabajamos contigo en sesiones para diseñar el informe que necesitas. ¿Quieres un estudio para tu organización? ",
                "Harga per bulan, dalam dolar AS (USD). Setiap paket berbayar mencakup laporan khusus: kami bekerja bersama Anda dalam sesi untuk merancang laporan yang Anda butuhkan. Ingin studi untuk organisasi Anda? "),
     "p_foot_a": ("Write to us", "Escríbenos", "Hubungi kami"),
-    "mail_subject": ("Study on commission", "Estudio a medida", "Studi pesanan"),
+    "mail_subject": ("Custom report or study", "Informe a medida o estudio", "Laporan khusus atau studi"),
     # ---- términos y reembolsos (borrador pendiente de revisión legal)
     "terms_lead": (
         "How the service, billing and refunds work. It is a draft pending legal review.",
@@ -462,7 +485,7 @@ T = {
     "tm1x": ("", "", ""),
     "tm2m": ('Plans', 'Planes', 'Paket'),
     "tm2h": ('Free and paid plans', 'Plan gratis y planes de pago', 'Paket gratis dan berbayar'),
-    "tm2p": ('The free plan gives one source and 1 hour of listening a week, with no card. When the hour is used up you wait 7 days for it to come back, or you subscribe. Paid plans are monthly, priced in US dollars, and are listed on the plans page.', 'El plan gratis da un medio y 1 hora de escucha por semana, sin tarjeta. Cuando se gasta la hora, esperas 7 días a que vuelva o te suscribes. Los planes de pago son mensuales, en dólares estadounidenses, y están en la página de planes.', 'Paket gratis memberi satu sumber dan 1 jam pemantauan per minggu, tanpa kartu. Setelah jam itu habis, Anda menunggu 7 hari agar kembali, atau berlangganan. Paket berbayar bersifat bulanan, dalam dolar AS, dan tercantum di halaman paket.'),
+    "tm2p": ('The free plan gives one source and 1 hour of listening a week, with no card. When the hour is used up you wait 7 days for it to come back, or you subscribe. Paid plans are monthly, priced in US dollars, and are listed on the plans page. Every paid plan includes a custom report that we design with you in working sessions.', 'El plan gratis da un medio y 1 hora de escucha por semana, sin tarjeta. Cuando se gasta la hora, esperas 7 días a que vuelva o te suscribes. Los planes de pago son mensuales, en dólares estadounidenses, y están en la página de planes. Todos los planes de pago incluyen un informe a medida que diseñamos contigo en sesiones de trabajo.', 'Paket gratis memberi satu sumber dan 1 jam pemantauan per minggu, tanpa kartu. Setelah jam itu habis, Anda menunggu 7 hari agar kembali, atau berlangganan. Paket berbayar bersifat bulanan, dalam dolar AS, dan tercantum di halaman paket. Setiap paket berbayar mencakup laporan khusus yang kami rancang bersama Anda dalam sesi kerja.'),
     "tm2x": ("", "", ""),
     "tm3m": ('Billing', 'Cobro', 'Penagihan'),
     "tm3h": ('Trial, renewal and cancelling', 'Prueba, renovación y cancelación', 'Uji coba, perpanjangan, dan pembatalan'),
@@ -543,9 +566,9 @@ T = {
         "Contacto",
         "Kontak"),
     "demo_lead": (
-        "To commission a study or ask for access, write with the topics, stations or sources and the language of the report. Researchers working on the brain side can write too.",
-        "Para encargar un estudio o pedir acceso, escribe con los temas, emisoras o fuentes y el idioma del informe. Los investigadores que trabajan el lado del cerebro también pueden escribir.",
-        "Untuk memesan studi atau meminta akses, tulislah dengan topik, stasiun, atau sumber dan bahasa laporan. Peneliti yang menggarap sisi otak juga boleh menulis."),
+        "To ask about your custom report, a study for your organisation or a research collaboration, write with the topics, stations or sources and the language of the report. Researchers working on the brain side can write too.",
+        "Para preguntar por tu informe a medida, un estudio para tu organización o una colaboración de investigación, escribe con los temas, emisoras o fuentes y el idioma del informe. Los investigadores que trabajan el lado del cerebro también pueden escribir.",
+        "Untuk bertanya tentang laporan khusus Anda, studi untuk organisasi Anda, atau kolaborasi riset, tulislah dengan topik, stasiun, atau sumber dan bahasa laporan. Peneliti yang menggarap sisi otak juga boleh menulis."),
     "demo_prices": ("Get access", "Obtener acceso", "Dapatkan akses"),
     "demo_label": ("Your email", "Tu correo", "Email Anda"),
     "demo_ph": ("you@organisation.org", "tu@organizacion.org", "anda@organisasi.org"),
@@ -553,9 +576,9 @@ T = {
     "demo_note": ("Or write to " + EMAIL, "O escribe a " + EMAIL, "Atau tulis ke " + EMAIL),
     # ---- pie
     "f_tag": (
-        "Media Neuroscience Lab. Radio, TV and YouTube, recorded, transcribed and counted.",
-        "Media Neuroscience Lab. Radio, TV y YouTube, grabados, transcritos y contados.",
-        "Media Neuroscience Lab. Radio, TV, dan YouTube, direkam, ditranskripsi, dan dihitung."),
+        "Media Neuroscience Lab. A streaming media monitoring tool for research.",
+        "Media Neuroscience Lab. Una herramienta de monitoreo de medios en streaming para investigar.",
+        "Media Neuroscience Lab. Alat pemantauan media streaming untuk riset."),
     "f_lab": ("The lab", "El laboratorio", "Laboratorium"), "f_contact": ("Contact", "Contacto", "Kontak"),
     "f_legal": ("Legal", "Legal", "Hukum"),
     "f_up": ("Back to top ↑", "Volver arriba ↑", "Kembali ke atas ↑"),
@@ -578,9 +601,9 @@ T_COBRO = {
     "p3l4": (f"{PRUEBA_DIAS}-day free trial", f"{PRUEBA_DIAS} días de prueba gratis", f"Uji coba gratis {PRUEBA_DIAS} hari"),
     "p_cta": ("Start free trial", "Empezar la prueba gratis", "Mulai uji coba gratis"),
     "d_data": (
-        "See how many minutes a word got on radio, TV and YouTube, download the table and ask the AI assistant.",
-        "Mira cuántos minutos tuvo una palabra en la radio, la TV y YouTube, descarga la tabla y pregunta al asistente de IA.",
-        "Lihat berapa menit sebuah kata tayang di radio, TV, dan YouTube, unduh tabelnya, dan tanya asisten AI."),
+        "See how many minutes a word got on radio, TV and YouTube, download the table and ask the AI assistant. A free plan and paid subscriptions.",
+        "Mira cuántos minutos tuvo una palabra en la radio, la TV y YouTube, descarga la tabla y pregunta al asistente de IA. Plan gratis y suscripciones de pago.",
+        "Lihat berapa menit sebuah kata tayang di radio, TV, dan YouTube, unduh tabelnya, dan tanya asisten AI. Paket gratis dan langganan berbayar."),
 }
 
 

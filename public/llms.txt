@@ -1,15 +1,15 @@
 # Zonorah, Media Neuroscience Lab
 
-> Zonorah is a Media Neuroscience Lab. Its streaming media monitoring system, used in academic and commercial research, is now open to everyone.
+> Zonorah is a streaming media monitoring tool used in academic research, and a Media Neuroscience Lab that now opens the tool to the public by subscription.
 
-Zonorah is a Media Neuroscience Lab. Its streaming media monitoring system records and counts what media broadcast, and is now open to everyone. Research on the brain is done separately and uses these counts.
+Zonorah is the tool: a streaming media monitoring system built for academic research. It is also a Media Neuroscience Lab that encourages research by opening the tool to the public under a subscription model. Research on the brain is done separately and uses these counts.
 
 ## Pages
 
-- [Home](https://zonorah.com/): Zonorah is a Media Neuroscience Lab. Its streaming media monitoring system, used in academic and commercial research, is now open to everyone.
+- [Home](https://zonorah.com/): Zonorah is a streaming media monitoring tool used in academic research, and a Media Neuroscience Lab that now opens the tool to the public by subscription.
 - [Method](https://zonorah.com/method/): How Zonorah records, transcribes and counts radio, TV and YouTube, what the numbers cannot tell you, and how to cite them.
-- [Research](https://zonorah.com/research/): Two lines of work on broadcast media: open data for science and journalism, and studies on commission for organisations.
-- [Zonorah Data](https://zonorah.com/data/): See how many minutes a word got on radio, TV and YouTube, download the table and ask the AI assistant.
+- [Research](https://zonorah.com/research/): How the Zonorah lab encourages research on broadcast media: the tool by subscription, a custom report in every paid plan and studies for organisations.
+- [The tool](https://zonorah.com/data/): See how many minutes a word got on radio, TV and YouTube, download the table and ask the AI assistant. A free plan and paid subscriptions.
 - [Sample studies](https://zonorah.com/studies/): Ten PDF reports from one week of radio and TV in September 2026, one per sector. The reports are in Spanish.
 - [Privacy](https://zonorah.com/privacy/): What Zonorah stores, what it does not store and how to delete your account. No recordings are kept.
 - [Terms and refunds](https://zonorah.com/terms/): The terms of use, billing and refund rules for Zonorah plans. Draft pending legal review.
