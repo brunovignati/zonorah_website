@@ -1,4 +1,4 @@
-// zonorah.com/datos/… -> la app de datos de Zonorah (datos.zonorah.com).
+// zonorah.com/platform/… -> la app de datos de Zonorah (datos.zonorah.com).
 //
 // El sitio sigue siendo estático: este Worker solo interviene en /datos
 // (lo fija `run_worker_first` en wrangler.jsonc). Todo lo demás lo sirve
@@ -12,13 +12,13 @@ const ORIGEN = "https://datos.zonorah.com";
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
-    if (url.pathname === "/datos") {
-      return Response.redirect(`${url.origin}/datos/${url.search}`, 301);
+    if (url.pathname === "/platform") {
+      return Response.redirect(`${url.origin}/platform/${url.search}`, 301);
     }
-    if (!url.pathname.startsWith("/datos/")) {
+    if (!url.pathname.startsWith("/platform/")) {
       return env.ASSETS.fetch(request);
     }
-    const destino = new URL(url.pathname.slice("/datos".length) + url.search, ORIGEN);
+    const destino = new URL(url.pathname.slice("/platform".length) + url.search, ORIGEN);
     const peticion = new Request(destino, request);
     // La IP de quien pregunta, para los límites de uso de la app.
     const ip = request.headers.get("CF-Connecting-IP");

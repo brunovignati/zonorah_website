@@ -5,11 +5,11 @@
   "compatibility_date": "2026-08-25",
 
   // El sitio es estático (./public). El Worker de src/worker.js solo atiende
-  // /datos y /datos/…, que reenvía a la app de datos (datos.zonorah.com).
+  // /platform y /platform/…, que reenvía a la app de datos (datos.zonorah.com).
   "main": "src/worker.js",
   "assets": {
     "directory": "./public",
     "binding": "ASSETS",
-    "run_worker_first": ["/datos", "/datos/*"]
+    "run_worker_first": ["/platform", "/platform/*", "/datos", "/datos/*"]
   }
 }
