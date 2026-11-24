@@ -1,51 +1,63 @@
 # Zonorah publica su metodología y sus cifras para que se citen: se permite a todos los rastreadores,
-# incluidos los de buscadores con IA. /datos es la aplicación: sus páginas llevan noindex y su API se bloquea.
+# incluidos los de buscadores con IA. /platform es la aplicación: sus páginas llevan noindex y su API se bloquea.
 User-agent: *
 Allow: /
+Disallow: /platform/api/
 Disallow: /datos/api/
 
 User-agent: GPTBot
 Allow: /
+Disallow: /platform/api/
 Disallow: /datos/api/
 
 User-agent: OAI-SearchBot
 Allow: /
+Disallow: /platform/api/
 Disallow: /datos/api/
 
 User-agent: ChatGPT-User
 Allow: /
+Disallow: /platform/api/
 Disallow: /datos/api/
 
 User-agent: ClaudeBot
 Allow: /
+Disallow: /platform/api/
 Disallow: /datos/api/
 
 User-agent: Claude-User
 Allow: /
+Disallow: /platform/api/
 Disallow: /datos/api/
 
 User-agent: Claude-SearchBot
 Allow: /
+Disallow: /platform/api/
 Disallow: /datos/api/
 
 User-agent: PerplexityBot
 Allow: /
+Disallow: /platform/api/
 Disallow: /datos/api/
 
 User-agent: Perplexity-User
 Allow: /
+Disallow: /platform/api/
 Disallow: /datos/api/
 
 User-agent: Google-Extended
 Allow: /
+Disallow: /platform/api/
 Disallow: /datos/api/
 
 User-agent: Applebot-Extended
 Allow: /
+Disallow: /platform/api/
 Disallow: /datos/api/
 
 User-agent: CCBot
 Allow: /
+Disallow: /platform/api/
 Disallow: /datos/api/
 
 Sitemap: https://zonorah.com/sitemap.xml

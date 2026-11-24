@@ -203,20 +203,20 @@ def pagina(lang: str, pg: str) -> str:
         for destino in ("method", "research", "data", "studies"):
             act = ' class="active" aria-current="page"' if destino == pg else ""
             items.append(f'<a href="{ruta(lang, destino)}"{act}>{e(x["pg_" + destino])}</a>')
-        items.append(f'<a href="{app("/datos/")}">{e(x["n_chat"])}</a>')
+        items.append(f'<a href="{app("/platform/")}">{e(x["n_chat"])}</a>')
         return "\n    ".join(items) + "\n"
     rs(r'(<nav class="nav-links" aria-label=")[^"]*(">).*?(</nav>)',
        lambda m: m.group(1) + e(x["aria_nav"]) + m.group(2) + "\n    " + enlaces(False) + "  " + m.group(3), 1)
     rs(r'(<nav class="menu-links" aria-label=")[^"]*(">).*?(</nav>)',
        lambda m: m.group(1) + e(x["aria_menu"]) + m.group(2) + "\n    " + enlaces(True)
-       + f'    <a href="{app("/datos/")}" id="menuCuenta" hidden>{e(x["n_login"])}</a>\n  ' + m.group(3), 1)
+       + f'    <a href="{app("/platform/")}" id="menuCuenta" hidden>{e(x["n_login"])}</a>\n  ' + m.group(3), 1)
     switch = "".join(
         f'<a href="{ruta(o, pg)}" hreflang="{o}" lang="{o}" data-lang="{o}" aria-current="{str(o == lang).lower()}">{o.upper()}</a>'
         for o in LANGS)
     rs(r'<span class="lang" role="group" aria-label="[^"]*">.*?</span>',
        f'<span class="lang" role="group" aria-label="{e(x["aria_lang"])}">{switch}</span>', 1)
     rp('id="navPlanes" class="btn btn-lime btn-nav magnetic" href="/datos/planes" data-cursor="Ir">Ver planes</a>',
-       f'id="navPlanes" class="btn btn-lime btn-nav magnetic" href="{app("/datos/")}" data-cursor="Ir">{e(x["n_access"])}</a>', 1)
+       f'id="navPlanes" class="btn btn-lime btn-nav magnetic" href="{app("/platform/")}" data-cursor="Ir">{e(x["n_access"])}</a>', 1)
     rp('aria-label="Abrir menú"', f'aria-label="{e(x["menu_open"])}"', 1)
     rp("'Cerrar menú'", "'" + x["menu_close"].replace("'", "\\'") + "'", 1)
     rp("'Abrir menú'", "'" + x["menu_open"].replace("'", "\\'") + "'", 1)
@@ -230,7 +230,7 @@ def pagina(lang: str, pg: str) -> str:
     rp('<span class="line-inner"><em>las 24 horas.</em></span>', f'<span class="line-inner"><em>{e(x["h1c"])}</em></span>', 1)
     # La frase va ENCIMA del bloque de botones (dentro de él se aplastaba al lado de los botones en móvil).
     rp('<div class="hero-bottom">', f'<p class="lead hero-lead" data-reveal>{e(x["hero_lead"])}</p>\n      <div class="hero-bottom">', 1)
-    rp('href="/datos/planes" data-cursor="Ir">Empieza gratis', f'href="{app("/datos/")}" data-cursor="Ir">{e(x["hero_cta1"])}', 1)
+    rp('href="/datos/planes" data-cursor="Ir">Empieza gratis', f'href="{app("/platform/")}" data-cursor="Ir">{e(x["hero_cta1"])}', 1)
     rp('href="#como" data-scroll data-cursor="Bajar">Cómo funciona', f'href="{ruta(lang, "method")}" data-cursor="Ir">{e(x["hero_cta2"])}', 1)
 
     # ---- preguntas flotantes
@@ -315,8 +315,8 @@ def pagina(lang: str, pg: str) -> str:
     # ---- contacto (cierra todas las páginas)
     rp("Deja de enterarte tarde.", e(x["demo_h"]), 1)
     rp("Te enseñamos el panel con tus propias fuentes en 15 minutos. Si encaja, tu primer informe llega mañana.", e(x["demo_lead"]), 1)
-    rp('href="/datos/planes" data-cursor="Ir">Ver planes<svg', f'href="{app("/datos/")}" data-cursor="Ir">{e(x["hero_cta1"])}<svg', 1)
-    rp('href="#precios" data-scroll>Ver precios', f'href="{app("/datos/")}">{e(x["demo_prices"])}', 1)
+    rp('href="/datos/planes" data-cursor="Ir">Ver planes<svg', f'href="{app("/platform/")}" data-cursor="Ir">{e(x["hero_cta1"])}<svg', 1)
+    rp('href="#precios" data-scroll>Ver precios', f'href="{app("/platform/")}">{e(x["demo_prices"])}', 1)
     rp('for="demoEmail">Tu correo</label>', f'for="demoEmail">{e(x["demo_label"])}</label>', 1)
     rp('placeholder="tu@organizacion.es"', f'placeholder="{e(x["demo_ph"])}"', 1)
     rp(">Enviar</button>", f'>{e(x["demo_send"])}</button>', 1)
@@ -401,8 +401,9 @@ def pagina(lang: str, pg: str) -> str:
     cur = {"Ir": x["cur_go"], "Ver": x["cur_view"], "Bajar": x["cur_down"], "Abrir PDF": x["cur_pdf"]}
     rs(r'data-cursor="([^"]*)"', lambda m: f'data-cursor="{e(cur[m.group(1)])}"')
     # toda ruta de la app lleva el idioma, para que se abra en el mismo que se está leyendo
-    p.s = p.s.replace('href="/datos/planes?plan=', 'href="/datos/?plan=').replace('href="/datos/planes"', 'href="/datos/"')
-    rs(r'href="(/datos[^"#?]*)(\?[^"#]*)?"',
+    p.s = p.s.replace('href="/datos/planes?plan=', 'href="/platform/?plan=').replace('href="/datos/planes"', 'href="/platform/"').replace('href="/datos/', 'href="/platform/')
+    p.s = p.s.replace('"/datos/', '"/platform/').replace('/datos/api/sesion', '/platform/api/sesion')
+    rs(r'href="(/platform[^"#?]*)(\?[^"#]*)?"',
        lambda m: m.group(0) if "lang=" in (m.group(2) or "") else f'href="{m.group(1)}{(m.group(2) + "&amp;") if m.group(2) else "?"}{ll}"')
     # Los comentarios de edición de la plantilla (en español) no tienen sentido en la página servida.
     rs(r"<!--.*?-->", "")
@@ -522,10 +523,10 @@ def main():
              'xmlns:xhtml="http://www.w3.org/1999/xhtml">\n' + urls + "</urlset>\n")
     bots = ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "Claude-User", "Claude-SearchBot",
             "PerplexityBot", "Perplexity-User", "Google-Extended", "Applebot-Extended", "CCBot"]
-    grupo = lambda ua: f"User-agent: {ua}\nAllow: /\nDisallow: /datos/api/\n\n"  # noqa: E731
+    grupo = lambda ua: f"User-agent: {ua}\nAllow: /\nDisallow: /platform/api/\nDisallow: /datos/api/\n\n"  # noqa: E731
     escribir(PUBLIC / "robots.txt",
              "# Zonorah publica su metodología y sus cifras para que se citen: se permite a todos los rastreadores,\n"
-             "# incluidos los de buscadores con IA. /datos es la aplicación: sus páginas llevan noindex y su API se bloquea.\n"
+             "# incluidos los de buscadores con IA. /platform es la aplicación: sus páginas llevan noindex y su API se bloquea.\n"
              + grupo("*") + "".join(grupo(b) for b in bots) + f"Sitemap: {SITE}/sitemap.xml\n")
     x = textos("en")
     escribir(PUBLIC / "llms.txt",
@@ -533,7 +534,7 @@ def main():
              + "".join(f"- [{x['pg_' + pg]}]({url('en', pg)}): {x['d_' + pg]}\n" for pg in PAGINAS)
              + "\n## Other languages\n\n" + "".join(f"- [{NOMBRES[l]}]({url(l, 'home')})\n" for l in ("es", "id"))
              + f"\n## More\n\n- [Full content as plain text]({SITE}/llms-full.txt)\n"
-             + f"- [Zonorah Data]({SITE}/datos/): the application (comparator, charts, CSV downloads, AI assistant)\n"
+             + f"- [Zonorah Platform]({SITE}/platform/): the application (comparator, charts, CSV downloads, AI assistant)\n"
              + f"\n## Cite\n\n{CITA}\n\n## Contact\n\n{EMAIL}\n")
     escribir(PUBLIC / "llms-full.txt", llms_full())
     print("  404.html  sitemap.xml  robots.txt  llms.txt  llms-full.txt")

@@ -21,7 +21,7 @@ Zonorah is a Media Neuroscience Lab. It records and counts what media broadcast.
 ## More
 
 - [Full content as plain text](https://zonorah.com/llms-full.txt)
-- [Zonorah Data](https://zonorah.com/datos/): the application (comparator, charts, CSV downloads, AI assistant)
+- [Zonorah Platform](https://zonorah.com/platform/): the application (comparator, charts, CSV downloads, AI assistant)
 
 ## Cite
 

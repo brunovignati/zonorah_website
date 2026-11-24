@@ -750,12 +750,12 @@ try{document.cookie="zonorah_lang=es; path=/; max-age=31536000; SameSite=Lax"}ca
     <a href="/es/investigacion/">Investigación</a>
     <a href="/es/datos-abiertos/">Zonorah Datos</a>
     <a href="/es/estudios/">Estudios de muestra</a>
-    <a href="/datos/?lang=es">Plataforma</a>
+    <a href="/platform/?lang=es">Plataforma</a>
   </nav>
   <div class="nav-right">
     <span class="lang" role="group" aria-label="Cambiar idioma"><a href="/" hreflang="en" lang="en" data-lang="en" aria-current="false">EN</a><a href="/es/" hreflang="es" lang="es" data-lang="es" aria-current="true">ES</a><a href="/id/" hreflang="id" lang="id" data-lang="id" aria-current="false">ID</a></span>
     <span class="nav-login nav-cuenta" id="navCuenta" aria-live="polite"></span>
-    <a id="navPlanes" class="btn btn-lime btn-nav magnetic" href="/datos/?lang=es" data-cursor="Ir">Obtener acceso</a>
+    <a id="navPlanes" class="btn btn-lime btn-nav magnetic" href="/platform/?lang=es" data-cursor="Ir">Obtener acceso</a>
     <button class="nav-burger" id="burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu"><i></i><i></i></button>
   </div>
   <span class="nav-progress" id="navProgress" aria-hidden="true"></span>
@@ -766,8 +766,8 @@ try{document.cookie="zonorah_lang=es; path=/; max-age=31536000; SameSite=Lax"}ca
     <a href="/es/investigacion/">Investigación</a>
     <a href="/es/datos-abiertos/">Zonorah Datos</a>
     <a href="/es/estudios/">Estudios de muestra</a>
-    <a href="/datos/?lang=es">Plataforma</a>
-    <a href="/datos/?lang=es" id="menuCuenta" hidden>Iniciar sesión / Registrarse</a>
+    <a href="/platform/?lang=es">Plataforma</a>
+    <a href="/platform/?lang=es" id="menuCuenta" hidden>Iniciar sesión / Registrarse</a>
   </nav>
   <div class="menu-foot"><span>hola@zonorah.com</span></div>
 </div>
@@ -787,7 +787,7 @@ try{document.cookie="zonorah_lang=es; path=/; max-age=31536000; SameSite=Lax"}ca
     <p class="lead hero-lead" data-reveal>Zonorah es un laboratorio computacional de medios. Grabamos radio, TV y YouTube, transcribimos el audio y medimos lo que se dice: cuántos minutos, en qué emisora y cuándo. Datos abiertos para investigar y estudios por encargo.</p>
       <div class="hero-bottom">
       <div class="hero-ctas" data-reveal>
-        <a class="btn btn-lime magnetic" href="/datos/?lang=es" data-cursor="Ir">Abrir los datos<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-lime magnetic" href="/platform/?lang=es" data-cursor="Ir">Abrir los datos<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
         <a class="btn btn-ghost magnetic" href="/es/metodo/" data-cursor="Ir">Método</a>
       </div>
     </div>
@@ -834,8 +834,8 @@ try{document.cookie="zonorah_lang=es; path=/; max-age=31536000; SameSite=Lax"}ca
     <div>
       <p class="lead" data-reveal>Para encargar un estudio o pedir acceso, escribe con los temas, emisoras o fuentes y el idioma del informe. Los investigadores que trabajan el lado del cerebro también pueden escribir.</p>
       <div class="demo-actions" data-reveal>
-        <a class="btn btn-lime magnetic" href="/datos/?lang=es" data-cursor="Ir">Abrir los datos<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
-        <a class="btn btn-ghost magnetic" href="/datos/?lang=es">Obtener acceso</a>
+        <a class="btn btn-lime magnetic" href="/platform/?lang=es" data-cursor="Ir">Abrir los datos<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-ghost magnetic" href="/platform/?lang=es">Obtener acceso</a>
       </div>
       
       <form class="demo-form" id="demoForm" action="mailto:hola@zonorah.com" method="get" data-reveal>
@@ -1211,7 +1211,7 @@ try{document.cookie="zonorah_lang=es; path=/; max-age=31536000; SameSite=Lax"}ca
 
 <script>
 (function () {
-  const API = "/datos/api/sesion", caja = document.getElementById("navCuenta"), menu = document.getElementById("menuCuenta"),
+  const API = "/platform/api/sesion", caja = document.getElementById("navCuenta"), menu = document.getElementById("menuCuenta"),
         planes = document.getElementById("navPlanes");
   const esc = t => String(t ?? "").replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
   let estado = null, cliente = null;
@@ -1221,11 +1221,11 @@ try{document.cookie="zonorah_lang=es; path=/; max-age=31536000; SameSite=Lax"}ca
     if (!estado || !estado.login_activo) { caja.innerHTML = ""; menu.hidden = true; return; }
     const u = estado.usuario;
     if (u) {
-      caja.innerHTML = `<a href="/datos/?lang=es" title="${esc(u.correo)}">${esc(u.nombre || u.correo)}</a> · <button type="button" data-cuenta="salir">${esc(zt("Salir"))}</button>`;
-      menu.textContent = `${u.nombre || u.correo}${zt(" · ir al chat")}`; menu.href = "/datos/"; delete menu.dataset.cuenta;
+      caja.innerHTML = `<a href="/platform/?lang=es" title="${esc(u.correo)}">${esc(u.nombre || u.correo)}</a> · <button type="button" data-cuenta="salir">${esc(zt("Salir"))}</button>`;
+      menu.textContent = `${u.nombre || u.correo}${zt(" · ir al chat")}`; menu.href = "/platform/"; delete menu.dataset.cuenta;
     } else {
       caja.innerHTML = `<button type="button" data-cuenta="entrar">${esc(zt("Iniciar sesión / Registrarse"))}</button>`;
-      menu.textContent = zt("Iniciar sesión / Registrarse"); menu.href = "/datos/"; menu.dataset.cuenta = "entrar";
+      menu.textContent = zt("Iniciar sesión / Registrarse"); menu.href = "/platform/"; menu.dataset.cuenta = "entrar";
     }
     menu.hidden = false;
   }
@@ -1233,7 +1233,7 @@ try{document.cookie="zonorah_lang=es; path=/; max-age=31536000; SameSite=Lax"}ca
     try { estado = await (await fetch(API, {credentials: "same-origin"})).json(); } catch { estado = null; }
     // Con la sesión iniciada la portada no se muestra: la función de «/» ya
     // redirige; esto cubre la vuelta atrás del navegador y la caché.
-    if (estado?.usuario) { location.replace("/datos/"); return; }
+    if (estado?.usuario) { location.replace("/platform/"); return; }
     pintar();
   }
   function google_() {
@@ -1251,7 +1251,7 @@ try{document.cookie="zonorah_lang=es; path=/; max-age=31536000; SameSite=Lax"}ca
         if (r.error) return;
         const x = await fetch(API + "/google", {method: "POST", headers: {"Content-Type": "application/json"},
           body: JSON.stringify({access_token: r.access_token})});
-        if (x.ok) location.href = "/datos/";   // entrar lleva a la app
+        if (x.ok) location.href = "/platform/";   // entrar lleva a la app
       }});
     cliente.requestAccessToken();
   }
