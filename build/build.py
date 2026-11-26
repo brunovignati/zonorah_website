@@ -95,6 +95,16 @@ def head_nuevo(lang: str, pg: str, x: dict) -> str:
     if pg in FAQ_PAGINAS:
         grafo.append({"@type": "FAQPage", "@id": url(lang, pg) + "#faq", "inLanguage": lang, "isPartOf": {"@id": url(lang, pg) + "#page"},
                       "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in FAQ[lang]]})
+    if pg == "studies":
+        idx = {"en": 2, "es": 3, "id": 4}[lang]
+        grafo.append({"@type": "ItemList", "@id": url(lang, pg) + "#informes", "name": x["pg_studies"],
+                      "numberOfItems": len(SECTORES), "itemListElement": [
+            {"@type": "ListItem", "position": i + 1, "item": {
+                "@type": "Report", "name": f"Zonorah: {sec[idx - 1]}", "inLanguage": "es",
+                "url": f"{SITE}/platform/informes/{sec[0]}", "datePublished": "2026-09-30",
+                "dateModified": UPDATED, "publisher": {"@id": SITE + "/#org"}, "encodingFormat": "application/pdf",
+                "about": sec[idx - 1], "isAccessibleForFree": True}}
+            for i, sec in enumerate(SECTORES)]})
     ld = json.dumps({"@context": "https://schema.org", "@graph": grafo}, ensure_ascii=False, indent=1)
     return f"""<title>{e(titulo)}</title>
 <meta name="description" content="{e(desc)}">
