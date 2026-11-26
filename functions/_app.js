@@ -14,18 +14,20 @@ export async function proxy(request, prefijo) {
   try {
     const r = await fetch(peticion, { redirect: "manual" });
     if (r.status >= 520) return fueraDeLinea(request);
-    return conRobots(r);
+    return conRobots(r, url.pathname);
   } catch {
     return fueraDeLinea(request);
   }
 }
 
-// La app no se indexa: todo su contenido está en la portada (/, /es/, /id/). `noindex` evita
+// Se indexan solo las páginas públicas de la plataforma (INDEXABLES). El resto no se indexa: todo su contenido está en la portada (/, /es/, /id/). `noindex` evita
 // copias duplicadas y versiones de idioma mezcladas (la app se traduce en el navegador);
 // `follow` deja que se sigan sus enlaces.
-function conRobots(r) {
+const INDEXABLES = new Set(["/platform/", "/platform/planes", "/platform/metodologia", "/platform/privacidad", "/platform/comparar"]);
+function conRobots(r, pathname) {
   const h = new Headers(r.headers);
-  h.set("X-Robots-Tag", "noindex, follow");
+  if (INDEXABLES.has(pathname) || INDEXABLES.has(pathname.replace(/\/$/, ""))) h.delete("X-Robots-Tag");
+  else h.set("X-Robots-Tag", "noindex, follow");
   return new Response(r.body, { status: r.status, statusText: r.statusText, headers: h });
 }
 
