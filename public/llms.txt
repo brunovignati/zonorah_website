@@ -23,6 +23,10 @@ The name Zonorah designates two things: an instrument that records and counts br
 
 - [Full content as plain text](https://zonorah.com/llms-full.txt)
 - [Zonorah Platform](https://zonorah.com/platform/): the application (comparator, charts, CSV downloads, AI assistant)
+- [Plans and pricing](https://zonorah.com/platform/planes): free plan and paid subscriptions
+- [Platform methodology](https://zonorah.com/platform/metodologia): how the platform counts and what the numbers mean
+- [Comparator](https://zonorah.com/platform/comparar): compare the airtime that media give to a word
+- [Platform privacy](https://zonorah.com/platform/privacidad): what the platform stores and how to delete an account
 
 ## Cite
 

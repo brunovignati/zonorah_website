@@ -26,6 +26,8 @@ sys.path.insert(0, str(Path(__file__).parent))
 from content import (COBRO_ACTIVO, CITA, EMAIL, ENLACE_FILA, FILAS, LAB_URL, LANGS, LOCALES, NOMBRES, PAGINAS,  # noqa: E402
                      SECTORES, SITE, UPDATED, comprobar, ruta, textos)
 
+from faq import FAQ, FAQ_PAGINAS, TITULO as FAQ_TITULO  # noqa: E402
+
 RAIZ = Path(__file__).resolve().parent.parent
 PUBLIC = RAIZ / "public"
 PLANTILLA = (Path(__file__).parent / "plantilla.html").read_text(encoding="utf-8")
@@ -90,6 +92,9 @@ def head_nuevo(lang: str, pg: str, x: dict) -> str:
         grafo.append({"@type": "BreadcrumbList", "@id": url(lang, pg) + "#crumbs", "itemListElement": [
             {"@type": "ListItem", "position": 1, "name": x["pg_home"], "item": url(lang, "home")},
             {"@type": "ListItem", "position": 2, "name": x[f"pg_{pg}"], "item": url(lang, pg)}]})
+    if pg in FAQ_PAGINAS:
+        grafo.append({"@type": "FAQPage", "@id": url(lang, pg) + "#faq", "inLanguage": lang, "isPartOf": {"@id": url(lang, pg) + "#page"},
+                      "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in FAQ[lang]]})
     ld = json.dumps({"@context": "https://schema.org", "@graph": grafo}, ensure_ascii=False, indent=1)
     return f"""<title>{e(titulo)}</title>
 <meta name="description" content="{e(desc)}">
@@ -161,6 +166,17 @@ def seccion_filas(titulo: str, lead: str, cuerpo: str, h1: bool) -> str:
             f'    <div class="container">\n      <div class="sec-head">\n'
             f'        <{t} class="display h-xl" id="casosTitle" {efecto}>{e(titulo)}</{t}>\n'
             f'        <p class="lead" data-reveal>{e(lead)}</p>\n      </div>\n'
+            f'      <div class="casos-list" data-stagger>\n        {cuerpo}\n      </div>\n    </div>\n  </section>')
+
+
+def seccion_faq(lang: str) -> str:
+    """Preguntas frecuentes visibles (el marcado FAQPage de `head_nuevo` repite exactamente este texto)."""
+    cuerpo = "\n        ".join(
+        f'<article class="caso">\n          <span class="mono">{i:02d}</span>\n          <h3>{e(q)}</h3>\n          <div><p>{e(a)}</p></div>\n        </article>'
+        for i, (q, a) in enumerate(FAQ[lang], 1))
+    return (f'<section class="casos is-light" id="faq-lista" data-theme="light" aria-labelledby="faqListaTitle">\n'
+            f'    <div class="container">\n      <div class="sec-head">\n'
+            f'        <h2 class="display h-xl" id="faqListaTitle" data-reveal>{e(FAQ_TITULO[lang])}</h2>\n      </div>\n'
             f'      <div class="casos-list" data-stagger>\n        {cuerpo}\n      </div>\n    </div>\n  </section>')
 
 
@@ -373,6 +389,8 @@ def pagina(lang: str, pg: str) -> str:
         cuerpo = [seccion_filas(x["pg_terms"], x["terms_lead"], filas(lang, x, "terms"), h1=True), demo]
     else:
         raise SystemExit(f"página desconocida: {pg}")
+    if pg in FAQ_PAGINAS:
+        cuerpo.insert(len(cuerpo) - 1, seccion_faq(lang))        # antes de la demo, al final del contenido
     main = '<main id="top">\n' + "\n".join(cuerpo) + "\n</main>"
     rs(r'<main id="top">.*?</main>', lambda m: main, 1)
 
@@ -497,6 +515,9 @@ def destino(lang: str, pg: str) -> Path:
     return PUBLIC / ruta(lang, pg).strip("/") / "index.html" if ruta(lang, pg) != "/" else PUBLIC / "index.html"
 
 
+PLATAFORMA_PUBLICA = ["", "planes", "metodologia", "comparar", "privacidad"]
+
+
 def llms_full() -> str:
     x = textos("en")
     pl = ("- Free: one source and 1 hour of listening a week, no card. When it runs out, wait 7 days or subscribe.\n"
@@ -542,6 +563,7 @@ def main():
         + "".join(f'<xhtml:link rel="alternate" hreflang="{m}" href="{url(m, pg)}"/>' for m in LANGS)
         + f'<xhtml:link rel="alternate" hreflang="x-default" href="{url("en", pg)}"/></url>\n'
         for pg in PAGINAS for l in LANGS)
+    urls += "".join(f"<url><loc>{SITE}/platform/{p}</loc><lastmod>{UPDATED}</lastmod></url>\n" for p in PLATAFORMA_PUBLICA)
     escribir(PUBLIC / "sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
              'xmlns:xhtml="http://www.w3.org/1999/xhtml">\n' + urls + "</urlset>\n")
     bots = ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "Claude-User", "Claude-SearchBot",
@@ -549,7 +571,7 @@ def main():
     grupo = lambda ua: f"User-agent: {ua}\nAllow: /\nDisallow: /platform/api/\nDisallow: /datos/api/\n\n"  # noqa: E731
     escribir(PUBLIC / "robots.txt",
              "# Zonorah publica su metodología y sus cifras para que se citen: se permite a todos los rastreadores,\n"
-             "# incluidos los de buscadores con IA. /platform es la aplicación: sus páginas llevan noindex y su API se bloquea.\n"
+             "# incluidos los de buscadores con IA. En /platform se indexan sus páginas públicas; su API y los informes de clientes no.\n"
              + grupo("*") + "".join(grupo(b) for b in bots) + f"Sitemap: {SITE}/sitemap.xml\n")
     x = textos("en")
     escribir(PUBLIC / "llms.txt",
@@ -558,6 +580,10 @@ def main():
              + "\n## Other languages\n\n" + "".join(f"- [{NOMBRES[l]}]({url(l, 'home')})\n" for l in ("es", "id"))
              + f"\n## More\n\n- [Full content as plain text]({SITE}/llms-full.txt)\n"
              + f"- [Zonorah Platform]({SITE}/platform/): the application (comparator, charts, CSV downloads, AI assistant)\n"
+             + f"- [Plans and pricing]({SITE}/platform/planes): free plan and paid subscriptions\n"
+             + f"- [Platform methodology]({SITE}/platform/metodologia): how the platform counts and what the numbers mean\n"
+             + f"- [Comparator]({SITE}/platform/comparar): compare the airtime that media give to a word\n"
+             + f"- [Platform privacy]({SITE}/platform/privacidad): what the platform stores and how to delete an account\n"
              + f"\n## Cite\n\n{CITA}\n\n## Contact\n\n{EMAIL}\n")
     escribir(PUBLIC / "llms-full.txt", llms_full())
     print("  404.html  sitemap.xml  robots.txt  llms.txt  llms-full.txt")
