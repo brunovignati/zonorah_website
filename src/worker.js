@@ -26,19 +26,20 @@ export default {
     try {
       const r = await fetch(peticion, { redirect: "manual" });
       if (r.status >= 520) return fuera_de_linea(request);
-      return conRobots(r);
+      return conRobots(r, url.pathname);
     } catch {
       return fuera_de_linea(request);
     }
   },
 };
 
-// La app no se indexa: todo su contenido está en la portada (/, /es/, /id/). `noindex` evita
-// copias duplicadas y versiones de idioma mezcladas (la app se traduce en el navegador);
-// `follow` deja que se sigan sus enlaces.
-function conRobots(r) {
+// Se indexan las páginas públicas de la plataforma (INDEXABLES); la API, los informes de clientes y lo
+// demás llevan `noindex, follow`.
+const INDEXABLES = new Set(["/platform/", "/platform/planes", "/platform/metodologia", "/platform/privacidad", "/platform/comparar"]);
+function conRobots(r, pathname) {
   const h = new Headers(r.headers);
-  h.set("X-Robots-Tag", "noindex, follow");
+  if (INDEXABLES.has(pathname.replace(/(.)\/$/, "$1")) || pathname === "/platform/") h.delete("X-Robots-Tag");
+  else h.set("X-Robots-Tag", "noindex, follow");
   return new Response(r.body, { status: r.status, statusText: r.statusText, headers: h });
 }
 

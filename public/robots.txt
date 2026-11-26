@@ -1,5 +1,5 @@
 # Zonorah publica su metodología y sus cifras para que se citen: se permite a todos los rastreadores,
-# incluidos los de buscadores con IA. /platform es la aplicación: sus páginas llevan noindex y su API se bloquea.
+# incluidos los de buscadores con IA. En /platform se indexan sus páginas públicas; su API y los informes de clientes no.
 User-agent: *
 Allow: /
 Disallow: /platform/api/
